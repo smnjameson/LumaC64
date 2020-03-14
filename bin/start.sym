@@ -1,0 +1,63 @@
+.label ClearScreen=$834 {
+}
+.label level_31=$87d5
+.label level_30=$87a2
+.label level_33=$8853
+.label level_32=$8800
+.label level_35=$88b1
+.label level_34=$887f
+.label LevelPassCodeData=$8050
+.label level_37=$890f
+.label level_36=$88eb
+.label level_3=$81ad
+.label level_28=$8730
+.label level_4=$81fb
+.label level_27=$8701
+.label level_5=$823d
+.label level_6=$8264
+.label level_29=$876e
+.label level_7=$82b4
+.label level_8=$834d
+.label level_9=$8393
+.label level_0=$80f0
+.label level_1=$813c
+.label level_2=$8190
+.label TILES=$e000
+.label level_20=$8588
+.label level_22=$85f9
+.label LEVEL=$3010 {
+}
+.label level_21=$85bf
+.label level_24=$8648
+.label level_23=$861c
+.label level_26=$86c6
+.label level_25=$8683
+.label level_17=$84f8
+.label level_16=$84dd
+.label level_19=$8556
+.label level_18=$8536
+.label SCREEN_RAM=$c000
+.label ZP=$2 {
+  .label Temp=$2
+}
+.label COLOR_RAM=$d800
+.label CHAR_COLORS=$e120
+.label level_11=$83dc
+.label level_10=$83bd
+.label level_13=$841b
+.label level_12=$8402
+.label level_15=$848e
+.label level_14=$844b
+.label Entry=$80e {
+}
+.label GAME=$3003 {
+  .label Start=$3003 {
+  }
+}
+.label INTRO=$3000 {
+  .label Start=$3000 {
+  }
+}
+.label level_39=$8973
+.label LevelPointerData=$8000
+.label level_38=$8938

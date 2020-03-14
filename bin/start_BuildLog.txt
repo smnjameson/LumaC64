@@ -1,0 +1,22 @@
+parsing
+flex pass 1
+flex pass 2
+flex pass 3
+Output pass
+Writing prg file: Z:\Projects\Luma\bin\start.prg
+
+Memory Map
+----------
+Default-segment:
+  *$0002-$0002 Unnamed
+  $0801-$080c Basic
+  $080e-$0833 Basic End
+  $0834-$0857 Utility functions and tables
+  $1000-$0fff Music
+  $3000-$300f Code
+  $8000-$89a9 Level data
+  $c800-$cfff Font data
+  $e000-$e21f Tile data
+
+Writing Vice symbol file: Z:\Projects\Luma\bin\start.vs
+Writing Symbol file: start.sym
