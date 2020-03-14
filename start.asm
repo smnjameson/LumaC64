@@ -12,6 +12,7 @@
 
 //Constants
 .label SCREEN_RAM = $c000
+.label SPRITE_POINTER = SCREEN_RAM + $03f8
 .label COLOR_RAM = $d800
 
 #import "src/zp.asm"
@@ -31,6 +32,15 @@ Entry: {
 		sta $d020
 		sta $d021
 
+		lda $d016
+		ora #%00010000
+		sta $d016
+
+		lda #$0b
+		sta $d022
+		lda #$0c
+		sta $d023
+
 		lda #%00000010
 		sta $d018
 		lda $dd00
@@ -39,6 +49,7 @@ Entry: {
 
 		cli
 
+		jsr IRQ.Init
 		jmp INTRO.Start
 }
 
@@ -66,6 +77,53 @@ ClearScreen: {
 		rts		
 }
 
+
+TABLES: {
+	TileToScreenLSB:
+		.for(var i=0; i< 80; i++) {
+			.var x = mod(i,10)
+			.var y = floor(i/10)
+			.byte <[SCREEN_RAM + y * $78 + x * 3]
+		}
+	TileToScreenMSB:
+		.for(var i=0; i< 80; i++) {
+			.var x = mod(i,10)
+			.var y = floor(i/10)
+			.byte >[SCREEN_RAM + y * $78 + x * 3]
+		}	
+	TileScreenOffsets:
+		.byte 0,1,2,40,41,42,80,81,82
+
+	TileDataOffsetsLSB:
+		.fill 32, <[TILES + i * 9]
+	TileDataOffsetsMSB:
+		.fill 32, >[TILES + i * 9]
+
+	Times10:
+		.fill 8, i*10
+	ItemToTileMap:
+		.byte $01, $08, $16, $1c, $1a
+		.byte $11, $12, $13, $14
+		.byte $11, $12, $13, $14
+		.byte $11, $12, $13, $14
+		.byte $15, $0d, $09, $1e, $1e, $1e 
+	ItemColorMap:
+		.byte 0,0,0,0,0
+		.byte 128,128,128,128
+		.byte 192,192,192,192
+		.byte 64,64,64,64
+		.byte 0,0,0
+		.byte 64,128,192
+	ItemColors:
+		.byte 00,10,13,14
+
+	SelectPositionX:
+		.fill 10, $18 + $18 * i
+	SelectPositionY:
+		.fill 10, $29 + $18 * i
+}
+
+
 * = $1000 "Music"
 
 
@@ -73,12 +131,17 @@ ClearScreen: {
 	#import "src/intro.asm"
 	#import "src/game.asm"
 	#import "src/level.asm"
+	#import "src/control.asm"
+	#import "src/irq.asm"
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"
 
 * = $c800 "Font data"
 	.import binary "assets/chars.bin"
+
+* = $d000 "Sprites"
+	.import binary "assets/sprites.bin"
 
 * = $e000 "Tile data"
 TILES:

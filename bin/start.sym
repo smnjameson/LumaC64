@@ -1,63 +1,142 @@
-.label ClearScreen=$834 {
+.label ClearScreen=$849 {
 }
-.label level_31=$87d5
-.label level_30=$87a2
-.label level_33=$8853
-.label level_32=$8800
-.label level_35=$88b1
-.label level_34=$887f
-.label LevelPassCodeData=$8050
-.label level_37=$890f
-.label level_36=$88eb
-.label level_3=$81ad
-.label level_28=$8730
-.label level_4=$81fb
-.label level_27=$8701
-.label level_5=$823d
-.label level_6=$8264
-.label level_29=$876e
-.label level_7=$82b4
-.label level_8=$834d
-.label level_9=$8393
-.label level_0=$80f0
-.label level_1=$813c
-.label level_2=$8190
+.label level_31=$887a
+.label level_30=$8836
+.label level_33=$88e4
+.label level_32=$88a8
+.label level_35=$8953
+.label level_34=$8914
+.label LevelPassCodeData=$805c
+.label level_37=$89bc
+.label level_36=$8988
+.label level_3=$81d4
+.label level_28=$87cd
+.label level_4=$8223
+.label level_27=$87a9
+.label level_5=$8266
+.label level_6=$828e
+.label level_29=$87fa
+.label level_7=$82c3
+.label level_8=$8314
+.label level_9=$8359
+.label level_0=$8114
+.label level_1=$8161
+.label level_2=$81b6
 .label TILES=$e000
-.label level_20=$8588
-.label level_22=$85f9
-.label LEVEL=$3010 {
+.label level_20=$8603
+.label level_22=$865e
+.label LEVEL=$3020 {
+  .label DrawTile=$31ec {
+    .label TileFetch=$321c
+    .label TileCol=$3236
+    .label TileDraw=$3222
+  }
+  .label CopyInitialMap=$31cb {
+  }
+  .label GenerateItems=$315c {
+  }
+  .label DrawMetaData=$3133 {
+  }
+  .label Data=$3020 {
+    .label Initial=$3020
+    .label Current=$30c0
+    .label Display=$3070
+  }
+  .label LoadLevel=$3110 {
+  }
+  .label GenerateWalls=$319f {
+  }
+  .label DrawLevel=$31da {
+  }
 }
-.label level_21=$85bf
-.label level_24=$8648
-.label level_23=$861c
-.label level_26=$86c6
-.label level_25=$8683
-.label level_17=$84f8
-.label level_16=$84dd
-.label level_19=$8556
-.label level_18=$8536
+.label level_21=$861f
+.label level_24=$8703
+.label level_23=$867f
+.label level_26=$876e
+.label level_25=$8736
+.label level_17=$853e
+.label level_16=$8511
+.label level_19=$85b3
+.label level_18=$856f
 .label SCREEN_RAM=$c000
 .label ZP=$2 {
-  .label Temp=$2
+  .label LevelPointer=$2
+  .label LevelTemp=$6
+  .label Joystick=$b
+  .label LevelColorTemp=$a
+  .label LevelDataIndex=$9
+  .label LevelDataVector=$4
 }
 .label COLOR_RAM=$d800
 .label CHAR_COLORS=$e120
-.label level_11=$83dc
-.label level_10=$83bd
-.label level_13=$841b
-.label level_12=$8402
-.label level_15=$848e
-.label level_14=$844b
+.label CONTROL=$323f {
+  .label RT=$8
+  .label PositionY=$3240
+  .label UpdatePosition=$3277 {
+  }
+  .label LT=$4
+  .label DN=$2
+  .label FR=$10
+  .label Update=$3270 {
+  }
+  .label UpdateWithFire=$32ee {
+  }
+  .label Init=$324b {
+  }
+  .label Ramp=$3241
+  .label Debounce=$324a
+  .label UP=$1
+  .label RampIndex=$3249
+  .label PositionSprites=$32ef {
+  }
+  .label PositionX=$323f
+  .label DEBOUNCE_TIMER=$8
+}
+.label IRQ=$3324 {
+  .label FrameFlag=$3324
+  .label Init=$3326 {
+  }
+  .label Timer=$3325
+  .label MainIRQ=$3348 {
+  }
+}
+.label level_11=$843a
+.label level_10=$83f3
+.label level_13=$84b0
+.label level_12=$8465
+.label level_15=$84f7
+.label level_14=$84d0
 .label Entry=$80e {
 }
 .label GAME=$3003 {
-  .label Start=$3003 {
+  .label Start=$3004 {
+  }
+  .label Settings=$3003 {
+    .label currentLevel=$3003
   }
 }
+.label SPRITE_POINTER=$c3f8
 .label INTRO=$3000 {
   .label Start=$3000 {
   }
 }
-.label level_39=$8973
+.label level_40=$8a69
+.label level_42=$8ad7
+.label level_41=$8a9c
+.label level_44=$8b26
+.label level_43=$8afc
+.label level_45=$8b62
+.label TABLES=$86d {
+  .label Times10=$956
+  .label TileScreenOffsets=$90d
+  .label ItemColors=$98c
+  .label SelectPositionY=$99a
+  .label ItemColorMap=$975
+  .label TileDataOffsetsMSB=$936
+  .label ItemToTileMap=$95e
+  .label TileDataOffsetsLSB=$916
+  .label SelectPositionX=$990
+}
+.label level_39=$8a3c
 .label LevelPointerData=$8000
-.label level_38=$8938
+.label level_38=$89e8
