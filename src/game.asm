@@ -27,7 +27,8 @@ GAME: {
 		sta IRQ.FrameFlag
 
 			jsr CONTROL.Update
-
+			jsr LEVEL.Update
+			
 		jmp !Loop-
 	}
 

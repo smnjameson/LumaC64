@@ -62,7 +62,3 @@ AUTOSTART: Injecting program data at $0801 (size $da1f)
 AUTOSTART: Ready
 AUTOSTART: Starting program.
 AUTOSTART: Done.
-Writing configuration file `C:\Users\Simon\AppData\Roaming\vice\3.1\vice.ini'.
-
-Exiting...
-Sound: Closing device `dx'

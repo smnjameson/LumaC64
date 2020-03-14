@@ -5,6 +5,8 @@ ZP: {
 	LevelTemp:			.byte $00, $00, $00
 	LevelDataIndex:		.byte $00
 	LevelColorTemp:		.byte $00
+	LevelShadowTemp:	.byte $00
 
 	Joystick:			.byte $00
+
 }

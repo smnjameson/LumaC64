@@ -48,7 +48,7 @@ LEVEL: {
 			inx
 			cpx #$08
 			bne !-
-			
+
 			clc
 			ldx #$00
 		!:
@@ -189,7 +189,6 @@ LEVEL: {
 	DrawTile: {
 			//Draw the tile number in Acc
 			//At the tile location in x
-			//Which is item Y
 
 			pha
 				and #$c0	//Color extract
@@ -240,5 +239,23 @@ LEVEL: {
 			bne !inner-
 
 			rts
+	}
+
+	Update: {
+			ldx #$4f
+		!:
+			lda Data.Current, x
+			cmp Data.Display, x
+			bne !UpdateTile+
+		!Next:
+			dex
+			bpl !-
+			rts
+
+		!UpdateTile:
+			stx ZP.LevelShadowTemp
+			jsr DrawTile
+			ldx ZP.LevelShadowTemp
+			jmp !Next-
 	}
 }

@@ -117,6 +117,28 @@ TABLES: {
 	ItemColors:
 		.byte 00,10,13,14
 
+	MoveableTileMap:
+		.byte 0,0,0,0,0,0,0,0
+		.byte 0,1,1,1,1,1,1,1
+		.byte 1,1,1,1,1,1,0,0
+		.byte 0,0,0,0,0,0,0,0
+
+	TileToSpriteMap:
+		.byte 0,0,0,0,0,0,0,0,0
+		.byte $42,$42,$42,$42	//Mirror /
+		.byte $44,$44,$44,$44	//Mirror \
+		.byte $46,$48,$4a,$4c	//Lasers W-E-N-S
+		.byte $4e				//Battery
+		.byte 0,0,0,0,0,0,0,0,0,0
+
+	JoyDirectionMapX:
+		.byte 0,0,0,0,-1,0,0,0
+		.byte 1,0,0,0,0,0,0,0
+
+	JoyDirectionMapY:
+		.byte 0,-1,1,0,0,0,0,0
+		.byte 0,0,0,0,0,0,0,0
+
 	SelectPositionX:
 		.fill 10, $18 + $18 * i
 	SelectPositionY:
