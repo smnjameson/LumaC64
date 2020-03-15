@@ -48,9 +48,15 @@ HUD: {
 	}
 
 	Update: {
+			jsr DrawMovesRemaining
+			jsr DrawLevelNumber
+			rts
+	}
 
 
+	DrawMovesRemaining: {
 			lda LEVEL.MovesRemaining
+
 		//Hundreds
 			ldx #$00
 		!:
@@ -64,7 +70,7 @@ HUD: {
 			pha
 			txa
 			clc
-			adc #$e0
+			adc #$b0
 			sta SCREEN_RAM + $0e * $28 + $22
 			clc
 			adc #$10
@@ -84,7 +90,7 @@ HUD: {
 			pha
 			txa
 			clc
-			adc #$e0
+			adc #$b0
 			sta SCREEN_RAM + $0e * $28 + $23
 			clc
 			adc #$10
@@ -92,11 +98,66 @@ HUD: {
 			pla
 
 			clc
-			adc #$e0
+			adc #$b0
 			sta SCREEN_RAM + $0e * $28 + $24
 			clc
 			adc #$10
 			sta SCREEN_RAM + $0f * $28 + $24
+
+			rts
+	}
+
+	DrawLevelNumber: {
+			lda GAME.Settings.currentLevel
+			clc
+			adc #$01
+			
+		//Hundreds
+			ldx #$00
+		!:
+			cmp #$64
+			bcc !+
+			inx
+			sec
+			sbc #$64
+			jmp !-
+		!:
+			pha
+			txa
+			clc
+			adc #$b0
+			sta SCREEN_RAM + $08 * $28 + $22
+			clc
+			adc #$10
+			sta SCREEN_RAM + $09 * $28 + $22
+			pla
+
+
+			ldx #$00
+		!:
+			cmp #$0a
+			bcc !+
+			inx
+			sec
+			sbc #$0a
+			jmp !-
+		!:
+			pha
+			txa
+			clc
+			adc #$b0
+			sta SCREEN_RAM + $08 * $28 + $23
+			clc
+			adc #$10
+			sta SCREEN_RAM + $09 * $28 + $23
+			pla
+
+			clc
+			adc #$b0
+			sta SCREEN_RAM + $08 * $28 + $24
+			clc
+			adc #$10
+			sta SCREEN_RAM + $09 * $28 + $24
 
 			rts
 	}

@@ -58,10 +58,8 @@ LEVEL: {
 
 			lda (ZP.LevelDataVector), y
 			beq !Exit+
-			adc #$80
+			adc #$70
 			sta SCREEN_RAM + $28 * $16 + $1f, x
-			lda #$01
-			sta COLOR_RAM + $28 * $16 + $1f, x
 			iny
 			inx
 			cpx #$08
@@ -94,7 +92,7 @@ LEVEL: {
 		CodeMod:
 			lda $BEEF, x
 			clc
-			adc #$80
+			adc #$70
 			sta SCREEN_RAM + $28 * $13 + $21, x
 			inx
 			cpx #$04

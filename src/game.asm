@@ -1,9 +1,13 @@
 GAME: {
 	Settings: {
-		currentLevel: .byte $53
+		currentLevel: .byte $00
 	}
 
 	Start: {
+		lda #$00
+		ldx #$01
+		jsr ClearScreen
+
 		jsr HUD.Init
 		jsr CONTROL.Init
 		jsr LASERS.Init
@@ -33,6 +37,7 @@ GAME: {
 			jsr LASERS.Update
 			jsr HUD.Update
 
+			jsr KEYBOARD.Update
 			//IT WAS MY BIRTHDAY RIGHT HERE!!!!!!!
 
 		jmp !Loop-

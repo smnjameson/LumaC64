@@ -60,3 +60,8 @@ AUTOSTART: Injecting program data at $0801 (size $db0f)
 AUTOSTART: Ready
 AUTOSTART: Starting program.
 AUTOSTART: Done.
+video_dx9: Failed to create the DirectX9 device!
+video_dx9: Failed to create the DirectX9 device!
+Writing configuration file `C:\Users\Simon\AppData\Roaming\vice\3.1\vice.ini'.
+
+Exiting...

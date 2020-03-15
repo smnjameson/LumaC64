@@ -246,6 +246,7 @@ TABLES: {
 	#import "src/irq.asm"
 	#import "src/lasers.asm"
 	#import "src/hud.asm"
+	#import "src/keyboard.asm"
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"

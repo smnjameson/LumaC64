@@ -13,9 +13,9 @@ Default-segment:
   $080e-$084d Basic End
   $084e-$0c0a Utility functions and tables
   $1000-$1a20 Music
-  $3000-$32a4 Code
-  $32a5-$363f SLIDES
-  $3640-$39bb PATH
+  $3000-$32a9 Code
+  $32aa-$364d SLIDES
+  $364e-$3a50 PATH
   $8000-$9d7d Level data
   $c800-$cfff Font data
   $d000-$dfff Sprites

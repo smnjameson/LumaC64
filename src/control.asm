@@ -182,8 +182,14 @@ CONTROL: {
 		!:
 			jsr GetIndexPosition
 			lda LEVEL.Data.Current, x
+			and #$c0
+			pha
+			lda LEVEL.Data.Current, x
+			and #$1f
 			tay
-			lda TABLES.TileClearValue, y
+			pla
+			ora TABLES.TileClearValue, y
+
 			sta MovingTile
 			lda #$01
 			sta SlidingActive
