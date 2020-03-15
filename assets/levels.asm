@@ -1,5 +1,5 @@
 LevelPointerData:
-    .word level_3
+    .word level_0
     .word level_1
     .word level_2
     .word level_3
@@ -110,6 +110,7 @@ LevelPointerData:
     .word level_108
     .word level_109
 
+.align $100
 LevelPassCodeData:
     .encoding "screencode_upper"
     .text "DFFA"

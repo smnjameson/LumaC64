@@ -366,6 +366,9 @@ CONTROL: {
 			//Disable selector, enable tile copy
 			lda #%00001100
 			sta $d015
+
+			//Decrement move counter
+			dec LEVEL.MovesRemaining
 			rts
 	}
 

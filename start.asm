@@ -245,6 +245,7 @@ TABLES: {
 	#import "src/control.asm"
 	#import "src/irq.asm"
 	#import "src/lasers.asm"
+	#import "src/hud.asm"
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"
@@ -260,5 +261,7 @@ TILES:
 	.import binary "assets/tiles.bin"
 CHAR_COLORS:
 	.import binary "assets/colors.bin"
+HUD_MAP:
+	.import binary "assets/hud.bin"
 
 

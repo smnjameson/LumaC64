@@ -9,6 +9,9 @@ LEVEL: {
 			.fill 80, $00
 	}
 
+	MovesRemaining:
+			.byte $00
+
 	LoadLevel: {
 			//load level number in Acc
 			asl
@@ -44,7 +47,7 @@ LEVEL: {
 			ldx #$00
 		!:
 			lda #$00
-			sta SCREEN_RAM + 31, x
+			sta SCREEN_RAM + $28 * $16 + $1f, x
 			inx
 			cpx #$08
 			bne !-
@@ -52,21 +55,55 @@ LEVEL: {
 			clc
 			ldx #$00
 		!:
+
 			lda (ZP.LevelDataVector), y
 			beq !Exit+
 			adc #$80
-			sta SCREEN_RAM + 31, x
+			sta SCREEN_RAM + $28 * $16 + $1f, x
 			lda #$01
-			sta COLOR_RAM + 31, x
+			sta COLOR_RAM + $28 * $16 + $1f, x
 			iny
 			inx
 			cpx #$08
 			bne !-
 
 		!Exit:
+			iny
 			sty ZP.LevelDataIndex
+
+			lda (ZP.LevelDataVector), y
+			sta MovesRemaining
+
+		//DRAW LEVEL CODE
+		
+			lda GAME.Settings.currentLevel
+			sta CodeMod + 1
+			lda #$00
+			sta CodeMod + 2
+			asl CodeMod + 1
+			rol CodeMod + 2
+			asl CodeMod + 1
+			rol CodeMod + 2
+			lda CodeMod + 2
+			clc
+			adc #>[LevelPassCodeData]
+			sta CodeMod + 2
+
+			ldx #$00
+		!:
+		CodeMod:
+			lda $BEEF, x
+			clc
+			adc #$80
+			sta SCREEN_RAM + $28 * $13 + $21, x
+			inx
+			cpx #$04
+			bne !-
+
 			rts
 	}
+
+
 	GenerateItems: {
 			ldy #$0a
 		!Loop:

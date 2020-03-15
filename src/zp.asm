@@ -19,5 +19,6 @@ ZP: {
 	LaserDirTemp:		.byte $00, $00
 	MirrorDirTemp:		.byte $00, $00
 	MirrorTileIndex: 	.byte $00
-	
-}
+
+	HudCharTemp:		.byte $00
+}	
