@@ -113,6 +113,8 @@
     .label y=$361d
     .label terminated=$367d
   }
+  .label GetJoyDirection=$385d {
+  }
   .label Complete=$35ab
   .label TrackActiveLasers=$36d2 {
   }
@@ -128,7 +130,9 @@
   .label Active=$35a9
   .label Init=$369d {
   }
-  .label UpdateTile=$3819 {
+  .label UpdateNewTile=$3885 {
+  }
+  .label UpdateTile=$381d {
   }
   .label Tracing=$35aa
   .label TraceLasers=$37a3 {
@@ -149,20 +153,25 @@
 .label level_89=$9851
 .label TABLES=$872 {
   .label TileToSpriteMap=$9b5
+  .label TileDnTransform=$b8b
+  .label ItemColorMap=$97a
+  .label TileDataOffsetsMSB=$93b
+  .label TileDataOffsetsLSB=$91b
+  .label TileRtTransform=$bcb
+  .label TileScreenOffsets=$912
   .label JoyDirectionMapX=$9d9
   .label Times10=$95b
   .label VertPassable=$afb
   .label IndexToX=$a5b
-  .label ItemColorMap=$97a
+  .label TileLtTransform=$bab
   .label HorizPassable=$b1b
-  .label TileDataOffsetsMSB=$93b
   .label ItemToTileMap=$963
-  .label TileDataOffsetsLSB=$91b
   .label JoyDirectionMapY=$9e9
   .label MirrorReflectBack=$b3b
   .label MirrorReflectForward=$b4b
-  .label TileScreenOffsets=$912
   .label ItemColors=$991
+  .label JoyToDirIndex=$b5b
+  .label TileUpTransform=$b6b
   .label SelectPositionY=$a03
   .label MoveableTileMap=$995
   .label ValidDirections=$a0b

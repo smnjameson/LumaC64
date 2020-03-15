@@ -68,7 +68,7 @@ LASERS: {
 
 	TrackActiveLasers: {
 		// rts
-		
+
 			ldx #79
 		!loop:
 			lda LEVEL.Data.Current, x
@@ -183,10 +183,6 @@ LASERS: {
 	Update: {
 			lda CONTROL.SlidingActive
 			beq !DoUpdate+
-
-			
-			// lda Active
-			// beq !+
 			jsr ClearIfNeeded
 			rts
 		!:
@@ -255,17 +251,20 @@ LASERS: {
 			tay
 
 			stx ZP.LaserDirTemp
+
 				//Check is current tile passable
 				lda Path.dx, x
 				beq !Vert+
 			!Horiz:
 				lda LEVEL.Data.Current, y
+				and #$1f
 				tax
 				lda TABLES.HorizPassable, x
 				cmp #$01
 				jmp !Done+
 			!Vert:
 				lda LEVEL.Data.Current, y
+				and #$1f
 				tax
 				lda TABLES.VertPassable, x
 				cmp #$01
@@ -306,30 +305,9 @@ LASERS: {
 		!Mirror:
 			lda #$00
 			sta ZP.MirrorDirTemp
-			//Change Direction (convert to joy 1,2,4,8)
-			lda Path.dy, x //-1 or 1
 
-			beq !NoVert+
-			clc
-			adc #$01 	//0,2
-			lsr 		//0,1
-			adc #$01	//1,2
-			sta ZP.MirrorDirTemp
-		!NoVert:
+			jsr GetJoyDirection
 
-			lda Path.dx, x //-1 or 1
-			beq !NoHoriz+
-			clc
-			adc #$01 	//0,2
-			lsr 		//0,1
-			adc #$01	//1,2
-			asl
-			asl			//4, 8
-			clc
-			adc ZP.MirrorDirTemp
-			sta ZP.MirrorDirTemp
-		!NoHoriz:
-			lda ZP.MirrorDirTemp
 			//Accumulator is now a JOY direction
 			//Are we a mirror forward or backwards
 			sta ZP.LaserDirTemp + 0
@@ -359,8 +337,109 @@ LASERS: {
 			ldy ZP.MirrorTileIndex
 
 		!NoMirror:
-			lda #$04
+			//Apply laser to current tile
+			//Current tile = Y
+			jsr UpdateNewTile
+			// lda #$04
+			// sta LEVEL.Data.Current, y
+			rts
+	}
+
+	GetJoyDirection: {
+			lda #$00
+			sta ZP.MirrorDirTemp
+
+			lda Path.dy, x //-1 or 1
+			beq !NoVert+
+			clc
+			adc #$01 	//0,2
+			lsr 		//0,1
+			clc
+			adc #$01	//1,2
+			sta ZP.MirrorDirTemp
+		!NoVert:
+
+			lda Path.dx, x //-1 or 1
+			beq !NoHoriz+
+			clc
+			adc #$01 	//0,2
+			lsr 		//0,1
+			clc
+			adc #$01	//1,2
+			asl
+			asl			//4, 8
+			clc
+			adc ZP.MirrorDirTemp
+			sta ZP.MirrorDirTemp
+		!NoHoriz:
+			lda ZP.MirrorDirTemp
+			rts
+	}
+
+
+	UpdateNewTile: {
+			//Current tile = Y
+			//Current Path = X
+
+			//Is tile blank (<8)
+			// lda LEVEL.Data.Current, y
+			//if so apply correct laser direction
+			
+			//Apply direction according to path exit direction
+
+			jsr GetJoyDirection
+			// .break
+			tax 
+			lda TABLES.JoyToDirIndex, x //(1,2,3,4,  U,D,L,R)
+			//Transform up
+			cmp #$01
+			bne !NotUp+
+			lda LEVEL.Data.Current, y
+			tax
+			lda TABLES.TileUpTransform, x
 			sta LEVEL.Data.Current, y
+			jmp !Exit+
+		!NotUp:
+
+			//Transform dn
+			cmp #$02
+			bne !NotDn+
+			lda LEVEL.Data.Current, y
+			tax
+			lda TABLES.TileDnTransform, x
+			sta LEVEL.Data.Current, y
+			jmp !Exit+
+		!NotDn:
+
+			//Transform lt
+			cmp #$03
+			bne !NotLt+
+			lda LEVEL.Data.Current, y
+			tax
+			lda TABLES.TileLtTransform, x
+			sta LEVEL.Data.Current, y
+			jmp !Exit+
+		!NotLt:
+
+			//Transform lt
+			cmp #$04
+			bne !NotRt+
+			lda LEVEL.Data.Current, y
+			tax
+			lda TABLES.TileRtTransform, x
+			sta LEVEL.Data.Current, y
+			jmp !Exit+
+		!NotRt:
+
+			// lda #$04
+			// sta LEVEL.Data.Current, y
+
+			//Exit
+			jmp !Exit+
+		!NotBlank:
+
+
+		!Exit:
 			rts
 	}
 }

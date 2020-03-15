@@ -20,7 +20,7 @@ al C:326f .Ramp
 al C:84b5 .level_7
 al C:84d3 .level_8
 al C:8522 .level_9
-al C:3819 .UpdateTile
+al C:381d .UpdateTile
 al C:34a4 .PositionSprites
 al C:8240 .level_0
 al C:82af .level_1
@@ -59,6 +59,7 @@ al C:36d2 .TrackActiveLasers
 al C:b1b .HorizPassable
 al C:17 .MirrorTileIndex
 al C:b4b .MirrorReflectForward
+al C:b5b .JoyToDirIndex
 al C:35fd .x
 al C:361d .y
 al C:3029 .Initial
@@ -67,9 +68,11 @@ al C:3498 .GetIndexPosition
 al C:31d4 .CopyInitialMap
 al C:3000 .Start__0
 al C:3004 .Start__1
+al C:b8b .TileDnTransform
 al C:97a .ItemColorMap
 al C:93b .TileDataOffsetsMSB
 al C:2 .DN
+al C:bcb .TileRtTransform
 al C:f .SlideCheckPosY
 al C:363d .dx
 al C:365d .dy
@@ -77,6 +80,7 @@ al C:e .SlideCheckPosX
 al C:1 .UP
 al C:31f8 .DrawTile
 al C:afb .VertPassable
+al C:bab .TileLtTransform
 al C:35fc .count
 al C:c .Joystick
 al C:35ac .PreLaserCopy
@@ -111,6 +115,7 @@ al C:3268 .SlideX
 al C:3029 .LEVEL
 al C:3119 .LoadLevel
 al C:326a .SlideY
+al C:3885 .UpdateNewTile
 al C:2 .ZP
 al C:35aa .Tracing
 al C:d800 .COLOR_RAM
@@ -131,6 +136,7 @@ al C:c3f8 .SPRITE_POINTER
 al C:37a3 .TraceLasers
 al C:9d9 .JoyDirectionMapX
 al C:965b .level_80
+al C:385d .GetJoyDirection
 al C:96c8 .level_82
 al C:968e .level_81
 al C:9728 .level_84
@@ -221,3 +227,4 @@ al C:8c4b .level_39
 al C:36ac .ClearIfNeeded
 al C:8c1e .level_38
 al C:356d .Timer
+al C:b6b .TileUpTransform
