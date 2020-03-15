@@ -60,6 +60,7 @@ LASERS: {
 			ldx #79
 		!:
 			lda LEVEL.Data.Current, x
+
 			sta Data.PreLaserCopy, x
 			dex
 			bpl !-
@@ -207,9 +208,16 @@ LASERS: {
 	}
 
 	TraceLasers: {
+			lda IRQ.Timer
+			and #$01
+			beq !+
+			rts
+		!:
 			// rts 
 			ldx #$00
 		!loop:
+			txa
+			pha
 			lda Path.terminated, x
 			beq !+
 			jmp !Next+ 
@@ -283,6 +291,8 @@ LASERS: {
 			sta Path.terminated, x
 
 		!Next:
+			pla
+			tax
 			inx
 			cpx Path.count
 			bne !loop-

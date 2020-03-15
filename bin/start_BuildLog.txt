@@ -11,12 +11,12 @@ Default-segment:
   *$0002-$0017 Unnamed
   $0801-$080c Basic
   $080e-$084d Basic End
-  $084e-$0bea Utility functions and tables
+  $084e-$0c0a Utility functions and tables
   $1000-$1a20 Music
   $3000-$3267 Code
-  $3268-$35fb SLIDES
-  $35fc-$38d3 PATH
-  $8000-$99e5 Level data
+  $3268-$35ff SLIDES
+  $3600-$38e3 PATH
+  $8000-$9d59 Level data
   $c800-$cfff Font data
   $d000-$dfff Sprites
   $e000-$e21f Tile data

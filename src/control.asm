@@ -182,6 +182,8 @@ CONTROL: {
 		!:
 			jsr GetIndexPosition
 			lda LEVEL.Data.Current, x
+			tay
+			lda TABLES.TileClearValue, y
 			sta MovingTile
 			lda #$01
 			sta SlidingActive
@@ -488,7 +490,7 @@ CONTROL: {
 			lda MovingTile
 			sta LEVEL.Data.Current, x
 			sta LASERS.Data.PreLaserCopy, x
-			
+
 			jsr RestoreSelector
 
 
