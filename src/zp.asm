@@ -9,4 +9,15 @@ ZP: {
 
 	Joystick:			.byte $00
 
+	SlideMoveCount:		.byte $00
+	SlideCheckPosX: 	.byte $00
+	SlideCheckPosY: 	.byte $00
+	SlideTemp: 			.byte $00
+	SlideIndex:			.byte $00
+
+	DirCheck:			.byte $00
+	LaserDirTemp:		.byte $00, $00
+	MirrorDirTemp:		.byte $00, $00
+	MirrorTileIndex: 	.byte $00
+	
 }

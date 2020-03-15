@@ -12,6 +12,7 @@ CONTROL: {
 	PositionY:
 		.byte $00
 
+	* = * "SLIDES"
 	SlideX:
 		.byte $00, $00
 	SlideY:
@@ -186,8 +187,13 @@ CONTROL: {
 			sta SlidingActive
 			lda #$01
 			sta LEVEL.Data.Current, x
+			sta LASERS.Data.PreLaserCopy, x
 			
 			jsr SetupSlideSprite
+
+			jsr LASERS.ClearIfNeeded
+			jsr LASERS.CopyCurrentMap
+
 
 		!Exit:
 			rts
@@ -206,8 +212,7 @@ CONTROL: {
 			bne !NonZero+
 			lda SlideDir + 0
 			bne !NonZero+
-			sec //return control
-			rts
+			jmp !ExitNotOK+
 
 		!NonZero:
 			//Now get count
@@ -217,8 +222,47 @@ CONTROL: {
 			sta ZP.SlideCheckPosX
 			lda PositionY
 			sta ZP.SlideCheckPosY
-			
 
+		!Loop:
+			lda ZP.SlideCheckPosX
+			clc
+			adc SlideDir + 0
+			sta ZP.SlideCheckPosX
+			bmi !CountAndExit+
+			cmp #$0a
+			bcs !CountAndExit+
+			//X is onscreen
+			lda ZP.SlideCheckPosY
+			clc
+			adc SlideDir + 1
+			sta ZP.SlideCheckPosY
+			bmi !CountAndExit+
+			cmp #$08
+			bcs !CountAndExit+
+			//Y is onscreen		
+			//Calcualte index
+			ldx ZP.SlideCheckPosY
+			lda TABLES.Times10, x
+			clc
+			adc ZP.SlideCheckPosX
+			tax
+			lda LEVEL.Data.Current, x
+			cmp #$08
+			bcs !CountAndExit+
+
+			inc ZP.SlideMoveCount
+			jmp !Loop-
+
+
+
+		!CountAndExit:
+			lda ZP.SlideMoveCount
+			bne !ExitOK+
+		!ExitNotOK:
+			sec
+			rts
+
+		!ExitOK:
 
 
 			clc
@@ -237,12 +281,85 @@ CONTROL: {
 			sta SPRITE_POINTER + 3
 
 			//Copy positions from selector
-			ldx #$03
-		!:
-			lda $d000, x
-			sta $d004, x
-			dex
-			bpl !-
+			lda $d000
+			sta $d004
+			sta SlideX + 0
+			sta SlideX + 1
+			lda $d001
+			sta $d005
+			sta SlideY + 0
+			sta SlideY + 1
+			lda $d002
+			sta $d006
+			lda $d003
+			sta $d007
+
+			//Apply color
+			cpx #$11
+			bcc !NoColor+
+			cpx #$15
+			bcs !NoColor+
+			lda MovingTile
+			and #$c0
+			asl
+			rol
+			rol
+			tax
+			lda TABLES.ItemColors, x
+			sec
+			sbc #$08
+			jmp !Color+
+
+		!NoColor:
+			lda #$07
+		!Color:
+			sta $d029
+			sta $d02a
+
+			//Calculate target positions
+			lda ZP.SlideMoveCount
+			asl
+			asl
+			asl
+			sta ZP.SlideTemp
+			clc
+			adc ZP.SlideTemp
+			adc ZP.SlideTemp
+			sta ZP.SlideTemp //Move count x24
+
+			//Check x first
+			lda SlideDir + 0 
+			beq !NotX+
+			bmi !Subtract+
+		!Add:
+			lda SlideX + 0
+			clc
+			adc ZP.SlideTemp
+			sta SlideX + 1
+			jmp !NotX+
+		!Subtract:
+			lda SlideX + 0
+			sec
+			sbc ZP.SlideTemp
+			sta SlideX + 1
+		!NotX:
+
+			//Check y first
+			lda SlideDir + 1 
+			beq !NotY+
+			bmi !Subtract+
+		!Add:
+			lda SlideY + 0
+			clc
+			adc ZP.SlideTemp
+			sta SlideY + 1
+			jmp !NotY+
+		!Subtract:
+			lda SlideY + 0
+			sec
+			sbc ZP.SlideTemp
+			sta SlideY + 1
+		!NotY:
 
 			//Disable selector, enable tile copy
 			lda #%00001100
@@ -250,6 +367,15 @@ CONTROL: {
 			rts
 	}
 
+
+	RestoreSelector: {
+			lda #$00
+			sta SlidingActive
+			lda #%00000011
+			sta $d015	
+			jsr PositionSprites	
+			rts
+	}
 
 	GetIndexPosition: {
 			ldx PositionY
@@ -262,32 +388,122 @@ CONTROL: {
 
 
 	PositionSprites: {
-		//Move sprite to location
-		ldx PositionX
-		lda TABLES.SelectPositionX, x
-		sta $d000
-		sta $d002
+			lda SlidingActive
+			beq !+
+			jmp SlideActiveSprite
+		!:
+			//Move sprite to location
+			ldx PositionX
+			lda TABLES.SelectPositionX, x
+			sta $d000
+			sta $d002
 
-		ldx PositionY
-		lda TABLES.SelectPositionY, x
-		sta $d001
-		clc
-		adc #$15
-		sta $d003
+			ldx PositionY
+			lda TABLES.SelectPositionY, x
+			sta $d001
+			clc
+			adc #$15
+			sta $d003
 
 
-		//Do color ramp
-		lda IRQ.Timer
-		and #$07
-		beq !+
-		inc RampIndex
-		lda RampIndex
-		and #$07
-		tax
-		lda Ramp, x
-		sta $d027
-		sta $d028
-	!:
-		rts
+			//Do color ramp
+			lda IRQ.Timer
+			and #$07
+			beq !+
+			inc RampIndex
+			lda RampIndex
+			and #$07
+			tax
+			lda Ramp, x
+			sta $d027
+			sta $d028
+		!:
+			rts
+	}
+
+	SlideActiveSprite: {
+			//Apply movement
+			lda SlideX + 0
+			clc
+			adc SlideDir + 0
+			clc
+			adc SlideDir + 0
+			clc
+			adc SlideDir + 0
+			clc
+			adc SlideDir + 0
+			sta SlideX + 0
+
+
+			lda SlideY + 0
+			clc
+			adc SlideDir + 1
+			clc
+			adc SlideDir + 1
+			clc
+			adc SlideDir + 1
+			clc
+			adc SlideDir + 1
+			sta SlideY + 0
+
+
+			lda SlideY + 0
+			cmp SlideY + 1
+			bne !NotArrived+
+			lda SlideX + 0
+			cmp SlideX + 1
+			bne !NotArrived+
+		
+		!Arrived:
+
+			//Work out the new position
+			lda SlideX + 1
+			ldx #$00
+		!:
+			cmp TABLES.SelectPositionX, x
+			beq !+
+			inx 
+			cpx #$0a
+			bne !-
+		!:
+			stx ZP.SlideIndex
+			stx PositionX
+
+			lda SlideY + 1
+			ldx #$00
+		!:
+			cmp TABLES.SelectPositionY, x
+			beq !+
+			inx 
+			cpx #$08
+			bne !-
+		!:
+			stx PositionY
+			lda TABLES.Times10, x 
+			clc
+			adc ZP.SlideIndex
+			tax
+
+			//X contains the index
+			lda MovingTile
+			sta LEVEL.Data.Current, x
+			sta LASERS.Data.PreLaserCopy, x
+			
+			jsr RestoreSelector
+
+
+
+		!NotArrived:
+
+			//Draw sprite in position	
+			lda SlideX + 0
+			sta $d004
+			sta $d006
+			lda SlideY + 0
+			sta $d005
+			clc
+			adc #$15
+			sta $d007
+			rts
 	}
 }

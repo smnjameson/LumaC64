@@ -5,7 +5,8 @@ GAME: {
 
 	Start: {
 		jsr CONTROL.Init
-
+		jsr LASERS.Init
+		
 		lda Settings.currentLevel
 		jsr LEVEL.LoadLevel
 		jsr LEVEL.DrawLevel
@@ -28,7 +29,10 @@ GAME: {
 
 			jsr CONTROL.Update
 			jsr LEVEL.Update
-			
+			jsr LASERS.Update
+
+			//IT WAS MY BIRTHDAY RIGHT HERE!!!!!!!
+
 		jmp !Loop-
 	}
 

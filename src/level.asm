@@ -165,6 +165,9 @@ LEVEL: {
 			sta Data.Current, x
 			dex
 			bpl !-
+
+			jsr LASERS.CopyCurrentMap
+
 			rts
 	}
 
@@ -253,6 +256,7 @@ LEVEL: {
 			rts
 
 		!UpdateTile:
+			sta Data.Display, x
 			stx ZP.LevelShadowTemp
 			jsr DrawTile
 			ldx ZP.LevelShadowTemp

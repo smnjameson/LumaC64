@@ -55,8 +55,6 @@ AUTOSTART: Resetting the machine to autostart '*'
 AUTOSTART: `bin/start.prg' recognized as program/p00 file.
 Main CPU: starting at ($FFFC).
 Main CPU: RESET.
-Sound: Opened device `dx', speed 44100Hz, fragment size 2.9ms, buffer size 101ms
-reSID: MOS8580, filter on, sampling rate 44100Hz - fast
 Drive 8: RESET.
 AUTOSTART: Injecting program data at $0801 (size $da1f)
 AUTOSTART: Ready

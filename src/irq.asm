@@ -29,8 +29,11 @@ IRQ: {
 	MainIRQ: {
 		saveState()
 			inc Timer
+
 			lda #$01
 			sta FrameFlag
+
+			jsr $1003	//Do music
 
 		restoreState()
 		asl $d019

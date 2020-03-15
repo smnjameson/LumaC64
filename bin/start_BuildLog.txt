@@ -8,13 +8,15 @@ Writing prg file: Z:\Projects\Luma\bin\start.prg
 Memory Map
 ----------
 Default-segment:
-  *$0002-$000c Unnamed
+  *$0002-$0017 Unnamed
   $0801-$080c Basic
-  $080e-$0848 Basic End
-  $0849-$0a03 Utility functions and tables
-  $1000-$0fff Music
-  $3000-$3428 Code
-  $8000-$8fc6 Level data
+  $080e-$084d Basic End
+  $084e-$0b5a Utility functions and tables
+  $1000-$1a20 Music
+  $3000-$3267 Code
+  $3268-$35fb SLIDES
+  $35fc-$3878 PATH
+  $8000-$99e5 Level data
   $c800-$cfff Font data
   $d000-$dfff Sprites
   $e000-$e21f Tile data

@@ -49,6 +49,9 @@ Entry: {
 
 		cli
 
+		lda #$00	//Initialise music
+		jsr $1000
+
 		jsr IRQ.Init
 		jmp INTRO.Start
 }
@@ -131,6 +134,9 @@ TABLES: {
 		.byte $4e				//Battery
 		.byte 0,0,0,0,0,0,0,0,0,0
 
+	LaserDirToJoyDir:
+		.byte 4,8,1,2
+
 	JoyDirectionMapX:
 		.byte 0,0,0,0,-1,0,0,0
 		.byte 1,0,0,0,0,0,0,0
@@ -142,12 +148,62 @@ TABLES: {
 	SelectPositionX:
 		.fill 10, $18 + $18 * i
 	SelectPositionY:
-		.fill 10, $29 + $18 * i
+		.fill 8, $29 + $18 * i
+
+	ValidDirections:
+		.byte $a,$e,$e,$e,$e,$e,$e,$e,$e,$6
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $b,$f,$f,$f,$f,$f,$f,$f,$f,$7
+		.byte $9,$d,$d,$d,$d,$d,$d,$d,$d,$5
+
+	IndexToX:
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+		.fill 10, i
+
+	IndexToY:
+		.for(var j=0; j<8; j++) {
+			.fill 10, j
+		}
+
+	VertPassable:
+		.byte 1,1,1,1,1,1,1,1
+		.byte 0,1,1,1,1,1,1,1
+		.byte 1,0,0,0,0,0,1,1
+		.byte 1,1,1,1,0,0,0,0
+
+	HorizPassable:
+		.byte 1,1,1,1,1,1,1,1
+		.byte 0,1,1,1,1,1,1,1
+		.byte 1,0,0,0,0,0,1,1
+		.byte 1,1,0,0,1,1,0,0
+
+	MirrorReflectBack:
+		.byte 0,4,8,0
+		.byte 1,0,0,0
+		.byte 2,0,0,0
+		.byte 0,0,0,0
+		
+	MirrorReflectForward:
+		.byte 0,8,4,0
+		.byte 2,0,0,0
+		.byte 1,0,0,0
+		.byte 0,0,0,0
 }
 
 
 * = $1000 "Music"
-
+	.var music = LoadBinary("assets/LumaMusic.prg", BF_C64FILE)
+	.fill music.getSize(), music.get(i)
 
 * = $3000 "Code"
 	#import "src/intro.asm"
@@ -155,6 +211,7 @@ TABLES: {
 	#import "src/level.asm"
 	#import "src/control.asm"
 	#import "src/irq.asm"
+	#import "src/lasers.asm"
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"
