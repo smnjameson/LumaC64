@@ -176,16 +176,16 @@ TABLES: {
 		}
 
 	VertPassable:
-		.byte 1,1,1,1,1,1,1,1
-		.byte 0,1,1,1,1,1,1,1
-		.byte 1,0,0,0,0,0,1,1
-		.byte 1,1,1,1,0,0,0,0
+		.byte 1,1,0,1,0,1,1,1
+		.byte 0,1,0,1,0,1,1,0
+		.byte 0,0,0,0,0,0,1,1
+		.byte 0,0,1,0,0,0,255,255
 
 	HorizPassable:
-		.byte 1,1,1,1,1,1,1,1
-		.byte 0,1,1,1,1,1,1,1
-		.byte 1,0,0,0,0,0,1,1
-		.byte 1,1,0,0,1,1,0,0
+		.byte 1,1,1,0,0,1,1,1
+		.byte 0,1,1,1,0,1,1,1
+		.byte 0,0,0,0,0,0,1,0
+		.byte 1,0,0,0,1,0,255,255
 
 	MirrorReflectBack:
 		.byte 0,4,8,0
@@ -233,31 +233,31 @@ TABLES: {
 		.byte $16,$16,$1a,$1a,$1c,$1c,$1e,$1f
 
 	//COLOR PATTERNS
-	//0  	.|.
+	//1 	.|.
 	//		.|.
 	//		.|.
 	
-	//1		...
+	//2		...
 	//		---
 	//		...
 	
-	//2		.|.
-	//		...
-	//		.|.
-
 	//3		.|.
+	//		...
+	//		.|.
+
+	//4		.|.
 	//		-..
 	//		...
-
-	//4		...
-	//		-..
-	//		.|.
 
 	//5		...
+	//		-..
+	//		.|.
+
+	//6		...
 	//		..-
 	//		.|.
 
-	//6		.|.
+	//7		.|.
 	//		..-
 	//		...
 
@@ -286,18 +286,23 @@ TABLES: {
 	ColorPatterns:
 		.byte 255,255,255,255
 		.byte 1,41,81,255
-		.byte 3,41,42,255
+		.byte 40,41,42,255
 		.byte 1,81,255,255
+
 		.byte 1,40,255,255
 		.byte 40,81,255,255
 		.byte 42,81,255,255
 		.byte 1,42,255,255
 
+		.byte 40,42,255,255
+
+	ColorAntiPatterns:
+		.byte 0,8,3,2,6,7,4,5,1
 }
 
 
 * = $1000 "Music"
-	.var music = LoadBinary("assets/LumaMusic.prg", BF_C64FILE)
+	.var music = LoadBinary("assets/LumaMusic2.prg", BF_C64FILE)
 	.fill music.getSize(), music.get(i)
 
 * = $3000 "Code"

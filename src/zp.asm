@@ -22,4 +22,12 @@ ZP: {
 
 	HudCharTemp:		.byte $00
 	PathColorTemp:		.byte $00
+
+	ColorUpdateIndex:	.byte $00
+	ColorUpdateValue:	.byte $00
+	ColorTileVector:	.word $0000
+	PathColor:			.byte $00
+	DrawNoColor:		.byte $00
+	ColorFixVector:		.word $0000
+	ColorFixTemp:		.byte $00, $00
 }	

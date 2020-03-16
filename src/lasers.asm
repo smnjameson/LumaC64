@@ -225,6 +225,9 @@ LASERS: {
 			beq !+
 			rts
 		!:
+
+						
+
 			// rts 
 			ldx #$00
 		!loop:
@@ -238,8 +241,11 @@ LASERS: {
 			bcc !+
 			jmp !Next+ 
 		!:
-
+			// .break
 			//Advance laser path
+			lda Path.color, x
+			sta ZP.PathColor
+
 			lda Path.x, x
 			clc
 			adc Path.dx, x
@@ -280,6 +286,7 @@ LASERS: {
 				and #$1f
 				tax
 				lda TABLES.HorizPassable, x
+				bmi !CheckTarget+
 				cmp #$01
 				jmp !Done+
 			!Vert:
@@ -287,6 +294,7 @@ LASERS: {
 				and #$1f
 				tax
 				lda TABLES.VertPassable, x
+				bmi !CheckTarget+
 				cmp #$01
 			!Done:
 			ldx ZP.LaserDirTemp
@@ -297,6 +305,25 @@ LASERS: {
 		
 			jmp !Next+
 
+		!CheckTarget:
+			lda LEVEL.Data.Current, y
+			and #$1f
+			cmp #$1e
+			bne !Terminate+
+
+			lda LEVEL.Data.Current, y
+			and #$c0
+			asl
+			rol
+			rol
+			ldx ZP.LaserDirTemp
+			cmp Path.color, x
+			bne !Terminate+
+
+			lda LEVEL.Data.Current, y
+			clc
+			adc #$01
+			sta LEVEL.Data.Current, y
 
 		!Terminate:	
 			lda #$01
@@ -307,8 +334,9 @@ LASERS: {
 			tax
 			inx
 			cpx Path.count
-			bne !loop-
-
+			beq !+
+			jmp !loop-
+		!:
 			rts
 	}
 
@@ -413,13 +441,20 @@ LASERS: {
 			// .break
 			tax 
 			lda TABLES.JoyToDirIndex, x //(1,2,3,4,  U,D,L,R)
+
+
 			//Transform up
 			cmp #$01
 			bne !NotUp+
 			lda LEVEL.Data.Current, y
+			and #$1f
 			tax
 			lda TABLES.TileUpTransform, x
 			sta LEVEL.Data.Current, y
+			tax
+			lda TABLES.ColorTransformUp, x
+			sta ZP.ColorUpdateIndex
+			jsr ColorTile
 			jmp !Exit+
 		!NotUp:
 
@@ -427,9 +462,14 @@ LASERS: {
 			cmp #$02
 			bne !NotDn+
 			lda LEVEL.Data.Current, y
+			and #$1f
 			tax
 			lda TABLES.TileDnTransform, x
 			sta LEVEL.Data.Current, y
+			tax
+			lda TABLES.ColorTransformDn, x
+			sta ZP.ColorUpdateIndex
+			jsr ColorTile
 			jmp !Exit+
 		!NotDn:
 
@@ -437,9 +477,14 @@ LASERS: {
 			cmp #$03
 			bne !NotLt+
 			lda LEVEL.Data.Current, y
+			and #$1f
 			tax
 			lda TABLES.TileLtTransform, x
 			sta LEVEL.Data.Current, y
+			tax
+			lda TABLES.ColorTransformLt, x
+			sta ZP.ColorUpdateIndex
+			jsr ColorTile
 			jmp !Exit+
 		!NotLt:
 
@@ -447,9 +492,14 @@ LASERS: {
 			cmp #$04
 			bne !NotRt+
 			lda LEVEL.Data.Current, y
+			and #$1f
 			tax
 			lda TABLES.TileRtTransform, x
 			sta LEVEL.Data.Current, y
+			tax
+			lda TABLES.ColorTransformRt, x
+			sta ZP.ColorUpdateIndex
+			jsr ColorTile
 			jmp !Exit+
 		!NotRt:
 
@@ -464,4 +514,85 @@ LASERS: {
 		!Exit:
 			rts
 	}
+
+	ColorTile: {
+			lda TABLES.TileToScreenLSB, y
+			sta ZP.ColorTileVector + 0
+			lda TABLES.TileToScreenMSB, y
+			clc
+			adc #>[COLOR_RAM - SCREEN_RAM]
+			sta ZP.ColorTileVector + 1
+
+
+			ldx ZP.PathColor
+			lda TABLES.ItemColors, x
+			sta ZP.ColorUpdateValue
+
+			clc
+			lda ZP.ColorUpdateIndex
+			asl
+			asl
+			tax
+
+		!loop:
+			lda TABLES.ColorPatterns, x
+			bmi !ExitLoop+
+					
+			ldy RecolorList.count
+			sta RecolorList.index, y
+			lda ZP.ColorTileVector + 0
+			sta RecolorList.lsb, y
+			lda ZP.ColorTileVector + 1
+			sta RecolorList.msb, y
+			lda ZP.ColorUpdateValue
+			sta RecolorList.color, y
+			inc RecolorList.count
+			inx
+			jmp !loop-
+		!ExitLoop:
+
+		!Exit:
+			rts
+
+	}
+
+	DoRecolor: {
+		// .break
+			ldy #$00
+		!:
+			cpy RecolorList.count
+			beq !Exit+
+
+			lda RecolorList.lsb, y
+			sta Mod + 1
+			lda RecolorList.msb, y
+			sta Mod + 2
+			ldx RecolorList.index, y
+			lda RecolorList.color, y
+		Mod:
+			sta $BEEF, x
+			iny 
+			jmp !-
+
+		!Exit:
+			ldy #$00
+			sty RecolorList.count
+			rts
+	}	
+
+
+
+	RecolorList: {
+		count: 
+			.byte $00
+		lsb:
+			.fill 256, 0
+		msb:
+			.fill 256, 0
+		index:
+			.fill 256, 0
+		color:
+			.fill 256, 0
+	}
+
 }

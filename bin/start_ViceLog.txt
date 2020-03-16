@@ -1,0 +1,9 @@
+ 
+*** VICE Version 3.1 ***
+OS compiled for: WIN64
+GUI compiled for: NATIVE
+CPU compiled for: X64
+Compiler used: GCC-6.2.0
+Current OS: Windows 10 PrLoadiWriting configuration file `C:\Users\Simon\AppData\Roaming\vice\3.1\vice.ini'.
+
+Exiting...

@@ -1,0 +1,336 @@
+.label ClearScreen=$84e {
+}
+.label level_31=$8b2b
+.label level_30=$8afe
+.label level_33=$8b8d
+.label level_32=$8b5c
+.label level_35=$8c02
+.label level_34=$8bbe
+.label LevelPassCodeData=$8100
+.label level_37=$8c6c
+.label level_36=$8c37
+.label level_3=$83a0
+.label level_28=$8abd
+.label level_4=$83f5
+.label level_27=$8a7c
+.label level_5=$844c
+.label level_6=$8491
+.label level_29=$8ae4
+.label level_7=$8502
+.label level_8=$8559
+.label level_9=$8577
+.label level_0=$82b8
+.label level_1=$8327
+.label level_2=$8374
+.label level_20=$886f
+.label level_22=$8950
+.label LEVEL=$303e {
+  .label DrawTile=$3243 {
+    .label TileFetch=$3273
+    .label TileCol=$3291
+    .label TileDraw=$3279
+  }
+  .label CopyInitialMap=$321f {
+  }
+  .label GenerateItems=$31b0 {
+  }
+  .label DrawMetaData=$3156 {
+    .label CodeMod=$31a1
+  }
+  .label Data=$303e {
+    .label Initial=$303e
+    .label Current=$30de
+    .label Display=$308e
+  }
+  .label DoShadows=$3243 {
+  }
+  .label Update=$329a {
+  }
+  .label LoadLevel=$312f {
+  }
+  .label MovesRemaining=$312e
+  .label GenerateWalls=$31f3 {
+  }
+  .label DrawLevel=$3231 {
+  }
+}
+.label level_21=$8909
+.label level_24=$89c6
+.label level_23=$897b
+.label level_26=$8a5c
+.label level_25=$8a07
+.label level_17=$87c8
+.label level_16=$8777
+.label level_19=$8849
+.label level_18=$880d
+.label ZP=$2 {
+  .label HudCharTemp=$18
+  .label ColorUpdateIndex=$1a
+  .label SlideIndex=$11
+  .label ColorTileVector=$1c
+  .label LevelShadowTemp=$b
+  .label LevelPointer=$2
+  .label SlideCheckPosY=$f
+  .label ColorFixVector=$20
+  .label SlideCheckPosX=$e
+  .label DrawNoColor=$1f
+  .label SlideMoveCount=$d
+  .label LevelDataVector=$4
+  .label LevelTemp=$6
+  .label MirrorDirTemp=$15
+  .label ColorUpdateValue=$1b
+  .label MirrorTileIndex=$17
+  .label PathColorTemp=$19
+  .label Joystick=$c
+  .label LevelColorTemp=$a
+  .label LevelDataIndex=$9
+  .label DirCheck=$12
+  .label SlideTemp=$10
+  .label LaserDirTemp=$13
+  .label PathColor=$1e
+  .label ColorFixTemp=$22
+}
+.label COLOR_RAM=$d800
+.label CHAR_COLORS=$e120
+.label level_91=$9931
+.label level_90=$98ce
+.label level_93=$999e
+.label level_92=$9964
+.label level_95=$9a24
+.label level_94=$99ff
+.label level_97=$9aa0
+.label IRQ=$35d0 {
+  .label FrameFlag=$35d0
+  .label Init=$35d2 {
+  }
+  .label Timer=$35d1
+  .label MainIRQ=$35f4 {
+  }
+}
+.label level_96=$9a5f
+.label level_11=$8609
+.label level_99=$9b33
+.label KEYBOARD=$3f19 {
+  .label DebounceKeys=$3f19
+  .label Update=$3f1a {
+  }
+}
+.label level_10=$85c6
+.label level_98=$9b05
+.label level_13=$86bb
+.label level_12=$8658
+.label level_15=$8718
+.label level_14=$86e3
+.label Entry=$80e {
+}
+.label SPRITE_POINTER=$c3f8
+.label level_80=$9695
+.label LASERS=$360d {
+  .label BATTERY=$15
+  .label Path=$3660 {
+    .label dx=$36a1
+    .label color=$3701
+    .label dy=$36c1
+    .label count=$3660
+    .label x=$3661
+    .label y=$3681
+    .label terminated=$36e1
+  }
+  .label GetJoyDirection=$3929 {
+  }
+  .label Complete=$360f
+  .label TrackActiveLasers=$3756 {
+  }
+  .label RecolorList=$3a2e {
+    .label color=$3d2f
+    .label count=$3a2e
+    .label index=$3c2f
+    .label lsb=$3a2f
+    .label msb=$3b2f
+  }
+  .label Data=$3610 {
+    .label PreLaserCopy=$3610
+  }
+  .label DoRecolor=$3a08 {
+    .label Mod=$3a21
+  }
+  .label Update=$3813 {
+  }
+  .label CopyCurrentMap=$374a {
+  }
+  .label ClearIfNeeded=$3730 {
+  }
+  .label Active=$360d
+  .label Init=$3721 {
+  }
+  .label UpdateNewTile=$3951 {
+  }
+  .label ColorTile=$39cc {
+  }
+  .label UpdateTile=$38e9 {
+  }
+  .label Tracing=$360e
+  .label TraceLasers=$3836 {
+  }
+}
+.label HUD_MAP=$e220
+.label level_82=$970d
+.label INTRO=$3000 {
+  .label Start=$3000 {
+  }
+}
+.label level_81=$96d4
+.label level_84=$9776
+.label level_83=$9742
+.label level_86=$97e5
+.label level_85=$97b9
+.label level_88=$9878
+.label level_87=$9824
+.label level_89=$98a1
+.label TABLES=$872 {
+  .label TileToSpriteMap=$9b5
+  .label TileDnTransform=$b8b
+  .label ItemColorMap=$97a
+  .label TileDataOffsetsMSB=$93b
+  .label ColorTransformRt=$c6b
+  .label TileDataOffsetsLSB=$91b
+  .label TileRtTransform=$bcb
+  .label ColorTransformDn=$c2b
+  .label TileScreenOffsets=$912
+  .label ColorTransformLt=$c4b
+  .label ColorAntiPatterns=$caf
+  .label TileClearValue=$beb
+  .label JoyDirectionMapX=$9d9
+  .label Times10=$95b
+  .label ColorTransformUp=$c0b
+  .label VertPassable=$afb
+  .label IndexToX=$a5b
+  .label TileLtTransform=$bab
+  .label HorizPassable=$b1b
+  .label ItemToTileMap=$963
+  .label JoyDirectionMapY=$9e9
+  .label MirrorReflectBack=$b3b
+  .label MirrorReflectForward=$b4b
+  .label ItemColors=$991
+  .label JoyToDirIndex=$b5b
+  .label TileUpTransform=$b6b
+  .label SelectPositionY=$a03
+  .label MoveableTileMap=$995
+  .label ValidDirections=$a0b
+  .label ColorPatterns=$c8b
+  .label LaserDirToJoyDir=$9d5
+  .label SelectPositionX=$9f9
+}
+.label LevelPointerData=$8000
+.label level_71=$948f
+.label level_70=$9453
+.label level_73=$9521
+.label level_72=$94ce
+.label level_75=$95a3
+.label level_74=$9563
+.label level_77=$95fd
+.label level_76=$95cf
+.label level_79=$9665
+.label level_78=$9634
+.label level_60=$923e
+.label level_62=$9284
+.label level_61=$9262
+.label TILES=$e000
+.label level_64=$92f0
+.label level_63=$92b7
+.label level_66=$934c
+.label level_65=$931f
+.label level_68=$93cc
+.label level_67=$9388
+.label level_69=$93fa
+.label SCREEN_RAM=$c000
+.label CONTROL=$32ba {
+  .label RT=$8
+  .label PositionY=$32bb
+  .label GetIndexPosition=$34fc {
+  }
+  .label SlideDir=$32c0
+  .label UpdatePosition=$3310 {
+  }
+  .label SlidingActive=$32cd
+  .label LT=$4
+  .label SlideCount=$32c2
+  .label DN=$2
+  .label FR=$10
+  .label Update=$3309 {
+  }
+  .label SetupSlideSprite=$3447 {
+  }
+  .label RestoreSelector=$34ee {
+  }
+  .label Init=$32cf {
+  }
+  .label Ramp=$32c3
+  .label GetMoveCountAndDirection=$33e3 {
+  }
+  .label Debounce=$32cc
+  .label UP=$1
+  .label RampIndex=$32cb
+  .label PositionSprites=$3508 {
+  }
+  .label PositionX=$32ba
+  .label DEBOUNCE_TIMER=$8
+  .label SlideX=$32bc
+  .label SlideActiveSprite=$3545 {
+  }
+  .label SlideY=$32be
+  .label UpdateWithFire=$338d {
+  }
+  .label MovingTile=$32ce
+}
+.label level_51=$8fb8
+.label level_50=$8f6e
+.label level_53=$9085
+.label level_52=$903c
+.label level_55=$90f0
+.label level_54=$90b8
+.label level_57=$9160
+.label level_56=$9137
+.label level_59=$9206
+.label level_58=$91cb
+.label level_49=$8eed
+.label GAME=$3003 {
+  .label Start=$3004 {
+  }
+  .label Settings=$3003 {
+    .label currentLevel=$3003
+  }
+}
+.label HUD=$3e2f {
+  .label Init=$3e2f {
+    .label ColMod=$3e55
+    .label HudMod=$3e4a
+  }
+  .label DrawMovesRemaining=$3e86 {
+  }
+  .label Update=$3e7f {
+  }
+  .label DrawLevelNumber=$3ece {
+  }
+}
+.label level_40=$8d0c
+.label level_42=$8d62
+.label level_41=$8d40
+.label level_44=$8df6
+.label level_43=$8da1
+.label level_46=$8e54
+.label level_45=$8e23
+.label level_48=$8ea0
+.label level_47=$8e7f
+.label level_39=$8cf0
+.label level_106=$9c86
+.label level_38=$8cbc
+.label level_107=$9cb3
+.label level_108=$9cef
+.label level_109=$9d43
+.label level_102=$9bb2
+.label level_103=$9bd7
+.label level_104=$9c13
+.label level_105=$9c4e
+.label level_100=$9b58
+.label level_101=$9b88

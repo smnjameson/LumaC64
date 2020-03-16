@@ -1,5 +1,5 @@
 LevelPointerData:
-    .word level_49
+    .word level_0
     .word level_1
     .word level_2
     .word level_3

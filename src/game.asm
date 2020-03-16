@@ -4,11 +4,14 @@ GAME: {
 	}
 
 	Start: {
-		lda #$00
-		ldx #$01
-		jsr ClearScreen
 
-		jsr HUD.Init
+		lda Settings.currentLevel
+		bne !+
+			lda #$00
+			ldx #$09		//Force mc in every square
+			jsr ClearScreen
+			jsr HUD.Init
+	!:
 		jsr CONTROL.Init
 		jsr LASERS.Init
 
@@ -39,6 +42,9 @@ GAME: {
 
 			jsr KEYBOARD.Update
 			//IT WAS MY BIRTHDAY RIGHT HERE!!!!!!!
+
+			// lda #$00
+			// sta ZP.DrawNoColor
 
 		jmp !Loop-
 	}

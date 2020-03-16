@@ -22,6 +22,8 @@ LEVEL: {
 			adc #>LevelPointerData
 			sta ZP.LevelPointer + 1
 
+			lda #$00
+			sta ZP.DrawNoColor
 
 			ldy #$00
 			lda (ZP.LevelPointer), y
@@ -263,6 +265,14 @@ LEVEL: {
 		TileDraw:
 			sta $BEEF, y
 			tay
+	
+	// 	lda ZP.DrawNoColor
+	// 	beq !+
+	// 		// .break
+	// 		nop
+	// 		jmp !NoColor+
+	// !:
+
 			lda ZP.LevelColorTemp
 			beq !Standard+
 				//Custom color
@@ -273,16 +283,23 @@ LEVEL: {
 			lda CHAR_COLORS, y
 		!DoneColor:
 			ldy TABLES.TileScreenOffsets, x
+			cmp #$08
+			beq !NoColor+
 		TileCol:
 			sta $BEEF, y
+
+		!NoColor:
 			inx
 			cpx #$09
 			bne !inner-
+
 
 			rts
 	}
 
 	Update: {
+
+
 			ldx #$4f
 		!:
 			lda Data.Current, x
@@ -291,11 +308,20 @@ LEVEL: {
 		!Next:
 			dex
 			bpl !-
+
+			jsr LASERS.DoRecolor
+
 			rts
 
 		!UpdateTile:
-			sta Data.Display, x
 			stx ZP.LevelShadowTemp
+
+				// ldx #$01
+				// stx ZP.DrawNoColor
+
+			ldx ZP.LevelShadowTemp
+			sta Data.Display, x
+			// .break
 			jsr DrawTile
 			ldx ZP.LevelShadowTemp
 			jmp !Next-
