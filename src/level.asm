@@ -223,6 +223,9 @@ LEVEL: {
 			rts
 	}
 
+	DoShadows: {
+				
+	}
 
 	DrawTile: {
 			//Draw the tile number in Acc

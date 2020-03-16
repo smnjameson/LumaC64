@@ -21,4 +21,5 @@ ZP: {
 	MirrorTileIndex: 	.byte $00
 
 	HudCharTemp:		.byte $00
+	PathColorTemp:		.byte $00
 }	

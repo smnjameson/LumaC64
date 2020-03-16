@@ -27,6 +27,8 @@ LASERS: {
 			.fill 32, 0
 		terminated:
 			.fill 32, 0
+		color:
+			.fill 32, 0
 	}
 
 	Init: {
@@ -82,6 +84,14 @@ LASERS: {
 			bcc !+
 			jmp !NoLaser+
 		!:
+
+
+			lda LEVEL.Data.Current, x
+			and #$c0
+			asl
+			rol
+			rol
+			sta ZP.PathColorTemp
 
 			//Found laser
 			//Check for battery
@@ -169,6 +179,8 @@ LASERS: {
 
 				lda #$00
 				sta Path.terminated, y
+				lda ZP.PathColorTemp
+				sta Path.color, y
 
 				inc Path.count
 
