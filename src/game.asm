@@ -14,12 +14,27 @@ GAME: {
 	!:
 		jsr CONTROL.Init
 		jsr LASERS.Init
+		jsr MESSAGES.Init
 
 		lda Settings.currentLevel
 		jsr LEVEL.LoadLevel
 		jsr LEVEL.DrawLevel
 
-				//Level testing debug code
+		lda Settings.currentLevel
+	!Level1:
+		bne !Level2+
+		lda #$00
+		sta MESSAGES.messageDisplayed
+		jmp !DoneMessages+
+	!Level2:
+		cmp #$01
+		bne !Level3+
+		lda #$00
+		sta MESSAGES.messageDisplayed
+		jmp !DoneMessages+
+	!Level3:
+	!DoneMessages:
+					//Level testing debug code
 				// lda #$10
 				// bit $dc00
 				// bne *-3
@@ -41,7 +56,8 @@ GAME: {
 			jsr HUD.Update
 
 			jsr KEYBOARD.Update
-			//IT WAS MY BIRTHDAY RIGHT HERE!!!!!!!
+
+			jsr MESSAGES.Update
 
 			// lda #$00
 			// sta ZP.DrawNoColor

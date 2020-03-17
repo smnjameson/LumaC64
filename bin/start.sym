@@ -1,68 +1,68 @@
 .label ClearScreen=$84e {
 }
-.label level_31=$8b76
-.label level_30=$8b5c
-.label level_33=$8bd4
-.label level_32=$8ba3
-.label level_35=$8c36
-.label level_34=$8c05
+.label level_31=$8b86
+.label level_30=$8b6c
+.label level_33=$8be4
+.label level_32=$8bb3
+.label level_35=$8c46
+.label level_34=$8c15
 .label LevelPassCodeData=$8100
-.label level_37=$8caf
-.label level_36=$8c7a
-.label level_3=$83bc
-.label level_28=$8af4
-.label level_4=$8411
-.label level_27=$8ad4
-.label level_5=$8468
-.label level_6=$84ad
-.label level_29=$8b35
-.label level_7=$851e
-.label level_8=$8575
-.label level_9=$8593
-.label level_0=$82d4
-.label level_1=$8343
-.label level_2=$8390
-.label level_20=$88c1
-.label level_22=$8981
-.label LEVEL=$303e {
-  .label DrawTile=$3243 {
-    .label TileFetch=$3273
-    .label TileCol=$3291
-    .label TileDraw=$3279
+.label level_37=$8cbf
+.label level_36=$8c8a
+.label level_3=$83cc
+.label level_28=$8b04
+.label level_4=$8421
+.label level_27=$8ae4
+.label level_5=$8478
+.label level_6=$84bd
+.label level_29=$8b45
+.label level_7=$852e
+.label level_8=$8585
+.label level_9=$85a3
+.label level_0=$82e4
+.label level_1=$8353
+.label level_2=$83a0
+.label level_20=$890f
+.label level_22=$8991
+.label LEVEL=$305d {
+  .label DrawTile=$3262 {
+    .label TileFetch=$3292
+    .label TileCol=$32b0
+    .label TileDraw=$3298
   }
-  .label CopyInitialMap=$321f {
+  .label CopyInitialMap=$323e {
   }
-  .label GenerateItems=$31b0 {
+  .label GenerateItems=$31cf {
   }
-  .label DrawMetaData=$3156 {
-    .label CodeMod=$31a1
+  .label DrawMetaData=$3175 {
+    .label CodeMod=$31c0
   }
-  .label Data=$303e {
-    .label Initial=$303e
-    .label Current=$30de
-    .label Display=$308e
+  .label Data=$305d {
+    .label Initial=$305d
+    .label Current=$30fd
+    .label Display=$30ad
   }
-  .label DoShadows=$3243 {
+  .label DoShadows=$3262 {
   }
-  .label Update=$329a {
+  .label Update=$32b9 {
   }
-  .label LoadLevel=$312f {
+  .label LoadLevel=$314e {
   }
-  .label MovesRemaining=$312e
-  .label GenerateWalls=$31f3 {
+  .label MovesRemaining=$314d
+  .label GenerateWalls=$3212 {
   }
-  .label DrawLevel=$3231 {
+  .label DrawLevel=$3250 {
   }
 }
-.label level_21=$88e7
-.label level_24=$89f3
-.label level_23=$89c8
-.label level_26=$8a7f
-.label level_25=$8a3e
-.label level_17=$87e4
-.label level_16=$8793
-.label level_19=$8865
-.label level_18=$8829
+.label level_21=$896b
+.label level_24=$8a03
+.label level_23=$89d8
+.label level_26=$8a8f
+.label level_25=$8a4e
+.label level_17=$883d
+.label level_16=$87de
+.label level_19=$88d3
+.label level_18=$888e
 .label ZP=$2 {
   .label HudCharTemp=$18
   .label ColorUpdateIndex=$1a
@@ -75,6 +75,7 @@
   .label SlideCheckPosX=$e
   .label DrawNoColor=$1f
   .label SlideMoveCount=$d
+  .label MessageVector=$25
   .label LevelDataVector=$4
   .label LevelTemp=$6
   .label MirrorDirTemp=$15
@@ -93,110 +94,129 @@
 }
 .label COLOR_RAM=$d800
 .label CHAR_COLORS=$e120
-.label level_91=$9959
-.label level_90=$9905
-.label level_93=$99af
-.label level_92=$9982
-.label level_95=$9a45
-.label level_94=$9a12
-.label level_97=$9ae0
-.label IRQ=$35e9 {
-  .label FrameFlag=$35e9
-  .label Init=$35eb {
+.label level_91=$995f
+.label level_90=$9920
+.label level_93=$99dc
+.label level_92=$99b3
+.label level_95=$9a6c
+.label level_94=$9a09
+.label level_97=$9ad9
+.label IRQ=$360e {
+  .label FrameFlag=$360e
+  .label Init=$3610 {
   }
-  .label Timer=$35ea
-  .label MainIRQ=$360d {
-  }
-}
-.label level_96=$9a7f
-.label level_11=$8625
-.label level_99=$9b40
-.label KEYBOARD=$40ac {
-  .label DebounceKeys=$40ac
-  .label Update=$40ad {
+  .label Timer=$360f
+  .label MainIRQ=$3632 {
   }
 }
-.label level_10=$85e2
-.label level_98=$9b05
-.label level_13=$86d7
-.label level_12=$8674
-.label level_15=$8734
-.label level_14=$86ff
+.label level_96=$9a9f
+.label level_11=$8635
+.label level_99=$9b5f
+.label KEYBOARD=$40d7 {
+  .label DebounceKeys=$40d7
+  .label Update=$40d8 {
+  }
+}
+.label level_10=$85f2
+.label level_98=$9b3a
+.label level_13=$86e7
+.label level_12=$8684
+.label level_15=$87a9
+.label level_14=$870f
 .label Entry=$80e {
 }
+.label MESSAGES=$410c {
+  .label messageDisplayed=$4129
+  .label Init=$412a {
+  }
+  .label data=$410c {
+    .label outofmoves=$4129
+    .label lookup=$410c
+    .label tutor1=$4129
+    .label tutor3=$4129
+    .label tutor2=$4129
+    .label tutor5=$4129
+    .label tutor4=$4129
+    .label tutor7=$4129
+    .label tutor6=$4129
+    .label complete=$411e
+  }
+  .label Update=$4130 {
+  }
+}
 .label SPRITE_POINTER=$c3f8
-.label level_80=$96de
-.label LASERS=$3626 {
+.label level_80=$970a
+.label LASERS=$364b {
   .label BATTERY=$15
-  .label Path=$3679 {
-    .label dx=$36ba
-    .label color=$373a
-    .label dy=$36da
-    .label spark=$371a
-    .label count=$3679
-    .label x=$367a
-    .label y=$369a
-    .label terminated=$36fa
+  .label Path=$369e {
+    .label dx=$36df
+    .label color=$375f
+    .label dy=$36ff
+    .label spark=$373f
+    .label count=$369e
+    .label x=$369f
+    .label y=$36bf
+    .label terminated=$371f
   }
-  .label SparkAnimCounter=$38b6
-  .label GetJoyDirection=$3abc {
+  .label SparkAnimCounter=$38db
+  .label GetJoyDirection=$3ae7 {
   }
-  .label Complete=$3628
-  .label TrackActiveLasers=$37cd {
+  .label Complete=$364d
+  .label TrackActiveLasers=$37f2 {
   }
-  .label RecolorList=$3bc1 {
-    .label color=$3ec2
-    .label count=$3bc1
-    .label index=$3dc2
-    .label lsb=$3bc2
-    .label msb=$3cc2
+  .label RecolorList=$3bec {
+    .label color=$3eed
+    .label count=$3bec
+    .label index=$3ded
+    .label lsb=$3bed
+    .label msb=$3ced
   }
-  .label Data=$3629 {
-    .label PreLaserCopy=$3629
+  .label Data=$364e {
+    .label PreLaserCopy=$364e
   }
-  .label DoRecolor=$3b9b {
-    .label Mod=$3bb4
+  .label DoRecolor=$3bc6 {
+    .label Mod=$3bdf
   }
-  .label Update=$388d {
+  .label Update=$38b2 {
   }
-  .label CopyCurrentMap=$37c1 {
+  .label CopyCurrentMap=$37e6 {
   }
-  .label ClearIfNeeded=$37a4 {
+  .label ClearIfNeeded=$37c9 {
   }
-  .label Active=$3626
-  .label Init=$375a {
+  .label Active=$364b
+  .label Init=$377f {
   }
-  .label UpdateNewTile=$3ae4 {
+  .label UpdateNewTile=$3b0f {
   }
-  .label ColorTile=$3b5f {
+  .label ColorTile=$3b8a {
   }
-  .label UpdateTile=$3a7c {
+  .label UpdateTile=$3aa7 {
   }
-  .label Tracing=$3627
-  .label clearSparks=$377a {
+  .label Tracing=$364c
+  .label clearSparks=$379f {
   }
-  .label SparkSpriteIndex=$38b3
-  .label SparkPathIndex=$38b4
-  .label DoSparks=$38b7 {
+  .label SparkSpriteIndex=$38d8
+  .label SparkPathIndex=$38d9
+  .label DoSparks=$38dc {
   }
-  .label SparkCounter=$38b5
-  .label TraceLasers=$3985 {
+  .label SparkCounter=$38da
+  .label TraceLasers=$39b0 {
   }
 }
 .label HUD_MAP=$e220
-.label level_82=$9746
+.label level_82=$976f
 .label INTRO=$3000 {
   .label Start=$3000 {
   }
 }
-.label level_81=$9715
-.label level_84=$97b5
-.label level_83=$9776
-.label level_86=$9823
-.label level_85=$97ee
-.label level_88=$989a
-.label level_87=$9857
-.label level_89=$98c6
+.label level_81=$9738
+.label level_84=$97d0
+.label level_83=$97a0
+.label level_86=$9848
+.label level_85=$980f
+.label level_88=$98b1
+.label level_87=$987d
+.label level_89=$98f4
 .label TABLES=$872 {
   .label TileToSpriteMap=$9b5
   .label VertPassableDn=$b1b
@@ -237,85 +257,89 @@
   .label SelectPositionX=$9f9
 }
 .label LevelPointerData=$8000
-.label level_71=$94ad
-.label level_70=$9469
-.label level_73=$9534
-.label level_72=$94db
-.label level_75=$95af
-.label level_74=$9570
-.label level_77=$9644
-.label level_76=$9602
-.label level_79=$96b0
-.label level_78=$9684
-.label level_113=$9e33
-.label level_114=$9e79
-.label level_115=$9eb5
-.label level_116=$9f09
-.label level_110=$9d93
-.label level_111=$9dce
-.label level_112=$9e06
-.label level_60=$926d
-.label level_62=$92e0
-.label level_61=$92a8
+.label level_71=$94c3
+.label level_70=$9487
+.label level_73=$9535
+.label level_72=$9507
+.label level_75=$95ca
+.label level_74=$958e
+.label level_77=$965c
+.label level_76=$9609
+.label level_79=$96de
+.label level_78=$969e
+.label level_117=$9f4a
+.label level_118=$9f86
+.label level_119=$a001
+.label level_113=$9e60
+.label level_114=$9e98
+.label level_115=$9ec5
+.label level_116=$9f0b
+.label level_110=$9db1
+.label level_111=$9ded
+.label level_112=$9e28
+.label level_60=$927d
+.label level_62=$92f0
+.label level_61=$92b8
 .label TILES=$e000
-.label level_64=$9326
-.label level_63=$9304
-.label level_66=$9398
-.label level_65=$9359
-.label level_68=$9400
-.label level_67=$93d1
-.label level_69=$942d
+.label level_64=$935e
+.label level_63=$933a
+.label level_66=$93b3
+.label level_65=$9380
+.label level_68=$942b
+.label level_67=$93f2
+.label level_69=$945a
 .label SCREEN_RAM=$c000
-.label CONTROL=$32ba {
+.label level_120=$a055
+.label CONTROL=$32d9 {
   .label RT=$8
-  .label PositionY=$32bb
-  .label GetIndexPosition=$3505 {
+  .label PositionY=$32da
+  .label GetIndexPosition=$3524 {
   }
-  .label SlideDir=$32c0
-  .label UpdatePosition=$3310 {
+  .label SlideDir=$32df
+  .label UpdatePosition=$332f {
   }
-  .label SlidingActive=$32cd
+  .label SlidingActive=$32ec
   .label LT=$4
-  .label SlideCount=$32c2
+  .label SlideCount=$32e1
   .label DN=$2
   .label FR=$10
-  .label Update=$3309 {
+  .label Update=$3328 {
   }
-  .label SetupSlideSprite=$3447 {
+  .label SetupSlideSprite=$3466 {
   }
-  .label RestoreSelector=$34f7 {
+  .label RestoreSelector=$3516 {
   }
-  .label Init=$32cf {
+  .label Init=$32ee {
   }
-  .label Ramp=$32c3
-  .label GetMoveCountAndDirection=$33e3 {
+  .label Ramp=$32e2
+  .label GetMoveCountAndDirection=$3402 {
   }
-  .label Debounce=$32cc
+  .label Debounce=$32eb
   .label UP=$1
-  .label RampIndex=$32cb
-  .label PositionSprites=$3511 {
+  .label RampIndex=$32ea
+  .label PositionSprites=$3530 {
   }
-  .label PositionX=$32ba
+  .label PositionX=$32d9
   .label DEBOUNCE_TIMER=$8
-  .label SlideX=$32bc
-  .label SlideActiveSprite=$354e {
+  .label SlideX=$32db
+  .label SlideActiveSprite=$3573 {
   }
-  .label SlideY=$32be
-  .label UpdateWithFire=$338d {
+  .label SlideY=$32dd
+  .label UpdateWithFire=$33ac {
   }
-  .label MovingTile=$32ce
+  .label MovingTile=$32ed
 }
-.label level_51=$8f8f
-.label level_50=$8f42
-.label level_53=$905a
-.label level_52=$9010
-.label level_55=$9127
-.label level_54=$90de
-.label level_57=$9192
-.label level_56=$915a
-.label level_59=$9202
-.label level_58=$91d9
-.label level_49=$8f21
+.label level_51=$8f9f
+.label level_50=$8f52
+.label level_53=$906a
+.label level_52=$9020
+.label level_55=$9137
+.label level_54=$90ee
+.label level_57=$91a2
+.label level_56=$916a
+.label level_59=$9212
+.label level_58=$91e9
+.label level_49=$8f31
 .label GAME=$3003 {
   .label Start=$3004 {
   }
@@ -323,36 +347,36 @@
     .label currentLevel=$3003
   }
 }
-.label HUD=$3fc2 {
-  .label Init=$3fc2 {
-    .label ColMod=$3fe8
-    .label HudMod=$3fdd
+.label HUD=$3fed {
+  .label Init=$3fed {
+    .label ColMod=$4013
+    .label HudMod=$4008
   }
-  .label DrawMovesRemaining=$4019 {
+  .label DrawMovesRemaining=$4044 {
   }
-  .label Update=$4012 {
+  .label Update=$403d {
   }
-  .label DrawLevelNumber=$4061 {
+  .label DrawLevelNumber=$408c {
   }
 }
-.label level_40=$8d5e
-.label level_42=$8dae
-.label level_41=$8d92
-.label level_44=$8e04
-.label level_43=$8de2
-.label level_46=$8e98
-.label level_45=$8e43
-.label level_48=$8ef6
-.label level_47=$8ec5
-.label level_39=$8d0e
-.label level_106=$9cdf
-.label level_38=$8cd9
-.label level_107=$9d08
-.label level_108=$9d32
-.label level_109=$9d57
-.label level_102=$9c31
-.label level_103=$9c5f
-.label level_104=$9c84
-.label level_105=$9caf
-.label level_100=$9b81
-.label level_101=$9be6
+.label level_40=$8d6e
+.label level_42=$8dbe
+.label level_41=$8da2
+.label level_44=$8e14
+.label level_43=$8df2
+.label level_46=$8ea8
+.label level_45=$8e53
+.label level_48=$8f06
+.label level_47=$8ed5
+.label level_39=$8d1e
+.label level_106=$9d09
+.label level_38=$8ce9
+.label level_107=$9d39
+.label level_108=$9d62
+.label level_109=$9d8c
+.label level_102=$9c40
+.label level_103=$9c8b
+.label level_104=$9cb9
+.label level_105=$9cde
+.label level_100=$9b9a
+.label level_101=$9bdb

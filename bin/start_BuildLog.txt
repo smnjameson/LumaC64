@@ -3,24 +3,24 @@ flex pass 1
 flex pass 2
 flex pass 3
 Output pass
-Writing prg file: Z:\Projects\Luma\bin\start.prg
+Writing prg file: C:\C64\git\LumaC64\bin\start.prg
 
 Memory Map
 ----------
 Default-segment:
-  *$0002-$0024 Unnamed
+  *$0002-$0025 Unnamed
   $0801-$080c Basic
   $080e-$084d Basic End
   $084e-$0d1d Utility functions and tables
   $1000-$1a6f Music
-  $3000-$32bb Code
-  $32bc-$3678 SLIDES
-  $3679-$3719 PATH
-  $371a-$40e0 spark
-  $8000-$9f43 Level data
+  $3000-$32da Code
+  $32db-$369d SLIDES
+  $369e-$373e PATH
+  $373f-$41aa spark
+  $8000-$a08f Level data
   $c800-$cfff Font data
   $d000-$dfff Sprites
   $e000-$e30f Tile data
 
-Writing Vice symbol file: Z:\Projects\Luma\bin\start.vs
+Writing Vice symbol file: C:\C64\git\LumaC64\bin\start.vs
 Writing Symbol file: start.sym

@@ -404,6 +404,11 @@ CONTROL: {
 
 
 	PositionSprites: {
+			lda MESSAGES.messageDisplayed
+			bmi !+
+			rts
+		!:
+
 			lda SlidingActive
 			beq !+
 			jmp SlideActiveSprite

@@ -32,4 +32,6 @@ ZP: {
 	ColorFixTemp:		.byte $00, $00
 
 	SparkTemp:			.byte $00
+
+	MessageVector:		.byte $00
 }	

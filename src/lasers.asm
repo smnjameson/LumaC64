@@ -268,6 +268,10 @@ LASERS: {
 	SparkAnimCounter:
 			.byte $00
 	DoSparks: {
+			lda MESSAGES.messageDisplayed
+			bmi !+
+			rts
+		!:
 			lda #$00
 			sta SparkCounter
 
