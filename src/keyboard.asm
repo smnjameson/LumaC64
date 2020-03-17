@@ -2,6 +2,8 @@ KEYBOARD:{
 	DebounceKeys:
 			.byte $00
 	Update: {
+			rts
+			
 			lda #%11111111	//Enable keyboard handling
 			sta $dc02
 			lda #%00000000	

@@ -35,10 +35,60 @@ IRQ: {
 
 			jsr $1003	//Do music
 
+
+			lda MESSAGES.messageDisplayed
+			bmi !+
+			cmp #$02
+			bcc !+
+			lda #<SpriteSplit1
+			sta $fffe
+			lda #>SpriteSplit1
+			sta $ffff
+			lda MESSAGES.messageY
+			clc
+			adc #$15
+			sta $d012
+		!:
+
 		restoreState()
 		asl $d019
 		rti
 	}
+
+	SpriteSplit1: {
+		saveState()
+			
+			
+
+			lda $d012
+			clc
+			adc #$02
+			sta $d001
+			sta $d009
+
+			
+			lda MESSAGES.messageArrowX
+			sta $d000
+			sta $d008
+
+			lda #$57
+			sta SPRITE_POINTER + 0
+			lda #$56
+			sta SPRITE_POINTER + 4
+
+			lda #<MainIRQ
+			sta $fffe
+			lda #>MainIRQ
+			sta $ffff
+			lda #$ff
+			sta $d012
+		!:
+
+		restoreState()
+		asl $d019
+		rti
+	}
+
 }
 
 

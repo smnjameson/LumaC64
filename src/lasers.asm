@@ -252,12 +252,50 @@ LASERS: {
 			inc Active
 		!:
 			jsr TraceLasers
+
+			jsr AreWeComplete
+
 			lda #$01
 			sta Tracing
 
 			jsr DoSparks
 			rts
 	}
+
+	AreWeComplete: {
+			lda GAME.Settings.isCompleted
+			beq !+
+			rts
+		!:
+
+			ldx #$00
+		!loop:
+				lda LEVEL.Data.Current, x
+				and #$1f
+				cmp #$1e
+				beq !Fail+
+
+			inx
+			cpx #80
+			bne !loop-
+
+
+			lda #$01
+			sta GAME.Settings.isCompleted
+
+			lda #$02
+			jsr $1000
+
+			lda #$00
+			sta MESSAGES.messageDisplayed
+			lda #MESSAGES.MessageEaseLength - 1
+			sta MESSAGES.messageYOffset
+			rts
+
+		!Fail:
+			rts
+	}
+
 
 	SparkSpriteIndex:
 			.byte $00
@@ -275,6 +313,10 @@ LASERS: {
 			lda #$00
 			sta SparkCounter
 
+			sta $d004
+			sta $d005
+			sta $d006
+			sta $d007
 			sta $d008
 			sta $d009
 			sta $d00a
@@ -285,6 +327,12 @@ LASERS: {
 			sta $d00f
 
 
+			lda #$d015
+			ora #%11110011
+			sta $d015
+			lda #$d01c
+			ora #%11110000
+			sta $d01c
 
 			
 		!loop:
@@ -294,6 +342,7 @@ LASERS: {
 			bne !+
 			jmp !skip+
 		!:	
+
 				//Apply spark
 				lda Path.x, x
 				tay
@@ -369,7 +418,7 @@ LASERS: {
 			ldy SparkCounter
 			iny
 			sty SparkCounter
-			cpy Path.count
+			cpy #$20//Path.count
 			beq !Exit+
 
 			jmp !loop-
@@ -411,22 +460,24 @@ LASERS: {
 		// 	beq !+
 		// 	rts
 		// !:
+			lda #$00
+			sta ZP.PathUpdateCount
 
-						
-
-			// rts 
 			ldx #$00
 		!loop:
+			cpx Path.count
+			bcc !+
+			jmp !Exit+ 
+		!:
+
 			txa
 			pha
 			lda Path.terminated, x
 			beq !+
 			jmp !Next+ 
 		!:
-			cpx Path.count
-			bcc !+
-			jmp !Next+ 
-		!:
+
+			inc ZP.PathUpdateCount
 			// .break
 			//Advance laser path
 			lda Path.color, x
@@ -565,6 +616,21 @@ LASERS: {
 			cpx Path.count
 			beq !+
 			jmp !loop-
+		!:
+		!Exit:
+
+			lda ZP.PathUpdateCount
+			bne !+
+			lda LEVEL.MovesRemaining
+			bne !+
+			lda MESSAGES.messageDisplayed
+			bpl !+
+			lda GAME.Settings.isCompleted
+			bne !+
+				lda #$1f
+				sta MESSAGES.messageYOffset
+				lda #$01
+				sta MESSAGES.messageDisplayed
 		!:
 			rts
 	}

@@ -41,10 +41,6 @@ CONTROL: {
 		sta PositionY
 		sta SlidingActive
 
-		lda #$40
-		sta SPRITE_POINTER + 0
-		lda #$41
-		sta SPRITE_POINTER + 1
 
 		lda #$0b
 		sta $d025
@@ -59,9 +55,9 @@ CONTROL: {
 		sta $d029
 		sta $d02a
 
-		lda #%11110011
+		lda #%00000011
 		sta $d015
-		lda #%11111100
+		lda #%00001100
 		sta $d01c
 
 		rts
@@ -77,6 +73,55 @@ CONTROL: {
 			lda $dc00
 			sta ZP.Joystick
 
+
+
+		//MESSAGES ///////////////////////////////////////
+			lda MESSAGES.messageDisplayed
+			bmi !+
+			lda MESSAGES.messageYOffset
+			beq !CanDismiss+
+			lda #$01
+			sta Debounce
+		!CanDismiss:
+			lda ZP.Joystick
+			and #$10
+			bne !ExitMsg+
+			lda Debounce
+			beq !Debounced+
+			rts
+
+		!Debounced:
+
+			lda MESSAGES.messageDisplayed
+			cmp #$02
+			bcs !Tutorial+
+
+			lda #$ff
+			sta MESSAGES.messageYOffset
+			rts
+
+		!Tutorial:
+			lda #$00
+			sta MESSAGES.messageYOffset
+			ldx MESSAGES.messageDisplayed 
+			lda MESSAGES.data.tutornext, x
+			sta MESSAGES.messageDisplayed
+			lda #$01
+			sta Debounce
+			rts
+
+		!ExitMsg:
+			lda #$00
+			sta Debounce
+			rts	
+		///////////////////////////////////////////////
+		
+
+
+
+
+
+		!:
 			lda SlidingActive
 			beq !NoSlidingActive+
 			rts
@@ -375,11 +420,20 @@ CONTROL: {
 		!NotY:
 
 			//Disable selector, enable tile copy
-			lda #%11111100
+			lda #%00001100
 			sta $d015
+			lda #%00001100
+			sta $d01c
 
 			//Decrement move counter
 			dec LEVEL.MovesRemaining
+			lda LEVEL.MovesRemaining
+			cmp #$ff
+			bne !+
+			lda #$00
+		!:
+			sta LEVEL.MovesRemaining
+
 			rts
 	}
 
@@ -387,7 +441,7 @@ CONTROL: {
 	RestoreSelector: {
 			lda #$00
 			sta SlidingActive
-			lda #%11110011
+			lda #%00000011
 			sta $d015	
 			jsr PositionSprites	
 			rts
@@ -413,6 +467,14 @@ CONTROL: {
 			beq !+
 			jmp SlideActiveSprite
 		!:
+
+			lda #%00000011
+			sta $d015
+			lda #$40
+			sta SPRITE_POINTER + 0
+			lda #$41
+			sta SPRITE_POINTER + 1
+
 			//Move sprite to location
 			ldx PositionX
 			lda TABLES.SelectPositionX, x

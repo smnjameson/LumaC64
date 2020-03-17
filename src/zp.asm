@@ -34,4 +34,5 @@ ZP: {
 	SparkTemp:			.byte $00
 
 	MessageVector:		.byte $00
+	PathUpdateCount:	.byte $00
 }	

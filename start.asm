@@ -6,9 +6,9 @@
  $c000 SCREEN RAM
  $c800 Font
  $d000 Sprites
- $e000 Tile & color data
-
+ // $e000 Tile & color data
 */
+
 
 //Constants
 .label SCREEN_RAM = $c000
@@ -289,6 +289,9 @@ TABLES: {
 		.byte 0,0,4,0,4,0,7,0
 		.byte 7,0,0,0,0,0,0,0
 		.byte 1,3,0,1,2,2,2,2  //DEBUG: unique code here last 4
+
+		//2222 - Chis
+		//2121 - 
 
 	ColorTransformDn:
 		.byte 0,0,1,0,3,0,0,0
