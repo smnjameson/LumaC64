@@ -175,17 +175,35 @@ TABLES: {
 			.fill 10, j
 		}
 
-	VertPassable:
+	VertPassableUp:
 		.byte 1,1,0,1,0,1,1,1
-		.byte 0,1,0,1,0,1,1,0
+		.byte 0,1,1,0,0,1,1,0
 		.byte 0,0,0,0,0,0,1,1
 		.byte 0,0,1,0,0,0,255,255
 
-	HorizPassable:
+	VertPassableDn:
+		.byte 1,1,0,1,0,1,1,1
+		.byte 0,1,0,1,0,1,0,1
+		.byte 0,0,0,0,0,0,1,1
+		.byte 0,0,1,0,0,0,255,255
+
+	HorizPassableLt:
 		.byte 1,1,1,0,0,1,1,1
-		.byte 0,1,1,1,0,1,1,1
+		.byte 0,1,1,0,0,1,0,1
 		.byte 0,0,0,0,0,0,1,0
 		.byte 1,0,0,0,1,0,255,255
+
+	HorizPassableRt:
+		.byte 1,1,1,0,0,1,1,1
+		.byte 0,1,0,1,0,1,1,0
+		.byte 0,0,0,0,0,0,1,0
+		.byte 1,0,0,0,1,0,255,255
+
+	CanSpark:
+		.byte 0,0,1,1,1,0,0,0
+		.byte 1,1,1,1,1,1,1,1
+		.byte 1,0,0,0,0,0,0,0
+		.byte 0,0,1,1,1,1,0,0
 
 	MirrorReflectBack:
 		.byte 0,4,8,0
@@ -232,6 +250,10 @@ TABLES: {
 		.byte $0d,$11,$12,$13,$14,$15,$16,$16
 		.byte $16,$16,$1a,$1a,$1c,$1c,$1e,$1f
 
+	SparkOffsetX:
+		.byte $0c, $00, $f4
+	SparkOffsetY:
+		.byte $17, $00, $fe
 	//COLOR PATTERNS
 	//1 	.|.
 	//		.|.
@@ -266,7 +288,8 @@ TABLES: {
 		.byte 0,0,1,0,3,0,0,0
 		.byte 0,0,4,0,4,0,7,0
 		.byte 7,0,0,0,0,0,0,0
-		.byte 1,3,0,1,0,0,0,0
+		.byte 1,3,0,1,2,2,2,2  //DEBUG: unique code here last 4
+
 	ColorTransformDn:
 		.byte 0,0,1,0,3,0,0,0
 		.byte 0,0,0,6,6,0,0,5

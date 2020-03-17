@@ -27,6 +27,9 @@ LASERS: {
 			.fill 32, 0
 		terminated:
 			.fill 32, 0
+			*=*"spark"
+		spark:
+			.fill 32,0
 		color:
 			.fill 32, 0
 	}
@@ -37,6 +40,38 @@ LASERS: {
 			sta Tracing
 			sta Complete
 			sta Path.count
+
+			jsr clearSparks
+
+			lda #$01
+			sta $d02b
+			sta $d02c
+			sta $d02d
+			sta $d02e
+
+			rts
+	}
+
+	clearSparks: {
+			lda #$00
+			ldy #$00
+		!:
+			sta Path.spark, y
+			iny
+			cpy #$20
+			bne !-
+		!skip:
+
+			lda #$00
+			sta SparkCounter
+			sta $d008
+			sta $d009
+			sta $d00a
+			sta $d00b
+			sta $d00c
+			sta $d00d
+			sta $d00e
+			sta $d00f
 			rts
 	}
 
@@ -47,6 +82,8 @@ LASERS: {
 			sta Tracing
 			sta Complete
 			sta Path.count
+
+			jsr clearSparks
 
 			//Copy map from PreLaserCopy TO Current
 			ldx #79
@@ -71,6 +108,7 @@ LASERS: {
 
 	TrackActiveLasers: {
 		// rts
+
 
 			ldx #79
 		!loop:
@@ -179,6 +217,7 @@ LASERS: {
 
 				lda #$00
 				sta Path.terminated, y
+				sta Path.spark, y
 				lda ZP.PathColorTemp
 				sta Path.color, y
 
@@ -216,15 +255,158 @@ LASERS: {
 			lda #$01
 			sta Tracing
 
+			jsr DoSparks
 			rts
 	}
 
-	TraceLasers: {
-			lda IRQ.Timer
-			and #$01
-			beq !+
-			rts
+	SparkSpriteIndex:
+			.byte $00
+	SparkPathIndex:
+			.byte $00
+	SparkCounter:
+			.byte $00
+	SparkAnimCounter:
+			.byte $00
+	DoSparks: {
+			lda #$00
+			sta SparkCounter
+
+			sta $d008
+			sta $d009
+			sta $d00a
+			sta $d00b
+			sta $d00c
+			sta $d00d
+			sta $d00e
+			sta $d00f
+
+
+
+			
+		!loop:
+			ldx SparkPathIndex
+			// .break
+			lda Path.spark, x
+			bne !+
+			jmp !skip+
+		!:	
+				//Apply spark
+				lda Path.x, x
+				tay
+				lda TABLES.SelectPositionX, y
+				pha
+				lda SparkSpriteIndex
+				asl
+				tay
+				pla
+				sta $d008, y
+
+
+
+				lda Path.y, x
+				tay
+				lda TABLES.SelectPositionY, y
+				pha
+				lda SparkSpriteIndex
+				asl
+				tay
+				pla
+				sta $d009, y
+
+
+				sty ZP.SparkTemp
+
+				ldy Path.dx, x
+				iny				
+				lda TABLES.SparkOffsetX, y
+				clc
+				ldy ZP.SparkTemp
+				adc $d008, y
+				sta $d008, y
+
+				ldy Path.dy, x
+				iny				
+				lda TABLES.SparkOffsetY, y
+				clc
+				ldy ZP.SparkTemp
+				adc $d009, y
+				sta $d009, y
+
+
+				ldy Path.dx, x
+				beq !+
+				ldy ZP.SparkTemp
+				lda $d009, y
+				clc
+				adc #$0a
+				sta $d009, y
+			!:
+
+
+			ldy SparkSpriteIndex
+			iny
+			sty SparkSpriteIndex
+
+
+		!skip:
+			inx
+			cpx Path.count
+			bcc !+
+			ldx #$00
 		!:
+			stx SparkPathIndex
+
+
+			ldy SparkSpriteIndex
+			cpy #$04
+			beq !Exit+
+
+
+			ldy SparkCounter
+			iny
+			sty SparkCounter
+			cpy Path.count
+			beq !Exit+
+
+			jmp !loop-
+
+
+		!Exit:
+			ldy #$00
+			sty SparkSpriteIndex
+
+			//record indexes etc
+			lda IRQ.Timer
+			and #$03
+			bne !Skip+
+			ldy SparkAnimCounter
+			iny
+			cpy #$03
+			bne !+
+			ldy #$00
+		!:
+			sty SparkAnimCounter
+			tya 
+			clc
+			adc #$50
+
+			sta SPRITE_POINTER + 4
+			sta SPRITE_POINTER + 5
+			sta SPRITE_POINTER + 6
+			sta SPRITE_POINTER + 7
+
+
+		!Skip:
+			rts
+	}
+
+
+	TraceLasers: {
+		// 	lda IRQ.Timer
+		// 	and #$01
+		// 	beq !+
+		// 	rts
+		// !:
 
 						
 
@@ -257,13 +439,21 @@ LASERS: {
 
 			//Check if in bounds
 			lda Path.x, x
-			bmi !Terminate+
+			bpl !+
+			jmp !Terminate+
+		!:
 			cmp #$0a
-			bcs !Terminate+
+			bcc !+
+			jmp !Terminate+
+		!:
 			lda Path.y, x
-			bmi !Terminate+
+			bpl !+
+			jmp !Terminate+
+		!:
 			cmp #$08
-			bcs !Terminate+	
+			bcc !+
+			jmp !Terminate+	
+		!:
 
 			//We are in bounds here
 			//Check if we can advance
@@ -282,25 +472,59 @@ LASERS: {
 				lda Path.dx, x
 				beq !Vert+
 			!Horiz:
+				lda Path.dx, x
+				bpl !Rt+
 				lda LEVEL.Data.Current, y
 				and #$1f
 				tax
-				lda TABLES.HorizPassable, x
+				lda TABLES.HorizPassableLt, x
 				bmi !CheckTarget+
 				cmp #$01
 				jmp !Done+
-			!Vert:
+			!Rt:
 				lda LEVEL.Data.Current, y
 				and #$1f
 				tax
-				lda TABLES.VertPassable, x
+				lda TABLES.HorizPassableRt, x
 				bmi !CheckTarget+
 				cmp #$01
+				jmp !Done+			
+
+			!Vert:
+				lda Path.dy, x
+				bpl !Dn+
+				lda LEVEL.Data.Current, y
+				and #$1f
+				tax
+				lda TABLES.VertPassableUp, x
+				bmi !CheckTarget+
+				cmp #$01
+				jmp !Done+
+			!Dn:
+				lda LEVEL.Data.Current, y
+				and #$1f
+				tax
+				lda TABLES.VertPassableDn, x
+				bmi !CheckTarget+
+				cmp #$01
+				jmp !Done+
+
 			!Done:
 			ldx ZP.LaserDirTemp
-			bcc !Terminate+
+			bcs !NoTerminate+
+
+				lda LEVEL.Data.Current, y
+				and #$1f
+				tay
+				lda TABLES.CanSpark, y
+				beq !NoSpark+
+				lda #$01
+				sta Path.spark,x
+			!NoSpark:
+				jmp !Terminate+
 
 				//Update new tile
+			!NoTerminate:
 				jsr UpdateTile
 		
 			jmp !Next+
@@ -328,6 +552,7 @@ LASERS: {
 		!Terminate:	
 			lda #$01
 			sta Path.terminated, x
+
 
 		!Next:
 			pla

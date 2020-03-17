@@ -59,9 +59,9 @@ CONTROL: {
 		sta $d029
 		sta $d02a
 
-		lda #%00000011
+		lda #%11110011
 		sta $d015
-		lda #%00001100
+		lda #%11111100
 		sta $d01c
 
 		rts
@@ -305,8 +305,13 @@ CONTROL: {
 			//Apply color
 			cpx #$11
 			bcc !NoColor+
-			cpx #$15
+			cpx #$16
 			bcs !NoColor+
+			cpx #$15
+			bne !+
+			lda #$07
+			jmp !Color+
+		!:
 			lda MovingTile
 			and #$c0
 			asl
@@ -319,7 +324,7 @@ CONTROL: {
 			jmp !Color+
 
 		!NoColor:
-			lda #$07
+			lda #$01
 		!Color:
 			sta $d029
 			sta $d02a
@@ -370,7 +375,7 @@ CONTROL: {
 		!NotY:
 
 			//Disable selector, enable tile copy
-			lda #%00001100
+			lda #%11111100
 			sta $d015
 
 			//Decrement move counter
@@ -382,7 +387,7 @@ CONTROL: {
 	RestoreSelector: {
 			lda #$00
 			sta SlidingActive
-			lda #%00000011
+			lda #%11110011
 			sta $d015	
 			jsr PositionSprites	
 			rts
@@ -443,10 +448,18 @@ CONTROL: {
 			adc SlideDir + 0
 			clc
 			adc SlideDir + 0
+			clc
+			adc SlideDir + 0
+			clc
+			adc SlideDir + 0
 			sta SlideX + 0
 
 
 			lda SlideY + 0
+			clc
+			adc SlideDir + 1
+			clc
+			adc SlideDir + 1
 			clc
 			adc SlideDir + 1
 			clc

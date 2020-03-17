@@ -30,4 +30,6 @@ ZP: {
 	DrawNoColor:		.byte $00
 	ColorFixVector:		.word $0000
 	ColorFixTemp:		.byte $00, $00
+
+	SparkTemp:			.byte $00
 }	
