@@ -448,7 +448,11 @@ LASERS: {
 			sta SPRITE_POINTER + 6
 			sta SPRITE_POINTER + 7
 
-
+			lda #$01
+			sta $d02b
+			sta $d02c
+			sta $d02d
+			sta $d02e
 		!Skip:
 			rts
 	}

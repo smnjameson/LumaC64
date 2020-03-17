@@ -11,13 +11,14 @@ Default-segment:
   *$0002-$0026 Unnamed
   $0801-$080c Basic
   $080e-$084d Basic End
-  $084e-$0d1d Utility functions and tables
+  $084e-$0c70 Utility functions and tables
+  $0c71-$0d1d Transform up
   $1000-$1a6f Music
   $3000-$3316 Code
-  $3317-$378c SLIDES
-  $378d-$382d PATH
-  $382e-$42fe spark
-  $42ff-$446b message
+  $3317-$3789 SLIDES
+  $378a-$382a PATH
+  $382b-$4309 spark
+  $430a-$4476 message
   $8000-$a08f Level data
   $c800-$cfff Font data
   $d000-$dfff Sprites

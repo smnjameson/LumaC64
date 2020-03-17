@@ -283,15 +283,19 @@ TABLES: {
 	//		..-
 	//		...
 
-
+	* = * "Transform up"
 	ColorTransformUp:
 		.byte 0,0,1,0,3,0,0,0
 		.byte 0,0,4,0,4,0,7,0
 		.byte 7,0,0,0,0,0,0,0
-		.byte 1,3,0,1,2,2,2,2  //DEBUG: unique code here last 4
+		.byte 1,3,0,1,6,1,3,3  //DEBUG: unique code here last 4
 
 		//2222 - Chis
-		//2121 - 
+		//2121 - 002 - 
+		//2531 - 003 - 
+		//1621 - 004 -
+		//3641 - 005 -
+		//6133 - 006 -
 
 	ColorTransformDn:
 		.byte 0,0,1,0,3,0,0,0
