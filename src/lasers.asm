@@ -282,7 +282,8 @@ LASERS: {
 
 			lda #$01
 			sta GAME.Settings.isCompleted
-
+			lda #$c0
+			sta GAME.Settings.completeSoundOff
 			lda #$02
 			jsr $1000
 
@@ -607,6 +608,11 @@ LASERS: {
 			clc
 			adc #$01
 			sta LEVEL.Data.Current, y
+			txa
+			pha
+			jsr PlayChime
+			pla 
+			tax
 
 		!Terminate:	
 			lda #$01
@@ -894,4 +900,16 @@ LASERS: {
 			.fill 256, 0
 	}
 
+
+	PlayChime: {
+		lda #<Chime       //Start address of sound effect data 
+	    ldy #>Chime
+	    ldx #14        //0, 7 or 14 for channels 1-3 
+	   	jsr $1006
+	   	rts
+	}
+	
+	.var chime = LoadBinary("assets/Target_Hit.bin");
+	Chime:
+		.fill chime.getSize(), chime.get(i) 	
 }

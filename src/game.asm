@@ -1,7 +1,12 @@
 GAME: {
+	.label MODE_NORMAL = $00
+	.label MODE_PRACTICE = $01
+
 	Settings: {
-		currentLevel: .byte $00
-		isCompleted: .byte $00
+		currentLevel: 	.byte $00
+		isCompleted: 	.byte $00
+		gameMode:		.byte $00
+		completeSoundOff:	.byte $00
 	}
 
 	Start: {
@@ -18,55 +23,53 @@ GAME: {
 		jsr CONTROL.Init
 		jsr LASERS.Init
 		jsr MESSAGES.Init
-
+		jsr GAMESCROLLER.Init
 
 
 		lda #$00
 		sta Settings.isCompleted
+		sta Settings.completeSoundOff
 
 		lda Settings.currentLevel
 		jsr LEVEL.LoadLevel
 		jsr LEVEL.DrawLevel
 
-
+		lda $10b8
+		beq !+
+		lda #$00
+		jsr $1000
+	!:
 
 				lda Settings.currentLevel
 			!Level1:
 				bne !Level2+
-				lda #$02
-				sta MESSAGES.messageDisplayed
 				lda #$00
-				sta MESSAGES.messageYOffset
+				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
 
 			!Level2:
 				cmp #$01
 				bne !Level3+
-				lda #$06
-				sta MESSAGES.messageDisplayed
-				lda #$00
-				sta MESSAGES.messageYOffset
+				lda #$04
+				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
 
 			!Level3:
 				cmp #$02
 				bne !Level4+
-				lda #$07
-				sta MESSAGES.messageDisplayed
-				lda #$00
-				sta MESSAGES.messageYOffset
+				lda #$05
+				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
 
 			!Level4:
 				cmp #$03
 				bne !Level5+
-				lda #$08
-				sta MESSAGES.messageDisplayed
-				lda #$00
-				sta MESSAGES.messageYOffset
+				lda #$06
+				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
-
 			!Level5:
+
+
 
 			!DoneMessages:
 
@@ -98,8 +101,19 @@ GAME: {
 			jsr KEYBOARD.Update
 
 			jsr MESSAGES.Update
+			jsr GAMESCROLLER.Update
 			// lda #$00
 			// sta ZP.DrawNoColor
+
+			//Stop complete music repeat
+			lda Settings.completeSoundOff
+			beq !+
+			dec Settings.completeSoundOff
+			bne !+
+			lda #$03
+			jsr $1000
+		!:
+
 
 		jmp !Loop-
 	}

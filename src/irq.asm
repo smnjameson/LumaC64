@@ -1,4 +1,5 @@
 IRQ: {
+	.label SCROLLER_SPLIT = $f2
 	FrameFlag:
 			.byte $00
 	Timer:
@@ -12,7 +13,7 @@ IRQ: {
 			lda #>MainIRQ
 			sta $ffff
 
-			lda #$ff
+			lda #SCROLLER_SPLIT
 			sta $d012
 			lda $d011
 			and #$7f
@@ -28,66 +29,91 @@ IRQ: {
 
 	MainIRQ: {
 		saveState()
-			inc Timer
+			lda $d012
+			cmp $d012
+			bne *-3
 
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+			
+			lda $d016
+			and #%11100000			
+			ora GAMESCROLLER.hscroll
+			sta $d016
+
+
+			lda #$ff
+			cmp $d012
+			bne *-3
+
+			lda $d016
+			and #%11111000
+			ora #%00011000
+			sta $d016
+
+
+			inc Timer
 			lda #$01
 			sta FrameFlag
-
 			jsr $1003	//Do music
 
 
-			lda MESSAGES.messageDisplayed
-			bmi !+
-			cmp #$02
-			bcc !+
-			lda #<SpriteSplit1
-			sta $fffe
-			lda #>SpriteSplit1
-			sta $ffff
-			lda MESSAGES.messageY
-			clc
-			adc #$15
-			sta $d012
-		!:
+		// 	lda MESSAGES.messageDisplayed
+		// 	bmi !+
+		// 	cmp #$02
+		// 	bcc !+
+		// 	lda #<SpriteSplit1
+		// 	sta $fffe
+		// 	lda #>SpriteSplit1
+		// 	sta $ffff
+		// 	lda MESSAGES.messageY
+		// 	clc
+		// 	adc #$15
+		// 	sta $d012
+		// !:
 
 		restoreState()
 		asl $d019
 		rti
 	}
 
-	SpriteSplit1: {
-		saveState()
+	// SpriteSplit1: {
+	// 	saveState()
 			
 			
 
-			lda $d012
-			clc
-			adc #$02
-			sta $d001
-			sta $d009
+	// 		lda $d012
+	// 		clc
+	// 		adc #$02
+	// 		sta $d001
+	// 		sta $d009
 
 			
-			lda MESSAGES.messageArrowX
-			sta $d000
-			sta $d008
+	// 		lda MESSAGES.messageArrowX
+	// 		sta $d000
+	// 		sta $d008
 
-			lda #$57
-			sta SPRITE_POINTER + 0
-			lda #$56
-			sta SPRITE_POINTER + 4
+	// 		lda #$57
+	// 		sta SPRITE_POINTER + 0
+	// 		lda #$56
+	// 		sta SPRITE_POINTER + 4
 
-			lda #<MainIRQ
-			sta $fffe
-			lda #>MainIRQ
-			sta $ffff
-			lda #$ff
-			sta $d012
-		!:
+	// 		lda #<MainIRQ
+	// 		sta $fffe
+	// 		lda #>MainIRQ
+	// 		sta $ffff
+	// 		lda #SCROLLER_SPLIT
+	// 		sta $d012
+	// 	!:
 
-		restoreState()
-		asl $d019
-		rti
-	}
+	// 	restoreState()
+	// 	asl $d019
+	// 	rti
+	// }
 
 }
 

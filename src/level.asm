@@ -54,6 +54,9 @@ LEVEL: {
 			cpx #$08
 			bne !-
 
+
+
+
 			clc
 			ldx #$00
 		!:
@@ -66,8 +69,23 @@ LEVEL: {
 			inx
 			cpx #$08
 			bne !-
+		!Exit:
+
+		!:
+			cpx #$07
+			bcs !Exit+
+			.for(var i=7; i>0;i--) {
+				lda SCREEN_RAM + $28 * $16 + $1f + i -1
+				sta SCREEN_RAM + $28 * $16 + $1f + i
+			}
+			lda #$00 
+			sta SCREEN_RAM + $28 * $16 + $1f
+			inx
+			inx
+			jmp !-
 
 		!Exit:
+
 			iny
 			sty ZP.LevelDataIndex
 

@@ -82,6 +82,10 @@ ClearScreen: {
 
 
 TABLES: {
+	ScreenLSB:
+		.fill 24, <[SCREEN_RAM + $28 * i]
+	ScreenMSB:
+		.fill 24, >[SCREEN_RAM + $28 * i]
 	TileToScreenLSB:
 		.for(var i=0; i< 80; i++) {
 			.var x = mod(i,10)
@@ -288,12 +292,12 @@ TABLES: {
 		.byte 0,0,1,0,3,0,0,0
 		.byte 0,0,4,0,4,0,7,0
 		.byte 7,0,0,0,0,0,0,0
-		.byte 1,3,0,1,6,1,3,3  //DEBUG: unique code here last 4
+		.byte 1,3,0,1,1,6,2,1  //DEBUG: unique code here last 4
 
-		//2222 - Chis
-		//2121 - 002 - 
-		//2531 - 003 - 
-		//1621 - 004 -
+		//2222 - 001 - Chis
+		//2121 - 002 - Stepz
+		//2531 - 003 - Morgan - MrG
+		//1621 - 004 - Colt45
 		//3641 - 005 -
 		//6133 - 006 -
 
@@ -345,6 +349,7 @@ TABLES: {
 	#import "src/hud.asm"
 	#import "src/keyboard.asm"
 	#import "src/messages.asm"
+	#import "src/gamescroller.asm"
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"

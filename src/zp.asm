@@ -34,5 +34,18 @@ ZP: {
 	SparkTemp:			.byte $00
 
 	MessageVector:		.byte $00
+	MessageTemp:		.byte $00
 	PathUpdateCount:	.byte $00
+
+	gameScrollPointer:	.word $0000
+
+*=*"Tutor zp" virtual
+	tutorScreen:		.word $0000
+	tutorColor:			.word $0000
+	tutorIndex:			.word $0000
+	tutorTemp:			.byte $00
+	tutorTemp2:			.byte $00
+	tutorRows:			.byte $00
+	tutorCols:			.byte $00
+	tutorArrow:			.byte $00
 }	

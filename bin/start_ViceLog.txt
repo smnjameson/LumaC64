@@ -55,6 +55,7 @@ AUTOSTART: Resetting the machine to autostart '*'
 AUTOSTART: `bin/start.prg' recognized as program/p00 file.
 Main CPU: starting at ($FFFC).
 Main CPU: RESET.
+Sound: Opened device `dx', speed 44100Hz, fragment size 2.9ms, buffer size 101ms
 Drive 8: RESET.
 AUTOSTART: Injecting program data at $0801 (size $db0f)
 AUTOSTART: Ready
@@ -63,3 +64,4 @@ AUTOSTART: Done.
 Writing configuration file `C:\Users\Simon\AppData\Roaming\vice\3.1\vice.ini'.
 
 Exiting...
+Sound: Closing device `dx'

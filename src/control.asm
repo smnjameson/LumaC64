@@ -101,11 +101,7 @@ CONTROL: {
 			rts
 
 		!Tutorial:
-			lda #$00
-			sta MESSAGES.messageYOffset
-			ldx MESSAGES.messageDisplayed 
-			lda MESSAGES.data.tutornext, x
-			sta MESSAGES.messageDisplayed
+			jsr MESSAGES.NextTutorial
 			lda #$01
 			sta Debounce
 			rts
@@ -460,6 +456,8 @@ CONTROL: {
 	PositionSprites: {
 			lda MESSAGES.messageDisplayed
 			bmi !+
+			cmp #$02
+			bcs !+
 			rts
 		!:
 
