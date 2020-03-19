@@ -422,6 +422,16 @@ CONTROL: {
 			sta $d01c
 
 			//Decrement move counter
+			lda GAME.Settings.gameMode
+			beq !normal+
+		!practice:
+			inc LEVEL.MovesRemaining
+			lda LEVEL.MovesRemaining
+			cmp #$00
+			bne !+
+			lda #$ff
+			jmp !+
+		!normal:
 			dec LEVEL.MovesRemaining
 			lda LEVEL.MovesRemaining
 			cmp #$ff
@@ -429,6 +439,8 @@ CONTROL: {
 			lda #$00
 		!:
 			sta LEVEL.MovesRemaining
+		!skip:
+
 
 			rts
 	}

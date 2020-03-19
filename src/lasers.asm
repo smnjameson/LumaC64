@@ -593,7 +593,7 @@ LASERS: {
 			lda LEVEL.Data.Current, y
 			and #$1f
 			cmp #$1e
-			bne !Terminate+
+			bcc !Terminate+
 
 			lda LEVEL.Data.Current, y
 			and #$c0
@@ -637,6 +637,9 @@ LASERS: {
 			bpl !+
 			lda GAME.Settings.isCompleted
 			bne !+
+			lda GAME.Settings.gameMode
+			bne !+
+
 				lda #$1f
 				sta MESSAGES.messageYOffset
 				lda #$01

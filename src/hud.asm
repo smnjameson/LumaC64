@@ -1,4 +1,7 @@
 HUD: {
+	PracticeRemap:
+			.byte 0,1,2,7,4,5,2,7
+			.byte 8,9,10,15,12,13,10,15
 	Init: {
 
 			lda #<[SCREEN_RAM + 30]
@@ -19,6 +22,11 @@ HUD: {
 			stx ZP.HudCharTemp
 			tax
 			lda CHAR_COLORS, x
+				ldx GAME.Settings.gameMode
+				beq !+
+				tax 
+				lda PracticeRemap, x
+			!:
 			ldx ZP.HudCharTemp
 		ColMod:
 			sta $BEEF, y

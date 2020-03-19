@@ -58,7 +58,7 @@ Entry: {
 		jsr IRQ.Init
 
 		cli
-		
+
 		jsr Random.init
 		jmp INTRO.Start
 
@@ -404,6 +404,19 @@ TABLES: {
 	#import "src/gamescroller.asm"
 	#import "src/completion.asm"
 
+	.var intrologo = LoadBinary("assets/luma-title.kla", KOALA_TEMPLATE)
+* = $5800 "INTRO BMP ScreenRam"
+	.fill intrologo.getScreenRamSize(), intrologo.getScreenRam(i)
+* = $5c00 "INTRO BMP ColorRam"
+	.fill intrologo.getColorRamSize(), intrologo.getColorRam(i)
+* = $5fff "INTRO BMP BG"
+	.byte intrologo.getBackgroundColor()
+* = $6000 "INTRO BMP"
+	.fill intrologo.getBitmapSize(), intrologo.getBitmap(i)
+
+         
+			
+
 * = $c800 "Font data"
 	.import binary "assets/chars.bin"
 
@@ -424,3 +437,4 @@ COMP_HUD_MAP:
 
 
 
+//  

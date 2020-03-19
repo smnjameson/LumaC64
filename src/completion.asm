@@ -11,6 +11,12 @@ COMPLETION: {
 		.byte $00
 	Start: {
 			lda #$01
+			jsr $1000
+
+			lda #$1b
+			sta $d011
+
+			lda #$01
 			sta isCompletion
 			jsr Random.get
 			and #$7f
@@ -763,33 +769,32 @@ COMPLETION: {
 		.text "  ZOOPERDAN       "
 		.text "                  "
 		.text "DONATORS          "
-		.text "  WAULOK          "
-		.text "  JAMES           "
-		.text "  COLT45RPM       "
-		.text "  WIZARDNJ        "
-		.text "  JAMES           "
-		.text "  ELDRITCH        "
-		.text "  ANDYMAGICKNIGHT "
-		.text "  CHISWICKED      "
-		.text "  HAYESMAKER      "
-		.text "  STOKER          "
-		.text "  OLDSKOOLCODER   "
-		.text "  BAGOFPOTATOES   "
-		.text "  FURROY          "
-		.text "  JOST            "
-		.text "  MRKOLA          "
-		.text "  STACBATS        "
-		.text "  ZOOPERDAN       "
 		.text "  AMOK            "
-		.text "  RICHMONDMIKE    "
-		.text "  STEPZ           "
-		.text "  SEUCK           "
+		.text "  ANDYMAGICKNIGHT "
+		.text "  BAGOFPOTATOES   "
 		.text "  CARLOS          "
-		.text "  PODULATOR       "
-		.text "  MITSOYAMA       "
-		.text "  ZENDARICK       "
-		.text "  YOSI TAGURI     "
+		.text "  CHISWICKED      "
+		.text "  COLT45RPM       "
 		.text "  DRAGAN          "
+		.text "  ELDRITCH        "
+		.text "  FURROY          "
+		.text "  HAYESMAKER      "
+		.text "  JAMES           "
+		.text "  JOST            "
+		.text "  MITSOYAMA       "
+		.text "  MRKOLA          "
+		.text "  OLDSKOOLCODER   "
+		.text "  PODULATOR       "
+		.text "  RICHMONDMIKE    "
+		.text "  SEUCK           "
+		.text "  STACBATS        "
+		.text "  STEPZ           "
+		.text "  STOKER          "
+		.text "  WAULOK          "
+		.text "  WIZARDNJ        "
+		.text "  YOSI TAGURI     "
+		.text "  ZENDARICK       "
+		.text "  ZOOPERDAN       "
 		.text "                  "
 		.text "                  "
 		.text "                  "

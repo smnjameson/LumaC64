@@ -70,16 +70,24 @@ IRQ: {
 			sta FrameFlag
 			jsr $1003	//Do music
 
+
 			lda #SCROLLER_SPLIT
 			sta $d012
+
+
+
 			lda COMPLETION.isCompletion
 			beq !+
-
-			// lda COMPLETION.FetchRowNow
-			// beq !skip+
-			// jsr COMPLETION.FetchNewRow
 		!skip:
 			jsr COMPLETION.StartSpriteSplitIRQ
+		!:
+
+
+
+			lda INTRO.isIntro
+			beq !+
+		!skip:
+			jsr INTRO.Irq001
 		!:
 		// 	lda MESSAGES.messageDisplayed
 		// 	bmi !+

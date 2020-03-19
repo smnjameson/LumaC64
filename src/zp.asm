@@ -55,4 +55,13 @@ ZP: {
 	complTemp2:			.byte $00
 
 	colTransition:		.word $0000
+
+	introSelectVector:	.word $0000
+	introScreenVector:	.word $0000
+	introColorVector:	.word $0000
+	introTemp1:			.byte $00
+	introTemp2:			.byte $00
+	introTemp3:			.byte $00
+	introkey:			.byte $00
+	codeCheck:			.byte $00
 }	

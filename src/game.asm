@@ -10,16 +10,11 @@ GAME: {
 	}
 
 	Start: {
+		ldx #$ff 
+		txs
 		lda #$7b
 		sta $d011
 
-		lda Settings.currentLevel
-		bne !+
-			lda #$00
-			ldx #$09		//Force mc in every square
-			jsr ClearScreen
-			jsr HUD.Init
-	!:
 		jsr CONTROL.Init
 		jsr LASERS.Init
 		jsr MESSAGES.Init
@@ -31,6 +26,16 @@ GAME: {
 		sta Settings.completeSoundOff
 
 		lda Settings.currentLevel
+		cmp #$80	
+		bne !+
+		lda Settings.gameMode
+		cmp #MODE_PRACTICE
+		beq !Reset+
+		jmp COMPLETION.Start
+	!Reset:
+		lda #$00
+		sta Settings.currentLevel
+	!:
 		jsr LEVEL.LoadLevel
 		jsr LEVEL.DrawLevel
 

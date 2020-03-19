@@ -5,6 +5,16 @@ GAMESCROLLER: {
 		colorIndex:
 			.byte $00
 
+		scrollerColorsIntro:
+			.byte $0b,$0c,$0f
+			.fill 33, $01
+			.byte $0f,$0c,$0b, $00
+
+		scrollerColorsPractice:
+			.byte $02,$0a,$0f
+			.fill 33, $01
+			.byte $0f,$0a,$02, $00
+
 		scrollerColors:
 			.byte $06,$0e,$03
 			.fill 33, $01
@@ -29,16 +39,40 @@ GAMESCROLLER: {
 			.text " --- "
 			.byte $00
 
+		scrollTextPractice:
+			.encoding "screencode_upper"
+			.text "PRACTICE MODE"
+			.text " --- "
+			.text "PRESS SPACE TO RESTART LEVEL"
+			.text " --- "
+			.text "PRESS RETURN TO SKIP LEVEL"
+			.text " --- "
+			.text "PRESS RUNSTOP TO QUIT TO MENU"
+			.text " --- "
+			.byte $00
+
+		scrollTextIntro:
+			.encoding "screencode_upper"
+			.text "LUMA --- A PUZZLE GAME FOR THE C64 WRITTEN FOR A CHARITY GAME DEV"
+			.text "STREAM ON TWITCH FOR THE EXTRA LIFE CHARITY --- CONCEPT AND CODE BY SHALLAN --- GRAPHICS BY HELPCOMPUTER, SHALLAN "
+			.text "--- MUSIC BY RICHMONDMIKE --- SOUND BY STEPZ --- @2020 SHALLAN"
+			.text " --- "
+			.byte $00
+
 		Init: {
 				jsr clearScrollArea
 
 				lda #$07
 				sta hscroll
 
+
 			RESET:
+				lda INTRO.isIntro
+				bne !Intro+
 				lda GAME.Settings.gameMode
 				cmp #GAME.MODE_NORMAL
 				bne !Practice+
+
 			!Normal:
 				lda #<scrollTextNormal
 				sta ZP.gameScrollPointer + 0
@@ -47,11 +81,18 @@ GAMESCROLLER: {
 				rts
 
 			!Practice:
-				lda #<scrollTextNormal
+				lda #<scrollTextPractice
 				sta ZP.gameScrollPointer + 0
-				lda #>scrollTextNormal
+				lda #>scrollTextPractice
 				sta ZP.gameScrollPointer + 1
 				rts
+
+			!Intro:
+				lda #<scrollTextIntro
+				sta ZP.gameScrollPointer + 0
+				lda #>scrollTextIntro
+				sta ZP.gameScrollPointer + 1
+				rts				
 		}
 
 		clearScrollArea: {
@@ -60,7 +101,19 @@ GAMESCROLLER: {
 			!:
 				lda #$00
 				sta SCREEN_RAM + $18 * $28, x
+
+				lda INTRO.isIntro
+				bne !Intro+
+				lda GAME.Settings.gameMode
+				beq !Normal+
+				lda scrollerColorsPractice, x
+				jmp !Set+
+			!Intro:
+				lda scrollerColorsIntro, x
+				jmp !Set+
+			!Normal:
 				lda scrollerColors, x
+			!Set:
 				sta COLOR_RAM + $18 * $28, x				
 				inx
 				cpx #$28
@@ -152,7 +205,10 @@ GAMESCROLLER: {
 			!:
 				stx hscroll
 
-				// jsr colorScroll
+				lda INTRO.isIntro
+				beq !+
+				jsr colorScroll
+			!:
 				rts
 		}
 }

@@ -3,12 +3,48 @@ KEYBOARD:{
 			.byte $00
 	DebounceKeys2:
 			.byte $00
+	DebounceKeys3:
+			.byte $00
 
 	Update: {
-			jsr CheckForReturn
-			jsr CheckForSpace
+			lda GAME.Settings.gameMode
+			beq !+
+				jsr CheckForReturn
+		!:
+				jsr CheckForSpace
+				jsr CheckForRUNSTOP
 			rts
 	}			
+
+	CheckForRUNSTOP: {
+			lda #%11111111	//Enable keyboard handling
+			sta $dc02
+			lda #%00000000	
+			sta $dc03
+
+			lda #%01111111  //F Keys mask
+			sta $dc00
+			lda $dc01
+			cmp #$ff
+			bne !+
+
+			lda #$00
+			sta DebounceKeys3
+
+		!Exit:
+			lda #%00000000	//Restore joy control
+			sta $dc02
+			rts
+
+		!:
+			ldx DebounceKeys3
+			bne !Exit-
+			inc DebounceKeys3
+
+			and #$80
+			bne !Exit-
+			jmp INTRO.Start
+	}
 
 	CheckForReturn: {
 			lda #%11111111	//Enable keyboard handling
@@ -38,8 +74,8 @@ KEYBOARD:{
 			and #$02
 			bne !Exit-
 			inc GAME.Settings.currentLevel
-			jsr GAME.Start
-			rts
+
+			jmp GAME.Start
 	}
 
 	CheckForSpace: {
@@ -69,7 +105,7 @@ KEYBOARD:{
 
 			and #$10
 			bne !Exit-
-			jsr GAME.Start
-			rts
+			jmp GAME.Start
+
 	}
 }

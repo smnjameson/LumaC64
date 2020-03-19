@@ -1,4 +1,5 @@
 LEVEL: {
+	.label MAX_LEVELS = 128
 
 	Data: {
 		Initial: 
@@ -92,11 +93,37 @@ LEVEL: {
 			lda (ZP.LevelDataVector), y
 			sta MovesRemaining
 
+			lda GAME.Settings.gameMode
+			beq !+
+			lda #$00
+			sta MovesRemaining
+		!:
 		//DRAW LEVEL CODE
 			lda COMPLETION.isCompletion
 			beq !+
 			rts
 		!:
+			lda GAME.Settings.gameMode
+			beq !NormalMode+
+			ldx #$00
+		!:
+			lda PracticeMessage + 0 , x
+			clc
+			adc #$70
+			sta SCREEN_RAM + $28 * $12 + $1f, x
+			lda PracticeMessage + 8 , x
+			clc
+			adc #$70
+			sta SCREEN_RAM + $28 * $13 + $1f, x
+			lda #$02
+			sta COLOR_RAM + $28 * $12 + $1f, x
+			sta COLOR_RAM + $28 * $13 + $1f, x
+			inx
+			cpx #$08
+			bne !-
+			rts
+
+		!NormalMode:
 			lda GAME.Settings.currentLevel
 			sta CodeMod + 1
 			lda #$00
@@ -124,6 +151,10 @@ LEVEL: {
 			rts
 	}
 
+	PracticeMessage:
+			.encoding "screencode_upper"
+			.text "PRACTICE"
+			.text "  MODE  "
 
 	GenerateItems: {
 			ldy #$0a
