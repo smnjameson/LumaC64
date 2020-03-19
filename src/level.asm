@@ -93,7 +93,10 @@ LEVEL: {
 			sta MovesRemaining
 
 		//DRAW LEVEL CODE
-		
+			lda COMPLETION.isCompletion
+			beq !+
+			rts
+		!:
 			lda GAME.Settings.currentLevel
 			sta CodeMod + 1
 			lda #$00
@@ -293,7 +296,7 @@ LEVEL: {
 
 			lda COMPLETION.isCompletion
 			beq !skip+
-			lda #$08
+			lda #$00
 			ldy TABLES.TileScreenOffsets, x
 			jmp TileCol
 		!skip:

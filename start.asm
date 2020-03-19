@@ -25,6 +25,9 @@ Entry: {
 		sta $dc0d
 		sta $dd0d
 
+		lda #$01
+		sta $dd0d
+
 		lda #$35
 		sta $01
 
@@ -47,13 +50,19 @@ Entry: {
 		and #%11111100
 		sta $dd00
 
-		cli
+		
 
 		lda #$00	//Initialise music
 		jsr $1000
 
 		jsr IRQ.Init
+
+		cli
+		
+		jsr Random.init
 		jmp INTRO.Start
+
+
 }
 
 * = * "Utility functions and tables"
@@ -80,12 +89,50 @@ ClearScreen: {
 		rts		
 }
 
+	Random: {
+		init: {
+			lda #$7f
+			sta $dc04
+			lda #$33
+			sta $dc05
+			lda #$2f
+			sta $dd04
+			lda #$79
+			sta $dd05
+
+			lda #$91
+			sta $dc0e
+			sta $dd0e
+			rts
+
+		}
+
+		get: {
+		        lda seed
+		        beq doEor
+		        asl
+		        beq noEor
+		        bcc noEor
+		    doEor:    
+		        eor #$1d
+		        eor $dc04
+		        eor $dd04
+		    noEor:  
+		        sta seed
+		        rts
+		    seed:
+		        .byte $62
+		}
+	}
+
 
 TABLES: {
 	ScreenLSB:
 		.fill 24, <[SCREEN_RAM + $28 * i]
 	ScreenMSB:
 		.fill 24, >[SCREEN_RAM + $28 * i]
+	ColorMSB:
+		.fill 24, >[COLOR_RAM + $28 * i]
 	TileToScreenLSB:
 		.for(var i=0; i< 80; i++) {
 			.var x = mod(i,10)
@@ -354,6 +401,9 @@ TABLES: {
 * = $8000 "Level data"
 	#import "assets/levels.asm"
 
+	#import "src/gamescroller.asm"
+	#import "src/completion.asm"
+
 * = $c800 "Font data"
 	.import binary "assets/chars.bin"
 
@@ -367,10 +417,10 @@ CHAR_COLORS:
 	.import binary "assets/colors.bin"
 HUD_MAP:
 	.import binary "assets/hud.bin"
+COMP_HUD_MAP:
+	.import binary "assets/comphud.bin"
 
 
 
 
-	#import "src/gamescroller.asm"
-	#import "src/completion.asm"
 

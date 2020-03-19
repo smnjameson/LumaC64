@@ -53,4 +53,6 @@ ZP: {
 	complFontData:		.word $0000
 	complTemp:			.byte $00
 	complTemp2:			.byte $00
+
+	colTransition:		.word $0000
 }	

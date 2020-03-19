@@ -8,21 +8,21 @@ Writing prg file: Z:\Projects\Luma\bin\start.prg
 Memory Map
 ----------
 Default-segment:
-  *$0002-$003c Unnamed
+  *$0002-$003e Unnamed
   $0801-$080c Basic
-  $080e-$084d Basic End
-  $084e-$0ca0 Utility functions and tables
-  $0ca1-$0d4d Transform up
+  $080e-$0855 Basic End
+  $0856-$0cf4 Utility functions and tables
+  $0cf5-$0da1 Transform up
   $1000-$1a6f Music
-  $3000-$336b Code
-  $336c-$37b9 SLIDES
-  $37ba-$385a PATH
-  $385b-$443d spark
-  $443e-$4e2a message
-  $8000-$a28c Level data
+  $3000-$3374 Code
+  $3375-$37d2 SLIDES
+  $37d3-$3873 PATH
+  $3874-$4456 spark
+  $4457-$4e43 message
+  $8000-$b321 Level data
   $c800-$cfff Font data
   $d000-$d9ff Sprites
-  $e000-$e7da Tile data
+  $e000-$e3ff Tile data
 
 Writing Vice symbol file: Z:\Projects\Luma\bin\start.vs
 Writing Symbol file: start.sym

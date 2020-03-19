@@ -13,6 +13,11 @@ IRQ: {
 			lda #>MainIRQ
 			sta $ffff
 
+			lda #<NMI
+			sta $fffa
+			lda #>NMI
+			sta $fffb
+
 			lda #SCROLLER_SPLIT
 			sta $d012
 			lda $d011
@@ -25,6 +30,9 @@ IRQ: {
 			asl $d019
 			cli
 			rts
+
+		NMI:
+			rti
 	}
 
 	MainIRQ: {
@@ -62,7 +70,8 @@ IRQ: {
 			sta FrameFlag
 			jsr $1003	//Do music
 
-
+			lda #SCROLLER_SPLIT
+			sta $d012
 			lda COMPLETION.isCompletion
 			beq !+
 

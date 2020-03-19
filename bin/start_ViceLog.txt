@@ -56,7 +56,7 @@ AUTOSTART: `bin/start.prg' recognized as program/p00 file.
 Main CPU: starting at ($FFFC).
 Main CPU: RESET.
 Drive 8: RESET.
-AUTOSTART: Injecting program data at $0801 (size $dfda)
+AUTOSTART: Injecting program data at $0801 (size $dbff)
 AUTOSTART: Ready
 AUTOSTART: Starting program.
 AUTOSTART: Done.

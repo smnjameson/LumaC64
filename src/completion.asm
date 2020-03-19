@@ -3,20 +3,43 @@ COMPLETION: {
 		.byte $00
 	level:
 		.byte $00
-
+	blankRows:
+		.byte $09
+	transitionColorList:
+		.byte $0a,$0d,$0e
+	transitionColorIndex:
+		.byte $00
 	Start: {
 			lda #$01
 			sta isCompletion
-			lda #$00
+			jsr Random.get
+			and #$7f
 			sta level
+				
+			lda #<RowTexts
+			sta FetchNewRow.ROWTEXTLOOKUP + 1
+			lda #>RowTexts
+			sta FetchNewRow.ROWTEXTLOOKUP + 2
+			lda #$09
+			sta blankRows
 			
-			jsr CompleteHud
 			jsr InitSprites
+
+			lda #$01
+			sta transitionColorIndex
+			lda #$0a
+			sta TransitionColor
+			lda #$01
+			sta TransitionTimer
+			jsr ColorTransitionInit
+
+			
 
 		NextLevel:
 			lda #$00
 			ldx #$09		//Force mc in every square
 			jsr ClearScreen
+			jsr CompleteHud
 
 			// jsr HUD.Init
 			lda level
@@ -25,18 +48,81 @@ COMPLETION: {
 
 
 		ScrollTime:
-			lda FetchRowNow
-			beq !skip+
+			//WAIT FOR SAME LINE
 			lda $d011
 			bmi *-3
 			lda #$80
 			cmp $d012
 			bcc *-3
+
+			lda FetchRowNow
+			beq !skipfetch+
 			jsr FetchNewRow
+		!skipfetch:
+
+			// lda IRQ.Timer
+			// and #$01
+			// bne !skipcolorupdate+
+			jsr ColorTransitionOnUpdate
+		!skipcolorupdate:
+
+			lda $d011
+			bpl *-3
+
+			lda blankRows
+			bne !skip+
+			lda isTransitioning
+			bne !skip+
+			lda TransitionColor
+			beq !skip+
+			jmp Exit 
 		!skip:
+
+
+		CheckForRunStop: {
+				lda #%11111111	//Enable keyboard handling
+				sta $dc02
+				lda #%00000000	
+				sta $dc03
+
+				lda #%01111111  //ROW mask
+				sta $dc00
+				lda $dc01
+				cmp #$ff
+				bne !+
+
+				lda #$00
+				sta DebounceKeys1
+				jmp !ExitKeys+
+
+			!:
+				ldx DebounceKeys1
+				bne !ExitKeys+
+				inc DebounceKeys1
+
+				and #$80
+				bne !ExitKeys+
+				jmp Exit
+
+
+			!ExitKeys:
+				lda #%00000000	//Restore joy control
+				sta $dc02
+		}
+
+
 			jmp ScrollTime		
 	}
+	DebounceKeys1:
+		.byte $00
 
+	Exit: {
+			lda #$1b
+			sta $d011
+			lda #$00
+			sta isCompletion
+			jmp INTRO.Start
+	}
 			
 	InitSprites: {
 			lda #$ff
@@ -157,7 +243,7 @@ COMPLETION: {
 
 		!End:
 			lda IRQ.Timer
-			and #$01
+			and #$03
 			bne !+
 			dec SpriteYpos + 1
 		!:
@@ -213,6 +299,54 @@ COMPLETION: {
 			inx
 			bne !-
 
+
+
+			lda #<[SCREEN_RAM + 30]
+			sta HudMod + 1
+			lda #>[SCREEN_RAM + 30]
+			sta HudMod + 2
+			lda #<[COLOR_RAM + 30]
+			sta ColMod + 1
+			lda #>[COLOR_RAM + 30]
+			sta ColMod + 2
+
+
+
+			ldx #$00
+			ldy #$00
+		!loop:	
+			lda COMP_HUD_MAP, x
+		HudMod:
+			sta $BEEF, y
+			stx ZP.HudCharTemp
+			tax
+			lda CHAR_COLORS, x
+			ldx ZP.HudCharTemp
+		ColMod:
+			sta $BEEF, y
+
+			iny
+			cpy #$0a
+			bne !+
+
+			ldy #$00
+			lda HudMod + 1
+			clc
+			adc #$28
+			sta HudMod + 1
+			sta ColMod + 1
+			lda HudMod + 2
+			adc #$00
+			sta HudMod + 2
+			clc
+			adc #>[COLOR_RAM - SCREEN_RAM]
+			sta ColMod + 2
+		!:
+			inx
+			cpx #$f0
+			bne !loop-
+
+	
 			rts
 	}
 
@@ -267,7 +401,10 @@ COMPLETION: {
 			//TESTING
 			ldx #$00
 		!LOOP:
+		ROWTEXTLOOKUP:
 			ldy RowTexts, x
+			bmi !Finished+
+
 			lda CharLookupsLSB, y
 			sta ZP.complFontData + 0
 			lda CharLookupsMSB, y
@@ -319,46 +456,196 @@ COMPLETION: {
 
 
 
-
-
-
-
-		// 	lda #$06
-		// 	sta ZP.complTemp
-		// !loop:
-		// 	ldx #$23
-		// !:
-		// 	ldy SpriteCharOffsets, x
-		// 	stx ZP.complTemp2
-
-		// 		lda #$7e
-		// 		sta (ZP.complSpriteData), y
-
-		// 	ldx ZP.complTemp2
-		// 	dex
-		// 	bpl !-
-
-		// 	dec ZP.complTemp
-		// 	beq !+
-
-
-		// 	clc
-		// 	lda ZP.complSpriteData + 0
-		// 	adc #$40	
-		// 	sta ZP.complSpriteData + 0	
-		// 	lda ZP.complSpriteData + 1
-		// 	adc #$00
-		// 	sta ZP.complSpriteData + 1	
-		// 	jmp !loop-
-		// !:
-
-
-
-
-		// dec $d020
+			lda ROWTEXTLOOKUP + 1
+			clc
+			adc #$24
+			sta ROWTEXTLOOKUP + 1
+			lda ROWTEXTLOOKUP + 2
+			adc #$00
+			sta ROWTEXTLOOKUP + 2
 			rts
 
+
+
+		!Finished:
+			ldx blankRows
+			dex
+			bpl !+
+			ldx #$00
+		!:
+			stx blankRows
+			ldx #$06
+		!Loop:
+			lda #$00
+			ldy #$3e
+		!:
+			sta (ZP.complSpriteData), y
+			dey
+			bpl !-
+			dex
+			beq !+
+
+			clc
+			lda ZP.complSpriteData + 0
+			adc #$40	
+			sta ZP.complSpriteData + 0	
+			lda ZP.complSpriteData + 1
+			adc #$00
+			sta ZP.complSpriteData + 1	
+			jmp !Loop-	
+
+		!:
+			rts
 	}
+
+
+	ColTransition1Start:
+		.byte $f4,$f5,$f6,$f7,$f8,$f9,$fa,$fb,$fc,$fd,$fe,$ff
+		.byte $ff,$fe,$fd,$fc,$fb,$fa,$f9,$f8,$f7,$f6,$f5,$f4
+	ColTransition2Start:
+		.byte $29,$28,$27,$26,$25,$24,$23,$22,$21,$20,$1f,$1e
+		.byte $1e,$1f,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29
+	ColTransitionIndexes:
+		.fill 24,0	
+	isTransitioning:
+		.byte $00
+	TransitionColor:
+			.byte $08
+	TransitionTimer:
+			.byte $ff
+
+	ColorTransitionInit: {
+			ldx TransitionColor
+			beq !Backwards+
+
+		!Forwards:
+			ldx #$17
+		!:
+			lda ColTransition1Start, x
+			sta ColTransitionIndexes, x
+			dex
+			bpl !-
+
+			rts
+
+		!Backwards:
+			ldx #$17
+		!:
+			lda ColTransition2Start, x
+			sta ColTransitionIndexes, x
+			dex
+			bpl !-
+
+			rts
+	}
+
+
+	ColorTransitionOnUpdate: {
+
+
+			lda isTransitioning
+			bne !DoTransition+
+				ldx TransitionTimer
+				beq !DoTransition+
+				dex
+				stx TransitionTimer
+				bne !+
+				jsr ColorTransitionInit
+			!:
+				rts
+
+		!DoTransition:
+			lda #$01
+			sta isTransitioning
+
+
+			ldx #$17
+		!:
+			lda TransitionColor
+			beq !Back+
+		!Fwd:
+			ldy ColTransitionIndexes, x
+			iny
+			tya
+			sta ColTransitionIndexes, x
+			bmi !skip+
+			cpy #$1e
+			bcs !skip+
+			jmp !Done+
+		!Back:
+			ldy ColTransitionIndexes, x
+			dey
+			tya
+			sta ColTransitionIndexes, x
+			bmi !skip+
+			cpy #$1e
+			bcs !skip+
+		!Done:
+
+
+			lda TABLES.ScreenLSB, x
+			sta ZP.colTransition + 0
+			lda TABLES.ColorMSB, x
+			sta ZP.colTransition + 1
+
+			lda TransitionColor
+			sta (ZP.colTransition), y
+
+		!skip:
+			dex
+			bpl !-
+
+			lda TransitionColor
+			beq !Back+
+		!Fwd:
+			cpy #$1e
+			bne !end+
+			jmp !Done+
+		!Back:
+			cpy #$ff
+			bne !end+
+
+
+
+			jsr Random.get
+			and #$7f
+			sta level
+			lda level
+			jsr LEVEL.LoadLevel
+			jsr LEVEL.DrawLevel	
+		!Done:
+
+
+
+			lda #$00
+			sta isTransitioning
+			ldx #$05
+			lda TransitionColor
+			beq !Set+
+		!clear:
+			lda #$00
+			jmp !+
+		!Set:
+			ldy transitionColorIndex
+			iny 
+			cpy #$03
+			bne !noreset+
+			ldy #$00
+		!noreset:
+			sty transitionColorIndex
+			lda transitionColorList, y
+		!:
+			sta TransitionColor
+		
+
+			bne !skip+
+			ldx #$80
+		!skip:
+			stx TransitionTimer
+		!end:
+			rts	
+	}
+
 
 	Offsets:
 		.byte 0,6,12,18,24,30
@@ -385,8 +672,149 @@ COMPLETION: {
 
 
 	RowTexts:
-		.text "ABCDEFGHIJKLMNOPQR"
-		.text "STUVWXYZ0123456789"
+		.encoding "screencode_upper"
+		.text "CONGRATULATIONS!!!"
+		.text "                  "
+		.text " YOU HAVE MANAGED "
+		.text " TO SOLVE ALL THE "
+		.text " PUZZLES FOUND IN "
+		.text " LUMA...          "
+		.text "                  "
+		.text "WE KNEW YOU COULD!"
+		.text "                  "
+		.text "                  "
+		.text "LUMA WAS MADE ON A"
+		.text "TWITCH STREAM FOR "
+		.text "THE MOST EXCELLENT"
+		.text "EXTRA LIFE CHARITY"
+		.text "WHO HELP SUPPORT  "
+		.text "KIDS IN HOSPITALS "
+		.text "ACROSS THE U.S.A. "
+		.text "                  "
+		.text "APPROXIMATELY 3/4 "
+		.text "OF THE GAME WAS   "
+		.text "MADE ON STREAM AND"
+		.text "THE REMAINDER WAS "
+		.text "COMPLETED DURING  "
+		.text "THE NEXT WEEK.    "
+		.text "GRAPHICS, MUSIC   "
+		.text "AND LEVEL DESIGN  "
+		.text "WERE ALSO DONE BY "
+		.text "VIEWERS OF THE    "
+		.text "STREAM.           "
+		.text "                  "
+		.text "IN TOTAL, VIEWERS "
+		.text "DONATED $1220.69  "
+		.text "IN THE 16 HOURS!  "
+		.text "                  "
+		.text "AMAZING WORK GUYS!"
+		.text "                  "
+		.text "ALL TWITCH REVENUE"
+		.text "FROM THE STREAM   "
+		.text "AND UP TO THE NEXT"
+		.text "PAYOUT WILL ALSO  "
+		.text "BE DONATED, AND   "
+		.text "ALL PROCEEDS FROM "
+		.text "ITCH.IO WILL GO TO"
+		.text "EXTRA LIFE ALSO.  "
+		.text "                  "
+		.text "                  "
+		.text "                  "
+		.text "                  "
+		.text "AND NOW, CREDITS: "
+		.text "                  "
+		.text "                  "
+		.text "CONCEPT AND CODE  "
+		.text "  SHALLAN         "
+		.text "                  "
+		.text "GRAPHICS          "
+		.text "  HELPCOMPUTER    "
+		.text "  SHALLAN         "
+		.text "                  "
+		.text "MUSIC             "
+		.text "  RICHMONDMIKE    "
+		.text "                  "
+		.text "SOUND             "
+		.text "  STEPZ           "
+		.text "                  "
+		.text "TESTING           "
+		.text "  CHISWICKED      "
+		.text "  COLT45RPM       "
+		.text "  MRG8472         "
+		.text "  STEPZ           "
+		.text "                  "
+		.text "LEVEL DESIGN      "
+		.text "  AIRJURI         "
+		.text "  AKMAFIN         "
+		.text "  AMOK            "
+		.text "  CHISWICKED      "
+		.text "  ELDRITCH        "
+		.text "  FURROY          "
+		.text "  MRG8472         "
+		.text "  OLDSKOOLCODER   "
+		.text "  PHAZE101        "
+		.text "  RICHMONDMIKE    "
+		.text "  SHALLAN         "
+		.text "  SPIRITHOUND     "
+		.text "  STEPZ           "
+		.text "  VOID            "
+		.text "  WAULOK          "
+		.text "  WIZARDNJ        "
+		.text "  ZOOPERDAN       "
+		.text "                  "
+		.text "DONATORS          "
+		.text "  WAULOK          "
+		.text "  JAMES           "
+		.text "  COLT45RPM       "
+		.text "  WIZARDNJ        "
+		.text "  JAMES           "
+		.text "  ELDRITCH        "
+		.text "  ANDYMAGICKNIGHT "
+		.text "  CHISWICKED      "
+		.text "  HAYESMAKER      "
+		.text "  STOKER          "
+		.text "  OLDSKOOLCODER   "
+		.text "  BAGOFPOTATOES   "
+		.text "  FURROY          "
+		.text "  JOST            "
+		.text "  MRKOLA          "
+		.text "  STACBATS        "
+		.text "  ZOOPERDAN       "
+		.text "  AMOK            "
+		.text "  RICHMONDMIKE    "
+		.text "  STEPZ           "
+		.text "  SEUCK           "
+		.text "  CARLOS          "
+		.text "  PODULATOR       "
+		.text "  MITSOYAMA       "
+		.text "  ZENDARICK       "
+		.text "  YOSI TAGURI     "
+		.text "  DRAGAN          "
+		.text "                  "
+		.text "                  "
+		.text "                  "
+		.text "                  "
+		.text "A HUGE THANK YOU  "
+		.text "TO EVERYONE WHO   "
+		.text "DONATED OR HELPED "
+		.text "BY CONTRIBUTING   "
+		.text "ASSETS, LEVELS OR "
+		.text "TIME, TO HELP MAKE"
+		.text "THIS GAME!        "
+		.text "                  "
+		.text "I HOPE YOU ENJOYED"
+		.text "IT, AND AM LOOKING"
+		.text "FORWARD TO THE    "
+		.text "NEXT GAME!!!      "
+		.text "                  "
+		.text "                  "
+		.text "                  "
+		.text "UNTIL NEXT TIME..."
+		.text "                  "
+		.text "SHALLAN           "
+		.text "                  "
+
+		.byte $FF
 }
 
 

@@ -570,7 +570,7 @@ level_38:
     .byte 129,0,40,108,0,0,108,40,0,129    //Level wall data 
     .byte 18,64,19,80,19,34,7,66,11,82,18,114,2,3,2,147,21,36,17,52,17,100,22,116,18,38,19,118,18,71,19,87    //Level item data 
     .byte $ff  
-    .text "CHISTUT5"    //Author
+    .text "CHISWICK"    //Author
     .byte $00
     .byte 16    //Moves
 
