@@ -39,7 +39,6 @@ ZP: {
 
 	gameScrollPointer:	.word $0000
 
-*=*"Tutor zp" virtual
 	tutorScreen:		.word $0000
 	tutorColor:			.word $0000
 	tutorIndex:			.word $0000
@@ -48,4 +47,10 @@ ZP: {
 	tutorRows:			.byte $00
 	tutorCols:			.byte $00
 	tutorArrow:			.byte $00
+
+	complSpriteData:	.word $0000
+	complCharData:		.word $0000
+	complFontData:		.word $0000
+	complTemp:			.byte $00
+	complTemp2:			.byte $00
 }	

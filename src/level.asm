@@ -291,6 +291,12 @@ LEVEL: {
 	// 		jmp !NoColor+
 	// !:
 
+			lda COMPLETION.isCompletion
+			beq !skip+
+			lda #$08
+			ldy TABLES.TileScreenOffsets, x
+			jmp TileCol
+		!skip:
 			lda ZP.LevelColorTemp
 			beq !Standard+
 				//Custom color
@@ -303,6 +309,7 @@ LEVEL: {
 			ldy TABLES.TileScreenOffsets, x
 			cmp #$08
 			beq !NoColor+
+		!:
 		TileCol:
 			sta $BEEF, y
 

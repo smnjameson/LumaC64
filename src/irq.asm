@@ -28,6 +28,7 @@ IRQ: {
 	}
 
 	MainIRQ: {
+		// .break
 		saveState()
 			lda $d012
 			cmp $d012
@@ -62,6 +63,15 @@ IRQ: {
 			jsr $1003	//Do music
 
 
+			lda COMPLETION.isCompletion
+			beq !+
+
+			// lda COMPLETION.FetchRowNow
+			// beq !skip+
+			// jsr COMPLETION.FetchNewRow
+		!skip:
+			jsr COMPLETION.StartSpriteSplitIRQ
+		!:
 		// 	lda MESSAGES.messageDisplayed
 		// 	bmi !+
 		// 	cmp #$02
@@ -75,6 +85,9 @@ IRQ: {
 		// 	adc #$15
 		// 	sta $d012
 		// !:
+			lda $d011
+			and #$7f
+			sta $d011
 
 		restoreState()
 		asl $d019

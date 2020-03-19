@@ -292,7 +292,7 @@ TABLES: {
 		.byte 0,0,1,0,3,0,0,0
 		.byte 0,0,4,0,4,0,7,0
 		.byte 7,0,0,0,0,0,0,0
-		.byte 1,3,0,1,1,6,2,1  //DEBUG: unique code here last 4
+		.byte 1,3,0,1,2,1,2,1  //DEBUG: unique code here last 4
 
 		//2222 - 001 - Chis
 		//2121 - 002 - Stepz
@@ -349,7 +349,7 @@ TABLES: {
 	#import "src/hud.asm"
 	#import "src/keyboard.asm"
 	#import "src/messages.asm"
-	#import "src/gamescroller.asm"
+	
 
 * = $8000 "Level data"
 	#import "assets/levels.asm"
@@ -368,4 +368,9 @@ CHAR_COLORS:
 HUD_MAP:
 	.import binary "assets/hud.bin"
 
+
+
+
+	#import "src/gamescroller.asm"
+	#import "src/completion.asm"
 
