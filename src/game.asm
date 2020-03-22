@@ -60,21 +60,21 @@ GAME: {
 				jmp !DoneMessages+
 
 			!Level2:
-				cmp #$01
+				cmp #$02
 				bne !Level3+
 				lda #$04
 				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
 
 			!Level3:
-				cmp #$02
+				cmp #$05
 				bne !Level4+
 				lda #$05
 				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
 
 			!Level4:
-				cmp #$03
+				cmp #$08
 				bne !Level5+
 				lda #$06
 				jsr MESSAGES.addTutorial

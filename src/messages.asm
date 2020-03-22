@@ -273,7 +273,7 @@ MESSAGES: {
 			//250,190,255
 			.encoding "screencode_upper"
 			Tutor1:
-				.byte 6,5,  24,7 //x,y,w,h
+				.byte 6,3,  24,9 //x,y,w,h
 				
 				.fill 24, 32 //width
 				.byte 32, 202
@@ -282,7 +282,9 @@ MESSAGES: {
 
 				.text @" \$d2THE AIM IS TO LIGHT \$d4 "
 				.text @" \$d2ALL OF THESE COLORED\$d4 "
-				.text @" \$d2TARGETS...          \$d4 "
+				.text @" \$d2TARGETS. WITHIN THE \$d4 "
+				.text @" \$d2NUMBER OF SHIFTS    \$d4 "
+				.text @" \$d2AVAILABLE...        \$d4 "
 
 				.byte 32, 250
 				.fill 20, 190 //width-3

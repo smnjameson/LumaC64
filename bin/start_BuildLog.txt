@@ -15,9 +15,9 @@ Default-segment:
   $0cf5-$0da1 Transform up
   $1000-$1a6f Music
   $3000-$3923 Code
-  $3924-$3e44 SLIDES
-  $3e45-$4c25 SPRAKS
-  $4c26-$562e message
+  $3924-$3e49 SLIDES
+  $3e4a-$4c2a SPRAKS
+  $4c2b-$5663 message
   $5800-$5be7 INTRO BMP ScreenRam
   $5c00-$5fe7 INTRO BMP ColorRam
   $5fff-$5fff INTRO BMP BG

@@ -41,7 +41,9 @@ CONTROL: {
 		sta PositionY
 		sta SlidingActive
 
-
+		lda #$01
+		sta Debounce
+		
 		lda #$0b
 		sta $d025
 		lda #$0c

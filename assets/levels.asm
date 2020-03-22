@@ -1,133 +1,147 @@
 LevelPointerData:
-    .word level_0//0
-    .word level_1 //4
-    .word level_2 //12
-    .word level_3 //5
-
-    .word level_4
+    .word level_0
+        .word level_8
+    .word level_1
+        .word level_17
+        .word level_9
+    .word level_2
+        .word level_18
+        .word level_69
+    .word level_3
     .word level_5
-    .word level_6
-    .word level_7
-    .word level_8
-    .word level_9
-    .word level_10
-    .word level_11
-    .word level_12
-    .word level_13
-    .word level_14
-    .word level_15
-    .word level_16
-    .word level_17
-    .word level_18
-    .word level_19
-    .word level_20
-    .word level_21
-    .word level_22
-    .word level_23
-    .word level_24
-    .word level_25
-    .word level_26
-    .word level_27
-    .word level_28
-    .word level_29
-    .word level_30
-    .word level_31
-    .word level_32
-    .word level_33
-    .word level_34
-    .word level_35
-    .word level_36
-    .word level_37
-    .word level_38
-    .word level_39
-    .word level_40
-    .word level_41
-    .word level_42
-    .word level_43
-    .word level_44
-    .word level_45
-    .word level_46
-    .word level_47
-    .word level_48
-    .word level_49
+
+
+    .word level_95
+    .word level_88
     .word level_50
-    .word level_51
-    .word level_52
-    .word level_53
-    .word level_54
-    .word level_55
-    .word level_56
-    .word level_57
-    .word level_58
-    .word level_59
-    .word level_60
+    .word level_92
+    .word level_26
     .word level_61
-    .word level_62
-    .word level_63
-    .word level_64
-    .word level_65
-    .word level_66
-    .word level_67
-    .word level_68
-    .word level_69
     .word level_70
-    .word level_71
+    .word level_30
+    .word level_57
+    .word level_60
+
+
+    .word level_52
+    .word level_27
+    .word level_59
+    .word level_93
+    .word level_4
+    .word level_35
+    .word level_98
+    .word level_51
+    .word level_66
+    .word level_84
+
+    .word level_20
+    .word level_36
+    .word level_42
+    .word level_33
+    .word level_48
+    .word level_54
     .word level_72
-    .word level_73
-    .word level_74
-    .word level_75
-    .word level_76
-    .word level_77
     .word level_78
+    .word level_115
+    .word level_126
+
+    .word level_40
+    .word level_104
+    .word level_111
+    .word level_19
+    .word level_29
+    .word level_117
+    .word level_41
+    .word level_49
+    .word level_22
+    .word level_44
+
+    .word level_87
+    .word level_116
+    .word level_58
+    .word level_63
+    .word level_74
     .word level_79
-    .word level_80
-    .word level_81
     .word level_82
     .word level_83
-    .word level_84
-    .word level_85
-    .word level_86
-    .word level_87
-    .word level_88
-    .word level_89
-    .word level_90
-    .word level_91
-    .word level_92
-    .word level_93
-    .word level_94
-    .word level_95
-    .word level_96
-    .word level_97
-    .word level_98
-    .word level_99
-    .word level_100
     .word level_101
     .word level_102
-    .word level_103
-    .word level_104
-    .word level_105
-    .word level_106
-    .word level_107
-    .word level_108
+
+    .word level_28
+    .word level_31
     .word level_109
-    .word level_110
-    .word level_111
-    .word level_112
-    .word level_113
-    .word level_114
-    .word level_115
-    .word level_116
-    .word level_117
-    .word level_118
-    .word level_119
-    .word level_120
-    .word level_121
-    .word level_122
+    .word level_6
+    .word level_21
+    .word level_32
+    .word level_65
+    .word level_103
+    .word level_106
     .word level_123
-    .word level_124
+
     .word level_125
-    .word level_126
+    .word level_39
+    .word level_43
+    .word level_56
+    .word level_99
+    .word level_110
+    .word level_14
+    .word level_23
+    .word level_38
+    .word level_108
+
+    .word level_24
+    .word level_25
+    .word level_37
+    .word level_47
+    .word level_73
+    .word level_90
+    .word level_105
+    .word level_122
+    .word level_34
+    .word level_113
+
     .word level_127
+    .word level_55
+    .word level_107
+    .word level_7
+    .word level_13
+    .word level_53
+    .word level_94
+    .word level_96
+    .word level_120
+    .word level_67
+
+    .word level_76
+    .word level_112
+    .word level_114
+    .word level_121
+    .word level_10
+    .word level_11
+    .word level_89
+    .word level_71
+    .word level_100
+    .word level_85
+
+    .word level_86
+    .word level_62
+    .word level_68
+    .word level_119
+    .word level_124
+    .word level_80
+    .word level_118
+    .word level_77
+    .word level_97
+    .word level_75
+
+    .word level_12
+    .word level_91
+    .word level_45
+    .word level_46
+    .word level_81
+    .word level_16
+    .word level_64
+    .word level_15
+
 
 .align $100
 LevelPassCodeData:
@@ -269,6 +283,30 @@ level_0:
     .text "CHISTUT1"    //Author
     .byte $00
     .byte 1    //Moves
+level_1:
+    .byte 16,16,16,16,16,16,16,16,16,16    //Level wall data 
+    .byte 22,0,18,144,9,113,17,145,17,2,6,34,18,3,21,147,4,5,4,37,4,53,4,69,4,101,19,117,3,133,18,149,4,6,4,38,4,54,4,70,18,86,4,102,4,118,3,134,4,150,4,7,3,23,18,39,19,55,4,71,4,103,4,119,4,151    //Level item data 
+    .byte $ff  
+    .text "CHISTUT2"    //Author
+    .byte $00
+    .byte 4    //Moves
+
+level_2:
+    .byte 8,8,8,40,40,40,8,8,8,8    //Level wall data 
+    .byte 4,0,4,32,4,48,4,64,4,96,19,112,3,128,18,144,4,1,4,33,4,49,4,65,18,81,4,97,4,113,3,129,4,145,4,2,3,18,18,34,19,50,4,66,4,98,4,114,4,146,3,20,3,36,21,52,20,84,3,100,3,116,3,132,19,37,18,101,5,54,14,86,18,7,17,71,19,151    //Level item data 
+    .byte $ff  
+    .text "CHISTUT3"    //Author
+    .byte $00
+    .byte 6    //Moves
+
+level_3:
+    .byte 3,1,1,0,0,0,0,128,128,192    //Level wall data 
+    .byte 21,48,17,80,12,128,5,144,20,2,18,50,3,66,3,82,2,98,4,51,4,99,17,147,17,4,4,52,4,100,2,53,3,69,3,85,18,101,22,149,6,7,15,23,17,71,21,103    //Level item data 
+    .byte $ff  
+    .text "CHISTUT4"    //Author
+    .byte $00
+    .byte 4    //Moves
+
 
 level_4:
     .byte 4,2,0,0,0,128,34,0,128,0    //Level wall data 
@@ -294,21 +332,6 @@ level_6:
     .byte $00
     .byte 4    //Moves
 
-level_1:
-    .byte 16,16,16,16,16,16,16,16,16,16    //Level wall data 
-    .byte 22,0,18,144,9,113,17,145,17,2,6,34,18,3,21,147,4,5,4,37,4,53,4,69,4,101,19,117,3,133,18,149,4,6,4,38,4,54,4,70,18,86,4,102,4,118,3,134,4,150,4,7,3,23,18,39,19,55,4,71,4,103,4,119,4,151    //Level item data 
-    .byte $ff  
-    .text "CHISTUT2"    //Author
-    .byte $00
-    .byte 4    //Moves
-
-level_3:
-    .byte 3,1,1,0,0,0,0,128,128,192    //Level wall data 
-    .byte 21,48,17,80,12,128,5,144,20,2,18,50,3,66,3,82,2,98,4,51,4,99,17,147,17,4,4,52,4,100,2,53,3,69,3,85,18,101,22,149,6,7,15,23,17,71,21,103    //Level item data 
-    .byte $ff  
-    .text "CHISTUT4"    //Author
-    .byte $00
-    .byte 4    //Moves
 
 level_7:
     .byte 0,0,0,16,0,0,8,0,0,0    //Level wall data 
@@ -324,7 +347,7 @@ level_8:
     .byte $ff  
     .text "WIZARDNJ"    //Author
     .byte $00
-    .byte 4    //Moves
+    .byte 2    //Moves
 
 level_9:
     .byte 0,0,124,68,68,68,68,68,124,0    //Level wall data 
@@ -358,13 +381,6 @@ level_12:
     .byte $00
     .byte 6    //Moves
 
-level_2:
-    .byte 8,8,8,40,40,40,8,8,8,8    //Level wall data 
-    .byte 4,0,4,32,4,48,4,64,4,96,19,112,3,128,18,144,4,1,4,33,4,49,4,65,18,81,4,97,4,113,3,129,4,145,4,2,3,18,18,34,19,50,4,66,4,98,4,114,4,146,3,20,3,36,21,52,20,84,3,100,3,116,3,132,19,37,18,101,5,54,14,86,18,7,17,71,19,151    //Level item data 
-    .byte $ff  
-    .text "CHISTUT3"    //Author
-    .byte $00
-    .byte 6    //Moves
 
 level_13:
     .byte 34,40,96,0,1,0,144,0,0,8    //Level wall data 
@@ -380,7 +396,7 @@ level_14:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 7    //Moves
+    .byte 4    //Moves
 
 level_15:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -404,7 +420,7 @@ level_17:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 8    //Moves
+    .byte 2    //Moves
 
 level_18:
     .byte 0,8,30,50,3,132,3,18,12,0    //Level wall data 
@@ -420,7 +436,7 @@ level_19:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 8    //Moves
+    .byte 7    //Moves
 
 level_20:
     .byte 2,2,2,2,62,32,32,32,224,0    //Level wall data 
@@ -436,7 +452,7 @@ level_21:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 9    //Moves
+    .byte 8    //Moves
 
 level_22:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -444,7 +460,7 @@ level_22:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 11    //Moves
+    .byte 7    //Moves
 
 level_23:
     .byte 0,0,102,0,0,0,0,36,0,0    //Level wall data 
@@ -460,7 +476,7 @@ level_24:
     .byte $ff  
     .text "SPRTHUND"    //Author
     .byte $00
-    .byte 11    //Moves
+    .byte 10    //Moves
 
 level_25:
     .byte 0,64,64,68,196,0,51,34,2,0    //Level wall data 
@@ -476,7 +492,7 @@ level_26:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 11    //Moves
+    .byte 4    //Moves
 
 level_27:
     .byte 23,21,29,0,58,0,62,34,28,0    //Level wall data 
@@ -484,7 +500,7 @@ level_27:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 12    //Moves
+    .byte 7    //Moves
 
 level_28:
     .byte 0,249,0,0,0,0,0,0,1,0    //Level wall data 
@@ -492,7 +508,7 @@ level_28:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 12    //Moves
+    .byte 6    //Moves
 
 level_29:
     .byte 8,0,128,2,250,0,1,0,0,0    //Level wall data 
@@ -508,7 +524,7 @@ level_30:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 14    //Moves
+    .byte 12    //Moves
 
 level_31:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -516,7 +532,7 @@ level_31:
     .byte $ff  
     .text "RICHMOND"    //Author
     .byte $00
-    .byte 14    //Moves
+    .byte 13    //Moves
 
 level_32:
     .byte 14,17,17,101,133,129,105,35,38,60    //Level wall data 
@@ -524,7 +540,7 @@ level_32:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 14    //Moves
+    .byte 8    //Moves
 
 level_33:
     .byte 0,64,64,64,64,64,64,64,64,0    //Level wall data 
@@ -532,7 +548,7 @@ level_33:
     .byte $ff  
     .text "WAULOK"    //Author
     .byte $00
-    .byte 14    //Moves
+    .byte 7    //Moves
 
 level_34:
     .byte 0,4,42,17,1,1,17,42,4,0    //Level wall data 
@@ -540,7 +556,7 @@ level_34:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 15    //Moves
+    .byte 12    //Moves
 
 level_35:
     .byte 8,8,40,42,0,0,0,0,0,0    //Level wall data 
@@ -548,7 +564,7 @@ level_35:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 15    //Moves
+    .byte 5    //Moves
 
 level_36:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -556,7 +572,7 @@ level_36:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 15    //Moves
+    .byte 12    //Moves
 
 level_37:
     .byte 24,90,0,24,88,26,24,64,26,24    //Level wall data 
@@ -572,7 +588,7 @@ level_38:
     .byte $ff  
     .text "CHISWICK"    //Author
     .byte $00
-    .byte 16    //Moves
+    .byte 15    //Moves
 
 level_39:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -580,7 +596,7 @@ level_39:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 16    //Moves
+    .byte 15    //Moves
 
 level_40:
     .byte 144,8,0,0,0,8,0,0,8,4    //Level wall data 
@@ -588,7 +604,7 @@ level_40:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 17    //Moves
+    .byte 11    //Moves
 
 level_41:
     .byte 0,0,0,0,96,224,96,0,0,0    //Level wall data 
@@ -596,7 +612,7 @@ level_41:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 17    //Moves
+    .byte 12    //Moves
 
 level_42:
     .byte 0,0,0,16,4,16,0,6,1,0    //Level wall data 
@@ -604,7 +620,7 @@ level_42:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 18    //Moves
+    .byte 11    //Moves
 
 level_43:
     .byte 0,8,4,2,1,0,0,0,0,0    //Level wall data 
@@ -612,7 +628,7 @@ level_43:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 18    //Moves
+    .byte 14    //Moves
 
 level_44:
     .byte 79,7,2,0,0,0,0,1,23,0    //Level wall data 
@@ -620,7 +636,7 @@ level_44:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 18    //Moves
+    .byte 12    //Moves
 
 level_45:
     .byte 132,6,112,9,134,240,0,0,0,0    //Level wall data 
@@ -644,7 +660,7 @@ level_47:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 19    //Moves
+    .byte 15    //Moves
 
 level_48:
     .byte 120,143,193,135,132,132,135,193,143,120    //Level wall data 
@@ -652,7 +668,7 @@ level_48:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 19    //Moves
+    .byte 14    //Moves
 
 level_49:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -660,7 +676,7 @@ level_49:
     .byte $ff  
     .text "MEOW"    //Author
     .byte $00
-    .byte 19    //Moves
+    .byte 15    //Moves
 
 level_50:
     .byte 7,33,37,164,133,145,17,148,132,228    //Level wall data 
@@ -668,7 +684,7 @@ level_50:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 19    //Moves
+    .byte 9    //Moves
 
 level_51:
     .byte 0,16,32,64,64,64,64,32,16,0    //Level wall data 
@@ -676,7 +692,7 @@ level_51:
     .byte $ff  
     .text "VOID"    //Author
     .byte $00
-    .byte 20    //Moves
+    .byte 16    //Moves
 
 level_52:
     .byte 0,0,0,0,0,0,0,0,0,2    //Level wall data 
@@ -684,7 +700,7 @@ level_52:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 20    //Moves
+    .byte 19    //Moves
 
 level_53:
     .byte 0,0,0,0,0,0,0,0,0,131    //Level wall data 
@@ -692,7 +708,7 @@ level_53:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 20    //Moves
+    .byte 7    //Moves
 
 level_54:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -700,7 +716,7 @@ level_54:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 20    //Moves
+    .byte 12    //Moves
 
 level_55:
     .byte 0,0,8,0,0,8,0,8,0,0    //Level wall data 
@@ -708,7 +724,7 @@ level_55:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 21    //Moves
+    .byte 18    //Moves
 
 level_56:
     .byte 170,1,128,1,128,1,128,1,128,85    //Level wall data 
@@ -716,7 +732,7 @@ level_56:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 21    //Moves
+    .byte 10    //Moves
 
 level_57:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -724,7 +740,7 @@ level_57:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 22    //Moves
+    .byte 5    //Moves
 
 level_58:
     .byte 32,32,36,36,36,36,36,36,4,4    //Level wall data 
@@ -732,7 +748,7 @@ level_58:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 22    //Moves
+    .byte 20    //Moves
 
 level_59:
     .byte 0,3,130,0,42,42,42,42,0,0    //Level wall data 
@@ -740,7 +756,7 @@ level_59:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 22    //Moves
+    .byte 9    //Moves
 
 level_60:
     .byte 255,129,165,129,193,131,129,161,129,255    //Level wall data 
@@ -748,7 +764,7 @@ level_60:
     .byte $ff  
     .text "ZOOPRDAN"    //Author
     .byte $00
-    .byte 22    //Moves
+    .byte 10    //Moves
 
 level_61:
     .byte 0,130,0,0,0,0,0,0,0,130    //Level wall data 
@@ -756,7 +772,7 @@ level_61:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 22    //Moves
+    .byte 5    //Moves
 
 level_62:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -772,7 +788,7 @@ level_63:
     .byte $ff  
     .text "MARTINI"    //Author
     .byte $00
-    .byte 23    //Moves
+    .byte 12    //Moves
 
 level_64:
     .byte 1,4,213,0,0,171,0,0,0,132    //Level wall data 
@@ -780,7 +796,7 @@ level_64:
     .byte $ff  
     .text "STEPZ"    //Author
     .byte $00
-    .byte 23    //Moves
+    .byte 22    //Moves
 
 level_65:
     .byte 0,254,130,131,129,129,129,129,255,0    //Level wall data 
@@ -788,7 +804,7 @@ level_65:
     .byte $ff  
     .text "SHALLAN"    //Author
     .byte $00
-    .byte 25    //Moves
+    .byte 18    //Moves
 
 level_66:
     .byte 0,118,66,106,42,34,234,138,226,56    //Level wall data 
@@ -796,7 +812,7 @@ level_66:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 25    //Moves
+    .byte 19    //Moves
 
 level_67:
     .byte 0,0,0,64,0,8,0,64,0,0    //Level wall data 
@@ -804,7 +820,7 @@ level_67:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 25    //Moves
+    .byte 18    //Moves
 
 level_68:
     .byte 255,129,191,5,5,0,0,0,0,0    //Level wall data 
@@ -812,7 +828,7 @@ level_68:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 25    //Moves
+    .byte 15    //Moves
 
 level_69:
     .byte 130,0,0,0,0,0,0,0,0,130    //Level wall data 
@@ -820,7 +836,7 @@ level_69:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 26    //Moves
+    .byte 12    //Moves
 
 level_70:
     .byte 255,130,131,250,3,2,251,130,131,254    //Level wall data 
@@ -828,7 +844,7 @@ level_70:
     .byte $ff  
     .text "CASTLE"    //Author
     .byte $00
-    .byte 26    //Moves
+    .byte 10    //Moves
 
 level_71:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -836,7 +852,7 @@ level_71:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 26    //Moves
+    .byte 14    //Moves
 
 level_72:
     .byte 255,137,205,129,129,145,145,145,145,255    //Level wall data 
@@ -844,7 +860,7 @@ level_72:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 27    //Moves
+    .byte 12    //Moves
 
 level_73:
     .byte 0,0,0,0,0,0,0,0,0,4    //Level wall data 
@@ -852,7 +868,7 @@ level_73:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 27    //Moves
+    .byte 16    //Moves
 
 level_74:
     .byte 0,0,0,0,23,0,20,0,0,0    //Level wall data 
@@ -860,7 +876,7 @@ level_74:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 27    //Moves
+    .byte 8    //Moves
 
 level_75:
     .byte 0,0,0,4,16,0,0,18,0,0    //Level wall data 
@@ -876,7 +892,7 @@ level_76:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 27    //Moves
+    .byte 21    //Moves
 
 level_77:
     .byte 195,231,102,66,0,0,66,102,231,195    //Level wall data 
@@ -884,7 +900,7 @@ level_77:
     .byte $ff  
     .text "ARENA"    //Author
     .byte $00
-    .byte 28    //Moves
+    .byte 16    //Moves
 
 level_78:
     .byte 0,96,1,127,64,2,254,128,6,0    //Level wall data 
@@ -892,7 +908,7 @@ level_78:
     .byte $ff  
     .text "PHAZE101"    //Author
     .byte $00
-    .byte 28    //Moves
+    .byte 26    //Moves
 
 level_79:
     .byte 0,33,0,0,64,0,0,64,2,64    //Level wall data 
@@ -900,7 +916,7 @@ level_79:
     .byte $ff  
     .text "OSKCODER"    //Author
     .byte $00
-    .byte 28    //Moves
+    .byte 16    //Moves
 
 level_80:
     .byte 4,4,244,4,4,221,16,16,80,16    //Level wall data 
@@ -924,7 +940,7 @@ level_82:
     .byte $ff  
     .text "PIRATES"    //Author
     .byte $00
-    .byte 30    //Moves
+    .byte 19    //Moves
 
 level_83:
     .byte 128,224,240,24,0,0,24,240,224,128    //Level wall data 
@@ -932,7 +948,7 @@ level_83:
     .byte $ff  
     .text "VOLCANO"    //Author
     .byte $00
-    .byte 30    //Moves
+    .byte 22    //Moves
 
 level_84:
     .byte 240,194,136,187,184,135,196,240,16,16    //Level wall data 
@@ -940,7 +956,7 @@ level_84:
     .byte $ff  
     .text "AIRJURI"    //Author
     .byte $00
-    .byte 31    //Moves
+    .byte 17    //Moves
 
 level_85:
     .byte 0,0,0,16,8,16,0,0,0,0    //Level wall data 
@@ -948,7 +964,7 @@ level_85:
     .byte $ff  
     .text "TARGET"    //Author
     .byte $00
-    .byte 31    //Moves
+    .byte 5    //Moves
 
 level_86:
     .byte 32,60,0,128,195,66,66,64,12,4    //Level wall data 
@@ -956,7 +972,7 @@ level_86:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 35    //Moves
+    .byte 32    //Moves
 
 level_87:
     .byte 8,8,0,68,68,68,68,68,124,0    //Level wall data 
@@ -964,7 +980,7 @@ level_87:
     .byte $ff  
     .text "SHALLAN"    //Author
     .byte $00
-    .byte 36    //Moves
+    .byte 17    //Moves
 
 level_88:
     .byte 8,122,10,142,6,96,113,80,94,16    //Level wall data 
@@ -980,7 +996,7 @@ level_89:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 36    //Moves
+    .byte 20    //Moves
 
 level_90:
     .byte 4,8,0,0,1,0,1,0,4,0    //Level wall data 
@@ -988,7 +1004,7 @@ level_90:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 37    //Moves
+    .byte 29    //Moves
 
 level_91:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -996,7 +1012,7 @@ level_91:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 37    //Moves
+    .byte 33    //Moves
 
 level_92:
     .byte 0,0,0,128,129,130,2,0,128,0    //Level wall data 
@@ -1012,7 +1028,7 @@ level_93:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 39    //Moves
+    .byte 30    //Moves
 
 level_94:
     .byte 0,24,240,19,0,0,22,0,86,0    //Level wall data 
@@ -1020,7 +1036,7 @@ level_94:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 40    //Moves
+    .byte 22    //Moves
 
 level_95:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1028,7 +1044,7 @@ level_95:
     .byte $ff  
     .text "AMOK"    //Author
     .byte $00
-    .byte 40    //Moves
+    .byte 9    //Moves
 
 level_96:
     .byte 0,0,60,36,32,32,36,60,0,128    //Level wall data 
@@ -1036,7 +1052,7 @@ level_96:
     .byte $ff  
     .text "TRAPPED"    //Author
     .byte $00
-    .byte 41    //Moves
+    .byte 11    //Moves
 
 level_97:
     .byte 0,126,66,102,66,66,102,66,126,0    //Level wall data 
@@ -1044,7 +1060,7 @@ level_97:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 42    //Moves
+    .byte 16    //Moves
 
 level_98:
     .byte 255,132,144,145,181,128,246,132,132,144    //Level wall data 
@@ -1052,7 +1068,7 @@ level_98:
     .byte $ff  
     .text "WAULOK"    //Author
     .byte $00
-    .byte 43    //Moves
+    .byte 39    //Moves
 
 level_99:
     .byte 0,0,15,8,8,8,24,8,8,104    //Level wall data 
@@ -1060,7 +1076,7 @@ level_99:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 43    //Moves
+    .byte 12    //Moves
 
 level_100:
     .byte 64,126,0,0,8,16,0,0,126,2    //Level wall data 
@@ -1068,7 +1084,7 @@ level_100:
     .byte $ff  
     .text "WAULOK"    //Author
     .byte $00
-    .byte 44    //Moves
+    .byte 41    //Moves
 
 level_101:
     .byte 200,8,0,252,28,30,4,32,9,9    //Level wall data 
@@ -1076,7 +1092,7 @@ level_101:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 44    //Moves
+    .byte 31    //Moves
 
 level_102:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1084,7 +1100,7 @@ level_102:
     .byte $ff  
     .text "CHECKERS"    //Author
     .byte $00
-    .byte 45    //Moves
+    .byte 20    //Moves
 
 level_103:
     .byte 0,56,68,130,130,130,174,68,0,0    //Level wall data 
@@ -1092,7 +1108,7 @@ level_103:
     .byte $ff  
     .text "PACMAN"    //Author
     .byte $00
-    .byte 49    //Moves
+    .byte 30    //Moves
 
 level_104:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1100,7 +1116,7 @@ level_104:
     .byte $ff  
     .text "FURROY"    //Author
     .byte $00
-    .byte 50    //Moves
+    .byte 14    //Moves
 
 level_105:
     .byte 0,0,0,0,0,0,0,64,0,136    //Level wall data 
@@ -1108,7 +1124,7 @@ level_105:
     .byte $ff  
     .text "AMOK"    //Author
     .byte $00
-    .byte 50    //Moves
+    .byte 15    //Moves
 
 level_106:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1116,7 +1132,7 @@ level_106:
     .byte $ff  
     .text "JUMBLE"    //Author
     .byte $00
-    .byte 50    //Moves
+    .byte 22    //Moves
 
 level_107:
     .byte 255,2,3,0,3,0,3,2,31,0    //Level wall data 
@@ -1124,7 +1140,7 @@ level_107:
     .byte $ff  
     .text "ELDRITCH"    //Author
     .byte $00
-    .byte 52    //Moves
+    .byte 30    //Moves
 
 level_108:
     .byte 126,0,0,0,0,0,0,0,0,126    //Level wall data 
@@ -1132,7 +1148,7 @@ level_108:
     .byte $ff  
     .text "BOING"    //Author
     .byte $00
-    .byte 53    //Moves
+    .byte 17    //Moves
 
 level_109:
     .byte 255,1,189,133,181,181,165,189,129,255    //Level wall data 
@@ -1140,7 +1156,7 @@ level_109:
     .byte $ff  
     .text "PEWPEW"    //Author
     .byte $00
-    .byte 54    //Moves
+    .byte 27    //Moves
 
 level_110:
     .byte 2,20,0,20,34,32,20,0,20,2    //Level wall data 
@@ -1148,7 +1164,7 @@ level_110:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 56    //Moves
+    .byte 38    //Moves
 
 level_111:
     .byte 255,126,60,24,0,24,60,126,255,255    //Level wall data 
@@ -1156,7 +1172,7 @@ level_111:
     .byte $ff  
     .text "FUNNEL"    //Author
     .byte $00
-    .byte 59    //Moves
+    .byte 37    //Moves
 
 level_112:
     .byte 17,85,85,69,85,69,85,20,85,69    //Level wall data 
@@ -1164,7 +1180,7 @@ level_112:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 62    //Moves
+    .byte 37    //Moves
 
 level_113:
     .byte 252,129,245,129,239,129,247,129,191,129    //Level wall data 
@@ -1172,7 +1188,7 @@ level_113:
     .byte $ff  
     .text "QQ"    //Author
     .byte $00
-    .byte 62    //Moves
+    .byte 27    //Moves
 
 level_114:
     .byte 0,12,18,129,129,129,18,12,0,0    //Level wall data 
@@ -1180,7 +1196,7 @@ level_114:
     .byte $ff  
     .text "SKULL"    //Author
     .byte $00
-    .byte 67    //Moves
+    .byte 28    //Moves
 
 level_115:
     .byte 0,0,0,128,0,0,0,0,0,8    //Level wall data 
@@ -1188,7 +1204,7 @@ level_115:
     .byte $ff  
     .text "BRUTAL"    //Author
     .byte $00
-    .byte 69    //Moves
+    .byte 34    //Moves
 
 level_116:
     .byte 0,16,16,16,16,56,16,0,0,0    //Level wall data 
@@ -1196,7 +1212,7 @@ level_116:
     .byte $ff  
     .text "SHALLAN"    //Author
     .byte $00
-    .byte 70    //Moves
+    .byte 47    //Moves
 
 level_117:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1204,7 +1220,7 @@ level_117:
     .byte $ff  
     .text "AMOK"    //Author
     .byte $00
-    .byte 70    //Moves
+    .byte 7    //Moves
 
 level_118:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1212,7 +1228,7 @@ level_118:
     .byte $ff  
     .text "FML"    //Author
     .byte $00
-    .byte 74    //Moves
+    .byte 34    //Moves
 
 level_119:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1220,7 +1236,7 @@ level_119:
     .byte $ff  
     .text "REVERSE"    //Author
     .byte $00
-    .byte 80    //Moves
+    .byte 39    //Moves
 
 level_120:
     .byte 0,0,0,0,231,231,0,0,0,0    //Level wall data 
@@ -1228,7 +1244,7 @@ level_120:
     .byte $ff  
     .text "CRISCROS"    //Author
     .byte $00
-    .byte 83    //Moves
+    .byte 38    //Moves
 
 level_121:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1236,7 +1252,7 @@ level_121:
     .byte $ff  
     .text "XWING"    //Author
     .byte $00
-    .byte 87    //Moves
+    .byte 25    //Moves
 
 level_122:
     .byte 171,129,0,1,0,1,0,1,128,171    //Level wall data 
@@ -1244,7 +1260,7 @@ level_122:
     .byte $ff  
     .text "BOUNCE"    //Author
     .byte $00
-    .byte 105    //Moves
+    .byte 82    //Moves
 
 level_123:
     .byte 0,247,66,66,64,2,66,66,239,0    //Level wall data 
@@ -1252,7 +1268,7 @@ level_123:
     .byte $ff  
     .text "SCREAM"    //Author
     .byte $00
-    .byte 119    //Moves
+    .byte 103    //Moves
 
 level_124:
     .byte 0,0,0,0,0,0,0,0,0,129    //Level wall data 
@@ -1260,7 +1276,7 @@ level_124:
     .byte $ff  
     .text "TEARS"    //Author
     .byte $00
-    .byte 135    //Moves
+    .byte 43    //Moves
 
 level_125:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1268,7 +1284,7 @@ level_125:
     .byte $ff  
     .text "SPIRAL"    //Author
     .byte $00
-    .byte 136    //Moves
+    .byte 18    //Moves
 
 level_126:
     .byte 64,0,64,0,0,0,0,0,0,2    //Level wall data 
@@ -1276,7 +1292,7 @@ level_126:
     .byte $ff  
     .text "MRG8472"    //Author
     .byte $00
-    .byte 154    //Moves
+    .byte 26    //Moves
 
 level_127:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
@@ -1284,5 +1300,5 @@ level_127:
     .byte $ff  
     .text "AMOK"    //Author
     .byte $00
-    .byte 168    //Moves
+    .byte 14    //Moves
 
