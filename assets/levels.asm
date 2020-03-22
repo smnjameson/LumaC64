@@ -143,6 +143,8 @@ LevelPointerData:
     .word level_15
 
 
+
+
 .align $100
 LevelPassCodeData:
     .encoding "screencode_upper"
@@ -280,14 +282,14 @@ level_0:
     .byte 8,8,8,8,8,8,8,8,8,8    //Level wall data 
     .byte 4,0,4,32,4,48,4,64,4,96,19,112,3,128,18,144,4,1,4,33,4,49,4,65,18,81,4,97,4,113,3,129,4,145,4,2,3,18,18,34,19,50,4,66,4,98,4,114,4,146,17,4,3,36,3,52,3,68,3,84,3,100,3,116,3,132,20,148,4,149,4,150,14,23,3,39,3,55,3,71,3,87,3,103,3,119,3,135,19,151    //Level item data 
     .byte $ff  
-    .text "CHISTUT1"    //Author
+    .text "CHISWICK"    //Author
     .byte $00
     .byte 1    //Moves
 level_1:
     .byte 16,16,16,16,16,16,16,16,16,16    //Level wall data 
     .byte 22,0,18,144,9,113,17,145,17,2,6,34,18,3,21,147,4,5,4,37,4,53,4,69,4,101,19,117,3,133,18,149,4,6,4,38,4,54,4,70,18,86,4,102,4,118,3,134,4,150,4,7,3,23,18,39,19,55,4,71,4,103,4,119,4,151    //Level item data 
     .byte $ff  
-    .text "CHISTUT2"    //Author
+    .text "CHISWICK"    //Author
     .byte $00
     .byte 4    //Moves
 
@@ -295,7 +297,7 @@ level_2:
     .byte 8,8,8,40,40,40,8,8,8,8    //Level wall data 
     .byte 4,0,4,32,4,48,4,64,4,96,19,112,3,128,18,144,4,1,4,33,4,49,4,65,18,81,4,97,4,113,3,129,4,145,4,2,3,18,18,34,19,50,4,66,4,98,4,114,4,146,3,20,3,36,21,52,20,84,3,100,3,116,3,132,19,37,18,101,5,54,14,86,18,7,17,71,19,151    //Level item data 
     .byte $ff  
-    .text "CHISTUT3"    //Author
+    .text "CHISWICK"    //Author
     .byte $00
     .byte 6    //Moves
 
@@ -303,7 +305,7 @@ level_3:
     .byte 3,1,1,0,0,0,0,128,128,192    //Level wall data 
     .byte 21,48,17,80,12,128,5,144,20,2,18,50,3,66,3,82,2,98,4,51,4,99,17,147,17,4,4,52,4,100,2,53,3,69,3,85,18,101,22,149,6,7,15,23,17,71,21,103    //Level item data 
     .byte $ff  
-    .text "CHISTUT4"    //Author
+    .text "CHISWICK"    //Author
     .byte $00
     .byte 4    //Moves
 
@@ -1020,7 +1022,7 @@ level_92:
     .byte $ff  
     .text "AKMAFIN"    //Author
     .byte $00
-    .byte 38    //Moves
+    .byte 6    //Moves
 
 level_93:
     .byte 0,0,0,0,0,0,0,0,0,0    //Level wall data 
