@@ -14,16 +14,15 @@ Default-segment:
   $0856-$0cf4 Utility functions and tables
   $0cf5-$0da1 Transform up
   $1000-$1a6f Music
-  $3000-$3913 Code
-  $3914-$3d8d SLIDES
-  $3d8e-$3e2e PATH
-  $3e2f-$4a66 spark
-  $4a67-$5453 message
+  $3000-$3923 Code
+  $3924-$3e44 SLIDES
+  $3e45-$4c25 SPRAKS
+  $4c26-$562e message
   $5800-$5be7 INTRO BMP ScreenRam
   $5c00-$5fe7 INTRO BMP ColorRam
   $5fff-$5fff INTRO BMP BG
   $6000-$7f3f INTRO BMP
-  $8000-$b501 Level data
+  $8000-$b53c Level data
   $c800-$cfff Font data
   $d000-$d9ff Sprites
   $e000-$e3ff Tile data

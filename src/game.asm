@@ -7,6 +7,7 @@ GAME: {
 		isCompleted: 	.byte $00
 		gameMode:		.byte $00
 		completeSoundOff:	.byte $00
+		musicOn:		.byte $01
 	}
 
 	Start: {
@@ -39,11 +40,17 @@ GAME: {
 		jsr LEVEL.LoadLevel
 		jsr LEVEL.DrawLevel
 
+		lda Settings.musicOn
+		bne !+
+		lda #$03
+		jsr $1000
+		jmp !musicdone+
+	!:
 		lda $10b8
-		beq !+
+		beq !musicdone+
 		lda #$00
 		jsr $1000
-	!:
+	!musicdone:
 
 				lda Settings.currentLevel
 			!Level1:

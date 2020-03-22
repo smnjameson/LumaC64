@@ -125,13 +125,13 @@ INTRO: {
 
 	KeyLookup:
 			.encoding "screencode_upper"
-			.text "W@@@@@@@" //0
-			.text "S@RYIP@@"
-			.text "A@@GJL@@" //2
-			.text "D@@@@@@@"
-			.text "EZCBM@@@" //4
-			.text "@@FHK@@@"
-			.text "@@TUO@@Q" //6
+			.text "@@@@@@@@" //0
+			.text "@WRYIP@@"
+			.text "@ADGJL@@" //2
+			.text "@@@@@@@@"
+			.text "@ZCBM@@@" //4
+			.text "@SFHK@@@"
+			.text "@ETUO@@Q" //6
 			.text "@@XVN@@@"
 
 
@@ -177,7 +177,8 @@ INTRO: {
 				adc ZP.introTemp3
 				tax
 				lda KeyLookup, x
-
+				beq !NotComplete+
+				
 				ldx KeyPosition
 				clc
 				adc #$70

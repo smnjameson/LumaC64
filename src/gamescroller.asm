@@ -37,6 +37,8 @@ GAMESCROLLER: {
 			.text " --- "
 			.text "PRESS RUNSTOP TO QUIT TO MENU"
 			.text " --- "
+			.text "PRESS F1 TO TOGGLE MUSIC"
+			.text " --- "
 			.byte $00
 
 		scrollTextPractice:
@@ -49,11 +51,13 @@ GAMESCROLLER: {
 			.text " --- "
 			.text "PRESS RUNSTOP TO QUIT TO MENU"
 			.text " --- "
+			.text "PRESS F1 TO TOGGLE MUSIC"
+			.text " --- "
 			.byte $00
 
 		scrollTextIntro:
 			.encoding "screencode_upper"
-			.text "LUMA --- A PUZZLE GAME FOR THE C64 WRITTEN FOR A CHARITY GAME DEV"
+			.text "LUMA --- A PUZZLE GAME FOR THE C64 WRITTEN FOR A CHARITY GAME DEV "
 			.text "STREAM ON TWITCH FOR THE EXTRA LIFE CHARITY --- CONCEPT AND CODE BY SHALLAN --- GRAPHICS BY HELPCOMPUTER, SHALLAN "
 			.text "--- MUSIC BY RICHMONDMIKE --- SOUND BY STEPZ --- @2020 SHALLAN"
 			.text " --- "
@@ -166,7 +170,7 @@ GAMESCROLLER: {
 				tya
 				and #$3f
 				tay 
-				lda scrollerColors, y
+				lda scrollerColors + 40, y
 				sta COLOR_RAM + $18 * $28 + $14, x
 				iny
 				inx
@@ -179,7 +183,7 @@ GAMESCROLLER: {
 				tya
 				and #$3f
 				tay 
-				lda scrollerColors, y
+				lda scrollerColors + 40, y
 				sta COLOR_RAM + $18 * $28, x
 				iny
 				dex

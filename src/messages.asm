@@ -172,7 +172,12 @@ MESSAGES: {
 			lda messageOffsetYY, x
 			clc
 			adc ZP.MessageTemp
-
+			
+			cmp #$e2
+			bcc !+
+			// bpl !+
+			lda #$00
+		!:
 			sta $d001
 			sta $d003
 			sta $d005
@@ -192,6 +197,12 @@ MESSAGES: {
 		!On:
 
 			dec messageYOffset
+			bne !noMusic+
+			lda messageDisplayed
+			bne !noMusic+
+			lda #$02
+			jsr $1000
+		!noMusic:
 			jmp !+
 		!Off:
 			dec messageYOffset
@@ -212,7 +223,14 @@ MESSAGES: {
 			lda #$ff
 			sta MESSAGES.messageYOffset
 			inc GAME.Settings.currentLevel
+
+			lda GAME.Settings.musicOn
+			bne !SetMusic+
+			lda #$03
+			jmp !Apply+
+		!SetMusic:
 			lda #$00
+		!Apply:
 			jsr $1000
 			jsr GAME.Start
 			rts

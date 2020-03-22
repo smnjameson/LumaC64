@@ -761,7 +761,7 @@ COMPLETION: {
 		.text "  PHAZE101        "
 		.text "  RICHMONDMIKE    "
 		.text "  SHALLAN         "
-		.text "  SPIRITHOUND     "
+		.text "  SPIRITHUND      "
 		.text "  STEPZ           "
 		.text "  VOID            "
 		.text "  WAULOK          "

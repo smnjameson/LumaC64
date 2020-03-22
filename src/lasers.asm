@@ -13,7 +13,6 @@ LASERS: {
 			.fill 80, 0
 	}
 
-	* =* "PATH"
 	Path: {
 		count: 
 			.byte 0
@@ -27,7 +26,7 @@ LASERS: {
 			.fill 32, 0
 		terminated:
 			.fill 32, 0
-			*=*"spark"
+		*=*"SPRAKS"
 		spark:
 			.fill 32,0
 		color:
@@ -245,20 +244,22 @@ LASERS: {
 
 
 		!DoUpdate:
+			jsr DoSparks
+			
 			lda Active
 			bne !+
 			
 			jsr TrackActiveLasers
+			lda #$01
+			sta Tracing			
 			inc Active
 		!:
 			jsr TraceLasers
 
 			jsr AreWeComplete
 
-			lda #$01
-			sta Tracing
 
-			jsr DoSparks
+			
 			rts
 	}
 
@@ -267,6 +268,31 @@ LASERS: {
 			beq !+
 			rts
 		!:
+
+			//Clear prev lit targets
+			
+			lda Tracing
+			bne !NoPrevLitChange+
+				ldy #$00
+				ldx #$00
+			!loop:
+				lda LEVEL.Data.Current, x
+				and #$1f
+				cmp #$1f
+				beq !+
+				lda #$00
+				sta PrevLitTargets, x
+			!:
+				lda PrevLitTargets, x
+				beq !+
+				iny
+			!:
+				inx
+				cpx #80
+				bne !loop-
+				sty ChimeIndex
+		!NoPrevLitChange:
+
 
 			ldx #$00
 		!loop:
@@ -282,15 +308,14 @@ LASERS: {
 
 			lda #$01
 			sta GAME.Settings.isCompleted
-			lda #$c0
+			lda #$f0
 			sta GAME.Settings.completeSoundOff
-			lda #$02
-			jsr $1000
 
 			lda #$00
 			sta MESSAGES.messageDisplayed
 			lda #MESSAGES.MessageEaseLength - 1
 			sta MESSAGES.messageYOffset
+
 			rts
 
 		!Fail:
@@ -365,6 +390,10 @@ LASERS: {
 				asl
 				tay
 				pla
+				cmp #$29
+				bcs !ok+
+				lda #$00
+			!ok:
 				sta $d009, y
 
 
@@ -594,6 +623,8 @@ LASERS: {
 			and #$1f
 			cmp #$1e
 			bcc !Terminate+
+			cmp #$1f
+			beq !Terminate+
 
 			lda LEVEL.Data.Current, y
 			and #$c0
@@ -608,11 +639,16 @@ LASERS: {
 			clc
 			adc #$01
 			sta LEVEL.Data.Current, y
-			txa
-			pha
-			jsr PlayChime
-			pla 
-			tax
+			lda PrevLitTargets, y
+			bne !NoChime+
+				lda #$01
+				sta PrevLitTargets, y
+				txa
+				pha
+				jsr PlayChime
+				pla 
+				tax
+		!NoChime:
 
 		!Terminate:	
 			lda #$01
@@ -631,6 +667,8 @@ LASERS: {
 
 			lda ZP.PathUpdateCount
 			bne !+
+			lda #$00
+			sta Tracing
 			lda LEVEL.MovesRemaining
 			bne !+
 			lda MESSAGES.messageDisplayed
@@ -647,6 +685,9 @@ LASERS: {
 		!:
 			rts
 	}
+
+	PrevLitTargets:
+			.fill 80, 0
 
 	UpdateTile: {
 			//x = Path index
@@ -904,15 +945,59 @@ LASERS: {
 	}
 
 
+	ChimeIndex:
+		.byte $00
+
 	PlayChime: {
-		lda #<Chime       //Start address of sound effect data 
-	    ldy #>Chime
+		lda ChimeIndex
+		cmp #$08
+		bcc !+
+		lda #$07
+	!:
+		asl
+		tax 
+		ldy ChimeTable + 1, x       //Start address of sound effect data 
+	    lda ChimeTable, x
 	    ldx #14        //0, 7 or 14 for channels 1-3 
 	   	jsr $1006
+
+	   	inc ChimeIndex
 	   	rts
 	}
 	
-	.var chime = LoadBinary("assets/Target_Hit.bin");
-	Chime:
-		.fill chime.getSize(), chime.get(i) 	
+	ChimeTable:
+		.word Chime1
+		.word Chime2
+		.word Chime3
+		.word Chime4
+		.word Chime5
+		.word Chime6
+		.word Chime7
+		.word Chime8
+
+	.var c1 = LoadBinary("assets/t1.bin");
+	.var c2 = LoadBinary("assets/t2.bin");
+	.var c3 = LoadBinary("assets/t3.bin");
+	.var c4 = LoadBinary("assets/t4.bin");
+	.var c5 = LoadBinary("assets/t5.bin");
+	.var c6 = LoadBinary("assets/t6.bin");
+	.var c7 = LoadBinary("assets/t7.bin");
+	.var c8 = LoadBinary("assets/t8.bin");
+
+	Chime1:
+		.fill c1.getSize(), c1.get(i) 	
+	Chime2:
+		.fill c2.getSize(), c2.get(i) 	
+	Chime3:
+		.fill c3.getSize(), c3.get(i) 	
+	Chime4:
+		.fill c4.getSize(), c4.get(i) 	
+	Chime5:
+		.fill c5.getSize(), c5.get(i) 	
+	Chime6:
+		.fill c6.getSize(), c6.get(i) 	
+	Chime7:
+		.fill c7.getSize(), c7.get(i) 	
+	Chime8:
+		.fill c8.getSize(), c8.get(i) 	
 }

@@ -121,8 +121,14 @@ CONTROL: {
 			lda SlidingActive
 			beq !NoSlidingActive+
 			rts
-
 		!NoSlidingActive:
+
+			lda LASERS.Tracing
+			beq !+
+			rts
+		!:
+
+
 			//Check if fire pressed
 			lda ZP.Joystick
 			and #FR
