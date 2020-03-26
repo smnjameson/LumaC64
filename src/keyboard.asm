@@ -10,7 +10,7 @@ KEYBOARD:{
 
 	Update: {
 			lda GAME.Settings.gameMode
-			// beq !+
+			beq !+
 				jsr CheckForReturn
 		!:
 				jsr CheckForSpace

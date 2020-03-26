@@ -308,7 +308,7 @@ INTRO: {
 			lda #>Irq002
 			sta $ffff
 
-			lda #$a8
+			lda #$a9
 			sta $d012
 			rts
 	}

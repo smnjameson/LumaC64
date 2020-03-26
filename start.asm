@@ -395,7 +395,6 @@ TABLES: {
 	#import "src/lasers.asm"
 	#import "src/hud.asm"
 	#import "src/keyboard.asm"
-	#import "src/messages.asm"
 	
 
 * = $8000 "Level data"
@@ -403,6 +402,7 @@ TABLES: {
 
 	#import "src/gamescroller.asm"
 	#import "src/completion.asm"
+
 
 	.var intrologo = LoadBinary("assets/luma-title.kla", KOALA_TEMPLATE)
 * = $5800 "INTRO BMP ScreenRam"
@@ -434,7 +434,7 @@ COMP_HUD_MAP:
 	.import binary "assets/comphud.bin"
 
 
-
+#import "src/messages.asm"
 
 
 //  

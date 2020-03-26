@@ -43,7 +43,7 @@ CONTROL: {
 
 		lda #$01
 		sta Debounce
-		
+
 		lda #$0b
 		sta $d025
 		lda #$0c
@@ -158,6 +158,7 @@ CONTROL: {
 			and #UP
 			bne !NoUp+
 			dec PositionY
+			jsr MoveCursorSound
 			lda #DEBOUNCE_TIMER
 			sta Debounce
 		!NoUp:
@@ -170,6 +171,7 @@ CONTROL: {
 			and #DN
 			bne !NoDn+
 			inc PositionY
+			jsr MoveCursorSound
 			lda #DEBOUNCE_TIMER
 			sta Debounce
 		!NoDn:
@@ -181,6 +183,7 @@ CONTROL: {
 			and #LT
 			bne !NoLt+
 			dec PositionX
+			jsr MoveCursorSound
 			lda #DEBOUNCE_TIMER
 			sta Debounce
 		!NoLt:
@@ -193,6 +196,7 @@ CONTROL: {
 			and #RT
 			bne !NoRt+
 			inc PositionX
+			jsr MoveCursorSound
 			lda #DEBOUNCE_TIMER
 			sta Debounce
 		!NoRt:	
@@ -201,6 +205,19 @@ CONTROL: {
 			rts	
 	}
 
+	MoveCursorSound: {
+			lda GAME.Settings.musicOn
+			beq !+
+			rts
+		!:
+			ldy #>Move01
+		    lda #<Move01
+
+		    ldx #14
+		    jsr GAME.GetNextChannel
+		   	jsr $1006
+		   	rts
+	}
 	UpdateWithFire: {
 			lda #$00
 			sta RampIndex
@@ -326,7 +343,56 @@ CONTROL: {
 			rts
 	}
 
+	MoveSound:
+		.byte 0,0,0,0,0,0,0,0
+		.byte 0,1,1,1,1,1,1,1
+		.byte 1,2,2,2,2,3,0,0
+		.byte 0,0,0,0,0,0,0,0
+	MoveSoundLookup:
+		.word $ffff
+		.word Slide01
+		.word Slide02
+		.word Slide03
+
+
+		.var m1 = LoadBinary("assets/move.bin");
+		.var s1 = LoadBinary("assets/mirror.bin");
+		.var s2 = LoadBinary("assets/laser.bin");
+		.var s3 = LoadBinary("assets/battery.bin");
+		Move01:
+			.fill m1.getSize(), m1.get(i) 	
+		Slide01:
+			.fill s1.getSize(), s1.get(i) 	
+		Slide02:
+			.fill s2.getSize(), s2.get(i) 	
+		Slide03:
+			.fill s3.getSize(), s3.get(i) 
+
+	PlayMoveSound: {
+			lda GAME.Settings.musicOn
+			beq !+
+			rts
+		!:
+			lda MovingTile
+			and #$1f
+			tax		
+			lda MoveSound, x
+			bne !+
+			rts
+		!:
+			asl
+			tax
+			ldy MoveSoundLookup + 1, x       //Start address of sound effect data 
+		    lda MoveSoundLookup, x
+
+		    ldx #14
+		    jsr GAME.GetNextChannel
+		   	jsr $1006
+		   	rts
+	}
+
 	SetupSlideSprite: {
+			jsr PlayMoveSound
 			lda MovingTile
 			and #$1f
 			tax

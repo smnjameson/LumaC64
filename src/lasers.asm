@@ -42,6 +42,9 @@ LASERS: {
 
 			jsr clearSparks
 
+			lda #$00
+			sta SparkPrevCounter
+
 			lda #$01
 			sta $d02b
 			sta $d02c
@@ -329,11 +332,15 @@ LASERS: {
 			.byte $00
 	SparkCounter:
 			.byte $00
+	SparkPrevCounter:
+			.byte $00
 	SparkAnimCounter:
 			.byte $00
 	DoSparks: {
 			lda MESSAGES.messageDisplayed
 			bmi !+
+			cmp #$02
+			bcs !+
 			rts
 		!:
 			lda #$00
@@ -484,6 +491,27 @@ LASERS: {
 			sta $d02d
 			sta $d02e
 		!Skip:
+
+
+
+			lda GAME.Settings.musicOn
+			bne !end+
+			//Count sparks
+			ldx #$1f
+			lda #$00
+			clc
+		!:
+			adc Path.spark, x
+			dex
+			bpl !-
+			cmp #$00
+			
+
+			sta IRQ.isSparks
+			// ldx SparkPrevCounter
+			// bne !end+
+			// sta SparkPrevCounter
+		!end:
 			rts
 	}
 
@@ -950,15 +978,16 @@ LASERS: {
 
 	PlayChime: {
 		lda ChimeIndex
-		cmp #$08
+		cmp #$04
 		bcc !+
-		lda #$07
+		lda #$03
 	!:
 		asl
 		tax 
 		ldy ChimeTable + 1, x       //Start address of sound effect data 
 	    lda ChimeTable, x
-	    ldx #14        //0, 7 or 14 for channels 1-3 
+	    ldx #14
+	    jsr GAME.GetNextChannel
 	   	jsr $1006
 
 	   	inc ChimeIndex
@@ -970,19 +999,19 @@ LASERS: {
 		.word Chime2
 		.word Chime3
 		.word Chime4
-		.word Chime5
-		.word Chime6
-		.word Chime7
-		.word Chime8
 
-	.var c1 = LoadBinary("assets/t1.bin");
-	.var c2 = LoadBinary("assets/t2.bin");
-	.var c3 = LoadBinary("assets/t3.bin");
-	.var c4 = LoadBinary("assets/t4.bin");
-	.var c5 = LoadBinary("assets/t5.bin");
-	.var c6 = LoadBinary("assets/t6.bin");
-	.var c7 = LoadBinary("assets/t7.bin");
-	.var c8 = LoadBinary("assets/t8.bin");
+
+	.var spksnd = LoadBinary("assets/spark.bin");
+	.var spksnd2 = LoadBinary("assets/sparkoff.bin");
+	Spark01:
+		.fill spksnd.getSize(), spksnd.get(i) 	
+	Spark02:
+		.fill spksnd2.getSize(), spksnd2.get(i) 	
+
+	.var c1 = LoadBinary("assets/target1.bin");
+	.var c2 = LoadBinary("assets/target2.bin");
+	.var c3 = LoadBinary("assets/target3.bin");
+	.var c4 = LoadBinary("assets/target4.bin");
 
 	Chime1:
 		.fill c1.getSize(), c1.get(i) 	
@@ -992,12 +1021,4 @@ LASERS: {
 		.fill c3.getSize(), c3.get(i) 	
 	Chime4:
 		.fill c4.getSize(), c4.get(i) 	
-	Chime5:
-		.fill c5.getSize(), c5.get(i) 	
-	Chime6:
-		.fill c6.getSize(), c6.get(i) 	
-	Chime7:
-		.fill c7.getSize(), c7.get(i) 	
-	Chime8:
-		.fill c8.getSize(), c8.get(i) 	
 }

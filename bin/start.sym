@@ -24,36 +24,36 @@
 .label level_2=$83c6
 .label level_20=$892a
 .label level_22=$89ac
-.label LEVEL=$361a {
-  .label DrawTile=$389e {
-    .label TileFetch=$38ce
-    .label TileCol=$38f9
-    .label TileDraw=$38d4
+.label LEVEL=$3723 {
+  .label DrawTile=$39a7 {
+    .label TileFetch=$39d7
+    .label TileCol=$3a02
+    .label TileDraw=$39dd
   }
-  .label CopyInitialMap=$387a {
+  .label CopyInitialMap=$3983 {
   }
-  .label Data=$361a {
-    .label Initial=$361a
-    .label Current=$36ba
-    .label Display=$366a
+  .label Data=$3723 {
+    .label Initial=$3723
+    .label Current=$37c3
+    .label Display=$3773
   }
-  .label Update=$3902 {
+  .label Update=$3a0b {
   }
-  .label LoadLevel=$370b {
+  .label LoadLevel=$3814 {
   }
-  .label GenerateWalls=$384e {
+  .label GenerateWalls=$3957 {
   }
-  .label PracticeMessage=$37fb
-  .label GenerateItems=$380b {
+  .label PracticeMessage=$3904
+  .label GenerateItems=$3914 {
   }
-  .label DrawMetaData=$3732 {
-    .label CodeMod=$37ec
+  .label DrawMetaData=$383b {
+    .label CodeMod=$38f5
   }
   .label MAX_LEVELS=$80
-  .label DoShadows=$389e {
+  .label DoShadows=$39a7 {
   }
-  .label MovesRemaining=$370a
-  .label DrawLevel=$388c {
+  .label MovesRemaining=$3813
+  .label DrawLevel=$3995 {
   }
 }
 .label level_21=$8986
@@ -128,33 +128,34 @@
 .label level_95=$9aa8
 .label level_94=$9a7c
 .label level_97=$9b3b
-.label IRQ=$3cc7 {
-  .label FrameFlag=$3cc7
-  .label Init=$3cc9 {
-    .label NMI=$3cf5
+.label IRQ=$3eb0 {
+  .label FrameFlag=$3eb0
+  .label isSparks=$3eb2
+  .label Init=$3eb3 {
+    .label NMI=$3edf
   }
-  .label Timer=$3cc8
+  .label Timer=$3eb1
   .label SCROLLER_SPLIT=$f2
-  .label MainIRQ=$3cf6 {
+  .label MainIRQ=$3ee0 {
   }
 }
 .label level_96=$9ae7
 .label level_11=$8671
 .label level_99=$9b91
-.label KEYBOARD=$4a09 {
-  .label CheckForSpace=$4a80 {
+.label KEYBOARD=$4c0a {
+  .label CheckForSpace=$4c83 {
   }
-  .label CheckForReturn=$4a4d {
+  .label CheckForReturn=$4c50 {
   }
-  .label DebounceKeys4=$4a0c
-  .label DebounceKeys3=$4a0b
-  .label DebounceKeys2=$4a0a
-  .label CheckForF1=$4ab0 {
+  .label DebounceKeys4=$4c0d
+  .label DebounceKeys3=$4c0c
+  .label DebounceKeys2=$4c0b
+  .label CheckForF1=$4cb3 {
   }
-  .label DebounceKeys1=$4a09
-  .label CheckForRUNSTOP=$4a1d {
+  .label DebounceKeys1=$4c0a
+  .label CheckForRUNSTOP=$4c20 {
   }
-  .label Update=$4a0d {
+  .label Update=$4c0e {
   }
 }
 .label level_10=$8622
@@ -165,128 +166,130 @@
 .label level_14=$872a
 .label Entry=$80e {
 }
-.label MESSAGES=$4af7 {
-  .label messageYOffset=$4c2c
+.label MESSAGES=$e400 {
+  .label messageYOffset=$e535
   .label MessageEaseLength=$28
-  .label FailRamp=$4aff
-  .label data=$4c11 {
-    .label outofmoves=$4c20
-    .label lookup=$4c11
-    .label complete=$4c15
+  .label FailRamp=$e408
+  .label data=$e51a {
+    .label outofmoves=$e529
+    .label lookup=$e51a
+    .label complete=$e51e
   }
-  .label messageY=$4c0f
-  .label Tutorials=$4dd1 {
-    .label Tutor4=$500c
-    .label lookup=$4dd1
-    .label Tutor5=$50f0
-    .label Tutor2=$4ebb
-    .label Tutor3=$4f60
-    .label Tutor1=$4ddf
-    .label ColorData=$5443
-    .label width=$5341
-    .label tutorNext=$5339
-    .label Tutor6=$51d5
-    .label Tutor7=$52ab
-    .label height=$5342
-    .label ScreenData=$5343
+  .label messageY=$e518
+  .label Tutorials=$e6da {
+    .label Tutor4=$e91b
+    .label lookup=$e6da
+    .label Tutor5=$ea1b
+    .label Tutor2=$e7ca
+    .label Tutor3=$e86f
+    .label Tutor1=$e6ee
+    .label ColorData=$ef45
+    .label width=$ee43
+    .label Tutor8=$ec64
+    .label Tutor10=$edbc
+    .label Tutor9=$ed09
+    .label tutorNext=$ee38
+    .label Tutor6=$eb00
+    .label Tutor7=$ebd6
+    .label height=$ee44
+    .label ScreenData=$ee45
   }
-  .label messageArrowX=$4c10
-  .label Update=$4c83 {
-    .label UpdateMessage=$4d69
+  .label messageArrowX=$e519
+  .label Update=$e58c {
+    .label UpdateMessage=$e672
   }
-  .label messageEaseOut=$4c2d
-  .label addTutorial=$5544 {
+  .label messageEaseOut=$e536
+  .label addTutorial=$f046 {
   }
-  .label currentTutor=$5543
-  .label TutorRamp=$4b07
-  .label messageOffsetYY=$4b8f
-  .label CompleteRamp=$4af7
-  .label messageDisplayed=$4c2b
-  .label Init=$4c7d {
+  .label currentTutor=$f045
+  .label TutorRamp=$e410
+  .label messageOffsetYY=$e498
+  .label CompleteRamp=$e400
+  .label messageDisplayed=$e534
+  .label Init=$e586 {
   }
-  .label ClearTutorArea=$5592 {
+  .label ClearTutorArea=$f094 {
   }
-  .label messageOffsetX=$4b0f
-  .label NextTutorial=$564f {
+  .label messageOffsetX=$e418
+  .label NextTutorial=$f151 {
   }
-  .label messageEase=$4c55 {
+  .label messageEase=$e55e {
   }
-  .label RestoreScreen=$5611 {
+  .label RestoreScreen=$f113 {
   }
 }
 .label SPRITE_POINTER=$c3f8
 .label level_80=$9749
-.label LASERS=$3d56 {
-  .label Complete=$3d58
-  .label PrevLitTargets=$4275
-  .label Update=$3fbd {
+.label LASERS=$3f8f {
+  .label Complete=$3f91
+  .label PrevLitTargets=$44cd
+  .label Update=$41fb {
   }
-  .label CopyCurrentMap=$3ef1 {
+  .label CopyCurrentMap=$412f {
   }
-  .label Init=$3e8a {
+  .label Init=$40c3 {
   }
-  .label AreWeComplete=$3fe6 {
+  .label AreWeComplete=$4224 {
   }
-  .label ColorTile=$43a8 {
+  .label ColorTile=$4600 {
   }
-  .label UpdateTile=$42c5 {
+  .label UpdateTile=$451d {
   }
-  .label clearSparks=$3eaa {
+  .label clearSparks=$40e8 {
   }
-  .label DoSparks=$403b {
+  .label DoSparks=$427a {
   }
-  .label ChimeTable=$4826
-  .label SparkCounter=$4039
-  .label TraceLasers=$413c {
+  .label ChimeTable=$4a81
+  .label SparkCounter=$4277
+  .label TraceLasers=$4394 {
   }
   .label BATTERY=$15
-  .label Path=$3da9 {
-    .label dx=$3dea
-    .label color=$3e6a
-    .label dy=$3e0a
-    .label spark=$3e4a
-    .label count=$3da9
-    .label x=$3daa
-    .label y=$3dca
-    .label terminated=$3e2a
+  .label Path=$3fe2 {
+    .label dx=$4023
+    .label color=$40a3
+    .label dy=$4043
+    .label spark=$4083
+    .label count=$3fe2
+    .label x=$3fe3
+    .label y=$4003
+    .label terminated=$4063
   }
-  .label SparkAnimCounter=$403a
-  .label Chime8=$48ec
-  .label GetJoyDirection=$4305 {
+  .label SparkAnimCounter=$4279
+  .label GetJoyDirection=$455d {
   }
-  .label Chime7=$48d2
-  .label Chime6=$48b8
-  .label TrackActiveLasers=$3efd {
+  .label TrackActiveLasers=$413b {
   }
-  .label Chime5=$489e
-  .label RecolorList=$440a {
-    .label color=$470b
-    .label count=$440a
-    .label index=$460b
-    .label lsb=$440b
-    .label msb=$450b
+  .label RecolorList=$4662 {
+    .label color=$4963
+    .label count=$4662
+    .label index=$4863
+    .label lsb=$4663
+    .label msb=$4763
   }
-  .label Chime4=$4884
-  .label Chime3=$486a
-  .label Chime2=$4850
-  .label Data=$3d59 {
-    .label PreLaserCopy=$3d59
+  .label Chime4=$4aeb
+  .label Chime3=$4acf
+  .label Chime2=$4ab3
+  .label Data=$3f92 {
+    .label PreLaserCopy=$3f92
   }
-  .label DoRecolor=$43e4 {
-    .label Mod=$43fd
+  .label DoRecolor=$463c {
+    .label Mod=$4655
   }
-  .label Chime1=$4836
-  .label ChimeIndex=$480b
-  .label ClearIfNeeded=$3ed4 {
+  .label Chime1=$4a97
+  .label ChimeIndex=$4a63
+  .label Spark01=$4a89
+  .label Spark02=$4a91
+  .label ClearIfNeeded=$4112 {
   }
-  .label PlayChime=$480c {
+  .label PlayChime=$4a64 {
   }
-  .label Active=$3d56
-  .label UpdateNewTile=$432d {
+  .label Active=$3f8f
+  .label UpdateNewTile=$4585 {
   }
-  .label Tracing=$3d57
-  .label SparkSpriteIndex=$4037
-  .label SparkPathIndex=$4038
+  .label Tracing=$3f90
+  .label SparkSpriteIndex=$4275
+  .label SparkPathIndex=$4276
+  .label SparkPrevCounter=$4278
 }
 .label HUD_MAP=$e220
 .label level_82=$97b1
@@ -504,44 +507,54 @@
 .label level_121=$a089
 .label level_122=$a0cf
 .label level_123=$a108
-.label CONTROL=$3922 {
+.label CONTROL=$3a2b {
   .label RT=$8
-  .label PositionY=$3923
-  .label GetIndexPosition=$3bca {
+  .label PositionY=$3a2c
+  .label GetIndexPosition=$3db3 {
   }
-  .label SlideDir=$3928
-  .label UpdatePosition=$3973 {
+  .label SlideDir=$3a31
+  .label UpdatePosition=$3a7c {
   }
-  .label SlidingActive=$3935
+  .label SlidingActive=$3a3e
   .label LT=$4
-  .label SlideCount=$392a
+  .label SlideCount=$3a33
   .label DN=$2
+  .label Move01=$3c37
   .label FR=$10
-  .label Update=$396c {
+  .label Update=$3a75 {
   }
-  .label SetupSlideSprite=$3ae7 {
+  .label SetupSlideSprite=$3ccd {
   }
-  .label RestoreSelector=$3bbc {
+  .label RestoreSelector=$3da5 {
   }
-  .label Init=$3937 {
+  .label Init=$3a40 {
   }
-  .label Ramp=$392b
-  .label GetMoveCountAndDirection=$3a83 {
+  .label Ramp=$3a34
+  .label GetMoveCountAndDirection=$3bab {
   }
-  .label Debounce=$3934
+  .label Debounce=$3a3d
   .label UP=$1
-  .label RampIndex=$3933
-  .label PositionSprites=$3bd6 {
+  .label RampIndex=$3a3c
+  .label PositionSprites=$3dbf {
   }
-  .label PositionX=$3922
+  .label PositionX=$3a2b
   .label DEBOUNCE_TIMER=$8
-  .label SlideX=$3924
-  .label SlideActiveSprite=$3c2c {
+  .label SlideX=$3a2d
+  .label MoveSoundLookup=$3c2f
+  .label MoveSound=$3c0f
+  .label SlideActiveSprite=$3e15 {
   }
-  .label SlideY=$3926
-  .label UpdateWithFire=$3a2d {
+  .label SlideY=$3a2f
+  .label UpdateWithFire=$3b55 {
   }
-  .label MovingTile=$3936
+  .label PlayMoveSound=$3caa {
+  }
+  .label Slide03=$3c83
+  .label Slide02=$3c67
+  .label Slide01=$3c49
+  .label MovingTile=$3a3f
+  .label MoveCursorSound=$3b42 {
+  }
 }
 .label level_51=$8fcb
 .label level_50=$8fa0
@@ -555,9 +568,13 @@
 .label level_58=$9204
 .label level_49=$8f6f
 .label GAME=$355f {
-  .label Start=$3564 {
+  .label Start01=$3586
+  .label GetNextChannel=$3566 {
+  }
+  .label Start=$364a {
   }
   .label MODE_NORMAL=$0
+  .label NextChannel=$3564
   .label MODE_PRACTICE=$1
   .label Settings=$355f {
     .label currentLevel=$355f
@@ -567,17 +584,17 @@
     .label isCompleted=$3560
   }
 }
-.label HUD=$4906 {
-  .label PracticeRemap=$4906
-  .label Init=$4916 {
-    .label ColMod=$4945
-    .label HudMod=$4931
+.label HUD=$4b07 {
+  .label PracticeRemap=$4b07
+  .label Init=$4b17 {
+    .label ColMod=$4b46
+    .label HudMod=$4b32
   }
-  .label DrawMovesRemaining=$4976 {
+  .label DrawMovesRemaining=$4b77 {
   }
-  .label Update=$496f {
+  .label Update=$4b70 {
   }
-  .label DrawLevelNumber=$49be {
+  .label DrawLevelNumber=$4bbf {
   }
 }
 .label level_40=$8d72

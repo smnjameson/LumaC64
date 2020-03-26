@@ -14,10 +14,10 @@ Default-segment:
   $0856-$0cf4 Utility functions and tables
   $0cf5-$0da1 Transform up
   $1000-$1a6f Music
-  $3000-$3923 Code
-  $3924-$3e49 SLIDES
-  $3e4a-$4c2a SPRAKS
-  $4c2b-$5663 message
+  $3000-$3585 Code
+  $3586-$3a2c START
+  $3a2d-$4082 SLIDES
+  $4083-$4cf9 SPRAKS
   $5800-$5be7 INTRO BMP ScreenRam
   $5c00-$5fe7 INTRO BMP ColorRam
   $5fff-$5fff INTRO BMP BG
@@ -25,7 +25,8 @@ Default-segment:
   $8000-$b53c Level data
   $c800-$cfff Font data
   $d000-$d9ff Sprites
-  $e000-$e3ff Tile data
+  $e000-$e533 Tile data
+  $e534-$f165 message
 
 Writing Vice symbol file: Z:\Projects\Luma\bin\start.vs
 Writing Symbol file: start.sym

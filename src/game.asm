@@ -10,6 +10,36 @@ GAME: {
 		musicOn:		.byte $01
 	}
 
+	NextChannel:
+		.byte $00, $00
+	GetNextChannel: {
+		stx NextChannel
+		ldx Settings.musicOn
+		beq !+
+		ldx #$0e
+		rts
+	!:
+		sta NextChannel + 1
+		txa
+		clc 
+		adc #$0e
+		tax
+		cpx #$0f
+		bcc !+
+		ldx #$00
+	!:
+		stx NextChannel
+		lda NextChannel + 1
+		rts
+	}
+
+	*=*"START"
+	.var start1 = LoadBinary("assets/begin.bin");
+	Start01:
+		.fill start1.getSize(), start1.get(i) 	
+
+
+
 	Start: {
 		ldx #$ff 
 		txs
@@ -25,6 +55,11 @@ GAME: {
 		lda #$00
 		sta Settings.isCompleted
 		sta Settings.completeSoundOff
+		lda #%00000000
+		sta $d404
+		sta $d40b
+		sta $d412
+			
 
 		lda Settings.currentLevel
 		cmp #$80	
@@ -44,13 +79,21 @@ GAME: {
 		bne !+
 		lda #$03
 		jsr $1000
+		// ldy #>Start01
+	 //    lda #<Start01
+	 //    ldx #00
+	 //    jsr GAME.GetNextChannel
+	 //   	jsr $1006
 		jmp !musicdone+
 	!:
 		lda $10b8
 		beq !musicdone+
 		lda #$00
 		jsr $1000
+
 	!musicdone:
+
+
 
 				lda Settings.currentLevel
 			!Level1:
@@ -79,8 +122,21 @@ GAME: {
 				lda #$06
 				jsr MESSAGES.addTutorial
 				jmp !DoneMessages+
+			
 			!Level5:
+				cmp #$01
+				bne !Level6+
+				lda #$07
+				jsr MESSAGES.addTutorial
+				jmp !DoneMessages+
+			!Level6:
 
+				cmp #$03
+				bne !Level7+
+				lda #$09
+				jsr MESSAGES.addTutorial
+				jmp !DoneMessages+
+			!Level7:
 
 
 			!DoneMessages:

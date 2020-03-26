@@ -266,6 +266,9 @@ MESSAGES: {
 				.word Tutor5
 				.word Tutor6
 				.word Tutor7
+				.word Tutor8
+				.word Tutor9
+				.word Tutor10
 
 
 			//202,191,209
@@ -328,17 +331,19 @@ MESSAGES: {
 
 
 			Tutor4:
-				.byte 0,3,  28,8 //x,y,w,h
+				.byte 0,3,  28,9 //x,y,w,h
 				
 				.text @" \$ba\$bb                         "
 				.byte 32, 202
 				.fill 24, 191 //width-4
 				.byte 209, 32
 
-				.text @" \$d2SELECT THE BATTERY WITH \$d4 "
-				.text @" \$d2THE JOYSTICK. THEN HOLD \$d4 "
-				.text @" \$d2FIRE AND A DIRECTION ON \$d4 "
-				.text @" \$d2THE JOYSTICK TO MOVE IT.\$d4 "
+				.text @" \$d2MOVE THIS CURSOR DOWN TO\$d4 "
+				.text @" \$d2SELECT THE BATTERY.     \$d4 "
+				.text @" \$d2THEN HOLD FIRE AND PULL \$d4 "
+				.text @" \$d2DOWN TO MOVE IT INTO    \$d4 "
+				.text @" \$d2POSITION.               \$d4 "
+
 
 				.byte 32, 250
 				.fill 24, 190 //width-4
@@ -398,15 +403,62 @@ MESSAGES: {
 				.byte 255, 32
 				.fill 23, 32 //width
 
+			Tutor8:
+				.byte 4,8,  23,7 //x,y,w,h
+				
+				.fill 23, 32 //width
+				.byte 32, 202
+				.fill 19, 191 //width-4
+				.byte 209, 32
 
+				.text @" \$d2TRY MOVING THESE   \$d4 "
+				.text @" \$d2BATTERIES TO FINISH\$d4 "
+				.text @" \$d2THE LEVEL.         \$d4 "
 
+				.byte 32, 250
+				.fill 19, 190 //width-4
+				.byte 255, 32
+				.text @"      \$bc\$bd       \$bc\$bd      "	
 
+			Tutor9:
+				.byte 5,6,  25,7 //x,y,w,h
+				
+				.text @"                      \$ba\$bb "
+				.byte 32, 202
+				.fill 21, 191 //width-4
+				.byte 209, 32
 
+				.text @" \$d2HINT:                \$d4 "
+				.text @" \$d2YOU MAY NEED TO MOVE \$d4 "
+				.text @" \$d2THE BATTERIES FIRST  \$d4 "
+
+				.byte 32, 250
+				.fill 21, 190 //width-4
+				.byte 255, 32
+				.fill 25, 32 //width
+
+			Tutor10:
+				.byte 0,6,  15,8 //x,y,w,h
+				
+				.fill 15, 32 //width
+				.byte 32, 202
+				.fill 11, 191 //width-4
+				.byte 209, 32
+
+				.text @" \$d2JUST TWO   \$d4 "
+				.text @" \$d2SHIFTS ONLY\$d4 "
+				.text @" \$d2HERE. WHICH\$d4 "
+				.text @" \$d2TO MOVE?   \$d4 "
+
+				.byte 32, 250
+				.fill 11, 190 //width-4
+				.byte 255, 32
+				.fill 15, 32 //width
 
 
 
 			tutorNext:
-				.byte 1,2,3,255,255,255,255,255
+				.byte 1,2,3,255,8,255,255,255,255,255,255
 			width:
 				.byte $00
 			height:

@@ -4,7 +4,8 @@ IRQ: {
 			.byte $00
 	Timer:
 			.byte $00
-
+	isSparks:
+			.byte $00
 	Init: {
 			sei
 
@@ -69,6 +70,46 @@ IRQ: {
 			lda #$01
 			sta FrameFlag
 			jsr $1003	//Do music
+
+			//Do spark sounds
+			lda GAME.Settings.musicOn
+			bne !end+
+			lda GAME.Settings.isCompleted
+			bne !end+
+				lda isSparks
+				beq !off+
+			!on:
+				jsr Random.get
+				sta $d407
+				jsr Random.get
+				and #$07
+				ora #$c8
+				sta $d408
+
+				lda #$00 //AD
+				sta $d40c
+				lda #$22 //SR
+				sta $d40d
+
+				lda $d40b
+				and #%00000001
+				eor #%00000001
+				ora #%10000000
+				sta $d40b
+
+				lda #$00
+				sta $d415
+				sta $d416
+				lda #$82
+				sta $d417
+				lda #$7f
+				sta $d418
+
+				jmp !end+
+			!off:
+				lda #%00001000
+				sta $d40b
+			!end:
 
 
 			lda #SCROLLER_SPLIT
